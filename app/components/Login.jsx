@@ -5,46 +5,44 @@ class Login extends React.Component {
   render (){
     return (
       <div>
-      <form className="form-horizontal">
-      <div className="form-group">
-        <label  className="col-sm-2 control-label">Full Name</label>
-        <div className="col-sm-10">
-          <input type="email" className="form-control" id="inputEmail3" placeholder="Username" />
-        </div>
-      </div>
-        <div className="form-group">
-          <label  className="col-sm-2 control-label">Email</label>
-          <div className="col-sm-10">
-            <input type="email" className="form-control" id="inputEmail3" placeholder="Email" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-2 control-label">Password</label>
-          <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword3" placeholder="Password" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-2 control-label">Password Confirmation</label>
-          <div className="col-sm-10">
-            <input type="password" className="form-control" id="inputPassword3" placeholder="Password" />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <div className="checkbox">
-              <label>
-                <input type="checkbox" /> Remember me
-              </label>
-            </div>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default">Sign in</button>
-          </div>
-        </div>
-        </form>
+        <div className="container login">
+       		<div className="row">
+       			<div className="panel panel-primary">
+       				<div className="panel-body">
+       					<form method="POST" action="#" role="form">
+       						<div className="form-group">
+       							<h2>Create account</h2>
+       						</div>
+       						<div className="form-group">
+       							<label className="control-label" >Your name</label>
+       							<input id="signupName" type="text" maxLength="50" className="form-control" />
+       						</div>
+       						<div className="form-group">
+       							<label className="control-label" >Email</label>
+       							<input id="signupEmail" type="email" maxLength="50" className="form-control" />
+       						</div>
+       						<div className="form-group">
+       							<label className="control-label" >Email again</label>
+       							<input id="signupEmailagain" type="email" maxLength="50" className="form-control" />
+       						</div>
+       						<div className="form-group">
+       							<label className="control-label" >Password</label>
+       							<input id="signupPassword" type="password" maxLength="25" className="form-control" placeholder="at least 6 characters" />
+       						</div>
+       						<div className="form-group">
+       							<label className="control-label" >Password again</label>
+       							<input id="signupPasswordagain" type="password" maxLength="25" className="form-control" />
+       						</div>
+       						<div className="form-group">
+       							<button id="signupSubmit" type="submit" className="btn btn-info btn-block">Create your account</button>
+       						</div>
+       						<hr />
+       						<p>Already have an account? <a href="#">Sign in</a></p>
+       					</form>
+       				</div>
+       			</div>
+       		</div>
+       	</div>
       </div>
     )
   }
