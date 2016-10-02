@@ -1,7 +1,7 @@
 import React from 'react';
 import  { render } from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router'
-require('./stylesheets/style.css');
+require('./stylesheets/style.scss');
 var Main = require('Main');
 var Home = require('Home');
 var Login = require('Login');

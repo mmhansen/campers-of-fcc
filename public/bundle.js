@@ -56,10 +56,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(235);
-	var Main = __webpack_require__(239);
-	var Home = __webpack_require__(241);
-	var Login = __webpack_require__(242);
+	__webpack_require__(239);
+	var Main = __webpack_require__(235);
+	var Home = __webpack_require__(237);
+	var Login = __webpack_require__(238);
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
@@ -27095,20 +27095,231 @@
 /* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Nav = __webpack_require__(236);
+
+	var Main = React.createClass({
+	  displayName: 'Main',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { 'class': 'container' },
+	      React.createElement(
+	        'div',
+	        { 'class': 'row' },
+	        React.createElement(
+	          'div',
+	          { 'class': 'col-sm-12' },
+	          React.createElement(Nav, null),
+	          this.props.children
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Main;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var _require = __webpack_require__(172);
+
+	var Link = _require.Link;
+	var IndexLink = _require.IndexLink;
+
+
+	var Main = React.createClass({
+	  displayName: 'Main',
+
+	  render: function render() {
+	    return React.createElement(
+	      'ul',
+	      { 'class': 'nav nav-pills' },
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          IndexLink,
+	          { to: '/', activeClassName: 'active' },
+	          'Home'
+	        )
+	      ),
+	      React.createElement(
+	        'li',
+	        null,
+	        React.createElement(
+	          Link,
+	          { to: '/login', activeClassName: 'active' },
+	          'Login'
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Main;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Home = React.createClass({
+	  displayName: 'Home',
+
+	  render: function render() {
+	    return React.createElement(
+	      'h1',
+	      null,
+	      'Hello from Home'
+	    );
+	  }
+	});
+
+	module.exports = Home;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Login = React.createClass({
+	  displayName: "Login",
+
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "form",
+	        { className: "form-horizontal" },
+	        React.createElement(
+	          "div",
+	          { className: "form-group" },
+	          React.createElement(
+	            "label",
+	            { "for": "inputEmail3", className: "col-sm-2 control-label" },
+	            "Full Name"
+	          ),
+	          React.createElement(
+	            "div",
+	            { className: "col-sm-10" },
+	            React.createElement("input", { type: "email", className: "form-control", id: "inputEmail3", placeholder: "Username" })
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "form-group" },
+	          React.createElement(
+	            "label",
+	            { "for": "inputEmail3", className: "col-sm-2 control-label" },
+	            "Email"
+	          ),
+	          React.createElement(
+	            "div",
+	            { className: "col-sm-10" },
+	            React.createElement("input", { type: "email", className: "form-control", id: "inputEmail3", placeholder: "Email" })
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "form-group" },
+	          React.createElement(
+	            "label",
+	            { "for": "inputPassword3", className: "col-sm-2 control-label" },
+	            "Password"
+	          ),
+	          React.createElement(
+	            "div",
+	            { className: "col-sm-10" },
+	            React.createElement("input", { type: "password", className: "form-control", id: "inputPassword3", placeholder: "Password" })
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "form-group" },
+	          React.createElement(
+	            "label",
+	            { "for": "inputPassword3", className: "col-sm-2 control-label" },
+	            "Password Confirmation"
+	          ),
+	          React.createElement(
+	            "div",
+	            { className: "col-sm-10" },
+	            React.createElement("input", { type: "password", className: "form-control", id: "inputPassword3", placeholder: "Password" })
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "form-group" },
+	          React.createElement(
+	            "div",
+	            { className: "col-sm-offset-2 col-sm-10" },
+	            React.createElement(
+	              "div",
+	              { className: "checkbox" },
+	              React.createElement(
+	                "label",
+	                null,
+	                React.createElement("input", { type: "checkbox" }),
+	                " Remember me"
+	              )
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          "div",
+	          { className: "form-group" },
+	          React.createElement(
+	            "div",
+	            { className: "col-sm-offset-2 col-sm-10" },
+	            React.createElement(
+	              "button",
+	              { type: "submit", className: "btn btn-default" },
+	              "Sign in"
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Login;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(236);
+	var content = __webpack_require__(240);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(238)(content, {});
+	var update = __webpack_require__(242)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./style.css");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -27118,21 +27329,21 @@
 	}
 
 /***/ },
-/* 236 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(237)();
+	exports = module.exports = __webpack_require__(241)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "body {\n  padding: 50px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\n}\n\na {\n  color: #00B7FF;\n}\n\np {\n  color: red;  \n}\n", ""]);
+	exports.push([module.id, "body {\n  padding: 50px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\na {\n  color: #00B7FF; }\n\nh1 {\n  color: blue; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 237 */
+/* 241 */
 /***/ function(module, exports) {
 
 	/*
@@ -27188,7 +27399,7 @@
 
 
 /***/ },
-/* 238 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27438,217 +27649,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var Nav = __webpack_require__(240);
-
-	var Main = React.createClass({
-	  displayName: 'Main',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { 'class': 'container' },
-	      React.createElement(
-	        'div',
-	        { 'class': 'row' },
-	        React.createElement(
-	          'div',
-	          { 'class': 'col-sm-12' },
-	          React.createElement(Nav, null),
-	          this.props.children
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Main;
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(172);
-
-	var Link = _require.Link;
-	var IndexLink = _require.IndexLink;
-
-
-	var Main = React.createClass({
-	  displayName: 'Main',
-
-	  render: function render() {
-	    return React.createElement(
-	      'ul',
-	      { 'class': 'nav nav-pills' },
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          IndexLink,
-	          { to: '/', activeClassName: 'active' },
-	          'Home'
-	        )
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/login', activeClassName: 'active' },
-	          'Login'
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Main;
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var Home = React.createClass({
-	  displayName: 'Home',
-
-	  render: function render() {
-	    return React.createElement(
-	      'h1',
-	      null,
-	      'Hello from Home'
-	    );
-	  }
-	});
-
-	module.exports = Home;
-
-/***/ },
-/* 242 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	var Login = React.createClass({
-	  displayName: "Login",
-
-	  render: function render() {
-	    return React.createElement(
-	      "div",
-	      null,
-	      React.createElement(
-	        "form",
-	        { className: "form-horizontal" },
-	        React.createElement(
-	          "div",
-	          { className: "form-group" },
-	          React.createElement(
-	            "label",
-	            { "for": "inputEmail3", className: "col-sm-2 control-label" },
-	            "Full Name"
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "col-sm-10" },
-	            React.createElement("input", { type: "email", className: "form-control", id: "inputEmail3", placeholder: "Username" })
-	          )
-	        ),
-	        React.createElement(
-	          "div",
-	          { className: "form-group" },
-	          React.createElement(
-	            "label",
-	            { "for": "inputEmail3", className: "col-sm-2 control-label" },
-	            "Email"
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "col-sm-10" },
-	            React.createElement("input", { type: "email", className: "form-control", id: "inputEmail3", placeholder: "Email" })
-	          )
-	        ),
-	        React.createElement(
-	          "div",
-	          { className: "form-group" },
-	          React.createElement(
-	            "label",
-	            { "for": "inputPassword3", className: "col-sm-2 control-label" },
-	            "Password"
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "col-sm-10" },
-	            React.createElement("input", { type: "password", className: "form-control", id: "inputPassword3", placeholder: "Password" })
-	          )
-	        ),
-	        React.createElement(
-	          "div",
-	          { className: "form-group" },
-	          React.createElement(
-	            "label",
-	            { "for": "inputPassword3", className: "col-sm-2 control-label" },
-	            "Password Confirmation"
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "col-sm-10" },
-	            React.createElement("input", { type: "password", className: "form-control", id: "inputPassword3", placeholder: "Password" })
-	          )
-	        ),
-	        React.createElement(
-	          "div",
-	          { className: "form-group" },
-	          React.createElement(
-	            "div",
-	            { className: "col-sm-offset-2 col-sm-10" },
-	            React.createElement(
-	              "div",
-	              { className: "checkbox" },
-	              React.createElement(
-	                "label",
-	                null,
-	                React.createElement("input", { type: "checkbox" }),
-	                " Remember me"
-	              )
-	            )
-	          )
-	        ),
-	        React.createElement(
-	          "div",
-	          { className: "form-group" },
-	          React.createElement(
-	            "div",
-	            { className: "col-sm-offset-2 col-sm-10" },
-	            React.createElement(
-	              "button",
-	              { type: "submit", className: "btn btn-default" },
-	              "Sign in"
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Login;
 
 /***/ }
 /******/ ]);

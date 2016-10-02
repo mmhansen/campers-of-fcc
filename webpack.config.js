@@ -19,14 +19,14 @@ module.exports = {
       {
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'latest', 'stage-0']
+          presets: ["latest", "react", "stage-1"]
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       },
       {
-        test: /\.css$/,
-        loaders: ['style', 'css']
+        test: /(\.css|\.scss)$/,
+        loaders: ['style', 'css', 'sass']
       }
     ]
   },
