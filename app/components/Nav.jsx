@@ -11,9 +11,13 @@ class Main extends React.Component {
             <IndexLink to="/" activeClassName="active"><h2>Campfire Stories</h2></IndexLink>
           </div>
             <ul className="nav navbar-nav navbar-right">
-              {/* sign in link */}
+              {/* Sign up link */}
               <li>
-                <Link to="/login" activeClassName="active">Login</Link>
+                <Link to="/signup" activeClassName="active">Sign Up</Link>
+              </li>
+              {/* Log in link */}
+              <li>
+                <Link to="/login" activeClassName="active">Log In</Link>
               </li>
             </ul>
         </div>
