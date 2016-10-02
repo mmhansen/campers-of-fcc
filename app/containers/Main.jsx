@@ -7,7 +7,7 @@ var Main = React.createClass({
       <div className="container">
       <div className="row">
         <div className="col-sm-12">
-          <Nav/>
+          <Nav auth="false"/>
           { this.props.children }
         </div>
       </div>

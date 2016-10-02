@@ -89,8 +89,10 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
               name="passwordConfirmation"/>
           </div>
+          {
           // this button needs to take you somewhere
           // right now it throws error about engine
+          }
           <div className="form-group">
             <button
               id="signupSubmit"
@@ -99,7 +101,9 @@ class SignupForm extends React.Component {
               onSubmit={this.onSubmit}>Create your account</button>
           </div>
           <hr />
+          {
           // route to sign in page
+          }
           <p>Already have an account?
             <a href="#">Sign in</a>
           </p>
