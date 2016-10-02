@@ -1,5 +1,5 @@
-var React = require('react');
-var Nav = require('../components/Nav');
+import React from 'react';
+import Nav from '../components/Nav';
 
 var Main = React.createClass({
   render: function() {

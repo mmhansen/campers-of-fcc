@@ -1,15 +1,25 @@
-var React = require('react');
-var {Link, IndexLink} = require('react-router');
+import React from 'react';
+import { Link, IndexLink } from 'react-router';
 
-var Main = React.createClass({
-  render: function() {
+class Main extends React.Component {
+  render (){
     return (
-      <ul className="nav nav-pills">
-        <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-        <li><Link to="/login" activeClassName="active">Login</Link></li>
-      </ul>
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="container">
+          {/* title */}
+          <div className="navbar-header">
+            <IndexLink to="/" activeClassName="active"><h2>Campfire Stories</h2></IndexLink>
+          </div>
+            <ul className="nav navbar-nav navbar-right">
+              {/* sign in link */}
+              <li>
+                <Link to="/login" activeClassName="active">Login</Link>
+              </li>
+            </ul>
+        </div>
+      </nav>
     )
   }
-});
+}
 
-module.exports = Main;
+export default Main;

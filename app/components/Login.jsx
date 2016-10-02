@@ -5,9 +5,9 @@ class Login extends React.Component {
   render (){
     return (
       <div>
-        <div className="container login">
+        <div className="login container">
        		<div className="row">
-       			<div className="panel panel-primary">
+       			<div className="col-sm-6 col-sm-offset-3 panel panel-primary">
        				<div className="panel-body">
        					<form method="POST" action="#" role="form">
        						<div className="form-group">

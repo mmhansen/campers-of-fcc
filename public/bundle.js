@@ -27112,23 +27112,30 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Nav = __webpack_require__(236);
+	var _react = __webpack_require__(1);
 
-	var Main = React.createClass({
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Nav = __webpack_require__(236);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Main = _react2.default.createClass({
 	  displayName: 'Main',
 
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'container' },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: 'row' },
-	        React.createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-12' },
-	          React.createElement(Nav, null),
+	          _react2.default.createElement(_Nav2.default, null),
 	          this.props.children
 	        )
 	      )
@@ -27144,44 +27151,79 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-
-	var _require = __webpack_require__(172);
-
-	var Link = _require.Link;
-	var IndexLink = _require.IndexLink;
-
-
-	var Main = React.createClass({
-	  displayName: 'Main',
-
-	  render: function render() {
-	    return React.createElement(
-	      'ul',
-	      { className: 'nav nav-pills' },
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          IndexLink,
-	          { to: '/', activeClassName: 'active' },
-	          'Home'
-	        )
-	      ),
-	      React.createElement(
-	        'li',
-	        null,
-	        React.createElement(
-	          Link,
-	          { to: '/login', activeClassName: 'active' },
-	          'Login'
-	        )
-	      )
-	    );
-	  }
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 
-	module.exports = Main;
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(172);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Main = function (_React$Component) {
+	  _inherits(Main, _React$Component);
+
+	  function Main() {
+	    _classCallCheck(this, Main);
+
+	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	  }
+
+	  _createClass(Main, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'nav',
+	        { className: 'navbar navbar-default navbar-fixed-top' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'navbar-header' },
+	            _react2.default.createElement(
+	              _reactRouter.IndexLink,
+	              { to: '/', activeClassName: 'active' },
+	              _react2.default.createElement(
+	                'h2',
+	                null,
+	                'Campfire Stories'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'nav navbar-nav navbar-right' },
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/login', activeClassName: 'active' },
+	                'Login'
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Main;
+	}(_react2.default.Component);
+
+	exports.default = Main;
 
 /***/ },
 /* 237 */
@@ -27225,13 +27267,13 @@
 	        null,
 	        _react2.default.createElement(
 	          "div",
-	          { className: "container login" },
+	          { className: "login container" },
 	          _react2.default.createElement(
 	            "div",
 	            { className: "row" },
 	            _react2.default.createElement(
 	              "div",
-	              { className: "panel panel-primary" },
+	              { className: "col-sm-6 col-sm-offset-3 panel panel-primary" },
 	              _react2.default.createElement(
 	                "div",
 	                { className: "panel-body" },
@@ -27335,7 +27377,7 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27349,12 +27391,12 @@
 
 	var Home = function Home() {
 	  return _react2.default.createElement(
-	    'div',
-	    null,
+	    "div",
+	    { className: "home-page" },
 	    _react2.default.createElement(
-	      'h1',
+	      "h1",
 	      null,
-	      'hello from home'
+	      "hello from home"
 	    )
 	  );
 	};
@@ -27396,7 +27438,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  padding: 50px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif; }\n\na {\n  color: #00B7FF; }\n\n/* Login page styles */\n.login {\n  margin-top: 24px; }\n\nh1 {\n  color: rgba(0, 0, 0, 0.5); }\n\nform {\n  margin: 0px 10px; }\n\nh2 {\n  margin-top: 2px;\n  margin-bottom: 2px; }\n\n.container {\n  max-width: 360px; }\n\n.divider {\n  text-align: center;\n  margin-top: 20px;\n  margin-bottom: 5px; }\n\n.divider hr {\n  margin: 7px 0px;\n  width: 35%; }\n\n.left {\n  float: left; }\n\n.right {\n  float: right; }\n", ""]);
+	exports.push([module.id, "/* Login page styles */\n.login {\n  margin-top: 120px; }\n\nh1 {\n  color: rgba(0, 0, 0, 0.5); }\n\nform {\n  margin: 0px 10px; }\n\nh2 {\n  margin-top: 2px;\n  margin-bottom: 2px; }\n\n.divider {\n  text-align: center;\n  margin-top: 20px;\n  margin-bottom: 5px; }\n\n.divider hr {\n  margin: 7px 0px;\n  width: 35%; }\n\n.left {\n  float: left; }\n\n.right {\n  float: right; }\n\n.navbar {\n  text-align: left; }\n\n/* Home page styles */\n.home-page {\n  margin-top: 200px; }\n", ""]);
 
 	// exports
 
