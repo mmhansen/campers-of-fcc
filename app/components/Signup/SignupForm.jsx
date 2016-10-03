@@ -23,13 +23,13 @@ class SignupForm extends React.Component {
   //
   onSubmit(e){
     e.preventDefault();
-    console.log(this.state);
+    this.props.userSignupRequest(this.state);
   }
   //
   render (){
     return (
       <div className="panel-body">
-        <form method="POST" action="#" role="form">
+        <form role="form">
           <div className="form-group">
             <h2>Create account</h2>
           </div>
@@ -98,7 +98,8 @@ class SignupForm extends React.Component {
               id="signupSubmit"
               type="submit"
               className="btn btn-info btn-block"
-              onSubmit={this.onSubmit}>Create your account</button>
+              onSubmit={this.onSubmit}>
+              Create your account</button>
           </div>
           <hr />
           {

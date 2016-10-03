@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.14.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-latest": "^6.16.0",
@@ -26,7 +27,10 @@
     "passport-local": "~1.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.2",
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.13.1",
