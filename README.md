@@ -10,9 +10,6 @@ git checkout development
 
 To run the server locally which will load the application enter:  
 npm install  
-webpack -w  
-
-In a separate terminal window enter:   
 npm start   
 
 Now open your browser and go to http://localhost:3000  

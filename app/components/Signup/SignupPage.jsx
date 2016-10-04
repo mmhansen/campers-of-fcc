@@ -1,26 +1,17 @@
 import React from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux';
+import { userSignupRequest } from '../../actions/signupActions.js';
 //components
 import SignupForm from './SignupForm';
 
 class SignupPage extends React.Component {
-
-  userSignupRequest(user){
-    console.log("post req")
-    axios.post('/users/add', user)
-      .then(function(response) {
-        console.log(response);
-      }).catch(function(err) {
-        console.log(err);
-      });
-  }
-
   render (){
+    const { userSignupRequest } = this.props
     return (
       <div className="container">
    		<div className="row">
    			<div className="col-sm-12 col-md-4 col-md-offset-4">
-   				<SignupForm userSignupRequest={this.userSignupRequest.bind(this)}/>
+   				<SignupForm userSignupRequest={userSignupRequest}/>
    			</div>
      	</div>
       </div>
@@ -28,4 +19,8 @@ class SignupPage extends React.Component {
   }
 }
 
-export default SignupPage;
+SignupPage.propTypes = {
+  userSignupRequest: React.PropTypes.func.isRequired
+}
+
+export default connect(null, { userSignupRequest })(SignupPage);

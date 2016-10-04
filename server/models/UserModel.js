@@ -1,7 +1,7 @@
 var mongoose =  require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 
-let userSchema = mongoose.Schema({
+var userSchema = mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -17,7 +17,7 @@ let userSchema = mongoose.Schema({
   }
 });
 
-const SALT_FACTOR = 10;
+var SALT_FACTOR = 10;
 
 userSchema.pre("save", function(done){
   var user = this;

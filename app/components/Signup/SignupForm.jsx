@@ -85,7 +85,6 @@ class SignupForm extends React.Component {
           <div className="form-group">
             <button
               id="signupSubmit"
-              type="submit"
               className="btn btn-info btn-block">
               Create your account</button>
           </div>
@@ -100,6 +99,10 @@ class SignupForm extends React.Component {
       </div>
     )
   }
+}
+
+SignupForm.propTypes = {
+  userSignupRequest: React.PropTypes.func.isRequired
 }
 
 

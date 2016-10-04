@@ -1,17 +1,19 @@
 // dependencies
 import React from 'react';
 import  { render } from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+// redux
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 // including styling
 require('./stylesheets/style.scss');
 // components
-import Routes from './Routes';
+import Routes from './routes';
 //
 const store = createStore(
-  (state = {}) => state
+  (state = {}) => state,
+  applyMiddleware(thunk)
 )
 // render to DOM
 render(

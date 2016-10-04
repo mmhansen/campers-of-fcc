@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "run-p serve pack",
+    "serve": "nodemon --watch server ./server/bin/www",
+    "pack": "webpack -w"
   },
   "dependencies": {
     "axios": "^0.14.0",
@@ -38,6 +40,8 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "nodemon": "^1.10.2",
+    "npm-run-all": "^3.1.0",
     "supertest": "^2.0.0"
   }
 }
