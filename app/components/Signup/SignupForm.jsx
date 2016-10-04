@@ -7,9 +7,9 @@ class SignupForm extends React.Component {
       username: "",
       password: "",
       passwordConfirmation: "",
-      email: "",
-      emailConfirmation: ""
+      email: ""
     }
+
     // bind this to our event handlers so we don't have to do it somehwere else
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,7 +29,7 @@ class SignupForm extends React.Component {
   render (){
     return (
       <div className="panel-body">
-        <form role="form">
+        <form onSubmit={this.onSubmit} role="form" method="post">
           <div className="form-group">
             <h2>Create account</h2>
           </div>
@@ -54,17 +54,6 @@ class SignupForm extends React.Component {
               value={this.state.name}
               onChange={this.onChange}
               name="email" />
-          </div>
-          <div className="form-group">
-            <label className="control-label" >Email Confirmation</label>
-            <input
-              id="signupEmailagain"
-              type="email"
-              maxLength="50"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChange}
-              name="emailConfirmation"/>
           </div>
           <div className="form-group">
             <label className="control-label" >Password</label>
@@ -97,8 +86,7 @@ class SignupForm extends React.Component {
             <button
               id="signupSubmit"
               type="submit"
-              className="btn btn-info btn-block"
-              onSubmit={this.onSubmit}>
+              className="btn btn-info btn-block">
               Create your account</button>
           </div>
           <hr />

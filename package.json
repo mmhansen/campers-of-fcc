@@ -35,5 +35,9 @@
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "supertest": "^2.0.0"
   }
 }

@@ -8,26 +8,16 @@ import { createStore, applyMiddleware } from 'redux';
 // including styling
 require('./stylesheets/style.scss');
 // components
-import Main from './containers/Main';
-import SignupPage from './components/Signup/SignupPage';
-import LoginPage from './components/Login/LoginPage'
-import Home from './components/Home';
+import Routes from './Routes';
 //
 const store = createStore(
-  (state = {}) => state,
-  applyMiddleware(thunk)
+  (state = {}) => state
 )
+// render to DOM
 render(
   // redux provder
   <Provider store={store}>
-    // routes
-    <Router history={ hashHistory }>
-      <Route path="/" component={ Main }>
-        <IndexRoute component={ Home } />
-        <Route path="signup" component={ SignupPage } />
-        <Route path="login" component={ LoginPage } />
-      </Route>
-    </Router>
+    <Routes />
   </Provider>,
   // this is where the react app goes
   document.getElementById("app")
