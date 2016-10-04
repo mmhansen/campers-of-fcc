@@ -1,31 +1,49 @@
 var express = require('express');
 var User = require('../models/UserModel');
 var router = express.Router();
+var Validator = require('validator');
+var isEmpty = require('lodash/isEmpty');
 
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.post('/add', function(req, res, next) {
-  var params = req.body;
+function validateInput(data) {
+  var errors = {};
+  // validate email
+  if (Validator.isNull(data.email)) {
+    errors.email = "This field is required";
+  }
+  if (!Validator.isEmail(data.email)){
+    errors.email = "Email is invalid"
+  }
+  // validate passwords
+  if (Validator.isNull(data.password)) {
+    errors.password = "This field is required";
+  }
+  if (Validator.isNull(data.passwordConfirmation)) {
+    errors.passwordConfirmation = "This field is required";
+  }
+  if (!Validator.equals(data.password, data.passwordConfirmation)){
+    errors.passwordConfirmation = "Passwords must match"
+  }
   // validate username
-  // validate emails
-  // validate password
-  console.log("add req");
-  var user = new User({
-    username: params.username,
-    email: params.email,
-    password: params.password
-  });
+  if (Validator.isNull(data.username)) {
+    errors.username = "This field is required";
+  }
+  return {
+    errors: errors,
+    isValid: isEmpty(errors)
+  }
+}
 
-  user.save(function(err) {
-    console.log('Errors');
-  });
+router.post('/', function(req, res){
+  var errors = validateInput(req.body).errors;
+  var isValid = validateInput(req.body).isValid;
+  // if isValid is not an empty object, log error
+  if (!isValid) {
+      res.status(400).json(errors)
+  }
+  console.log(req.body);
 
-  return res.json(user);
+})
 
-});
+
 
 module.exports = router;

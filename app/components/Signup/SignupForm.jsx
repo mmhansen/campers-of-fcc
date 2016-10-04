@@ -7,7 +7,8 @@ class SignupForm extends React.Component {
       username: "",
       password: "",
       passwordConfirmation: "",
-      email: ""
+      email: "",
+      errors: {}
     }
 
     // bind this to our event handlers so we don't have to do it somehwere else
@@ -22,8 +23,12 @@ class SignupForm extends React.Component {
   }
   //
   onSubmit(e){
+    this.setState({ errors: {} });
     e.preventDefault();
-    this.props.userSignupRequest(this.state);
+    this.props.userSignupRequest(this.state).then(
+      () => {},
+      ({ data }) => this.setState({ errors: data })
+    );
   }
   //
   render (){
