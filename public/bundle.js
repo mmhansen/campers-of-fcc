@@ -28934,7 +28934,7 @@
 	      console.log(resp);
 	      _reactRouter.browserHistory.push('/');
 	    }).catch(function (err) {
-	      return err.data;
+	      return err;
 	    });
 	  };
 	}
@@ -30155,7 +30155,7 @@
 /* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30166,6 +30166,10 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(289);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30203,150 +30207,178 @@
 
 
 	  _createClass(SignupForm, [{
-	    key: "onChange",
+	    key: 'onChange',
 	    value: function onChange(e) {
 	      this.setState(_defineProperty({}, e.target.name, e.target.value));
 	    }
 	    //
 
 	  }, {
-	    key: "onSubmit",
+	    key: 'onSubmit',
 	    value: function onSubmit(e) {
 	      var _this2 = this;
 
 	      this.setState({ errors: {} });
 	      e.preventDefault();
-	      this.props.userSignupRequest(this.state).then(function () {}, function (_ref) {
+	      this.props.userSignupRequest(this.state).then(function (_ref) {
 	        var data = _ref.data;
-	        return _this2.setState({ errors: data });
+
+	        _this2.setState({ errors: data });
 	      });
 	    }
 	    //
 
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
+	      var errors = this.state.errors;
+
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "panel-body" },
+	        'div',
+	        { className: 'panel-body' },
 	        _react2.default.createElement(
-	          "form",
-	          { onSubmit: this.onSubmit, role: "form", method: "post" },
+	          'form',
+	          { onSubmit: this.onSubmit, role: 'form', method: 'post' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: 'form-group' },
 	            _react2.default.createElement(
-	              "h2",
+	              'h2',
 	              null,
-	              "Create account"
+	              'Create account'
 	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: (0, _classnames2.default)("form-group", { "has-error": errors.firstName }) },
 	            _react2.default.createElement(
-	              "label",
-	              { className: "control-label" },
-	              "First Name"
+	              'label',
+	              { className: 'control-label' },
+	              'First Name'
 	            ),
-	            _react2.default.createElement("input", {
-	              id: "signupName",
-	              type: "text",
-	              maxLength: "50",
-	              className: "form-control",
+	            _react2.default.createElement('input', {
+	              id: 'signupName',
+	              type: 'text',
+	              maxLength: '50',
+	              className: 'form-control',
 	              value: this.state.name,
 	              onChange: this.onChange,
-	              name: "firstName" })
+	              name: 'firstName' }),
+	            errors.firstName && _react2.default.createElement(
+	              'span',
+	              { className: 'help-block' },
+	              errors.firstName
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: (0, _classnames2.default)("form-group", { "has-error": errors.lastName }) },
 	            _react2.default.createElement(
-	              "label",
-	              { className: "control-label" },
-	              "Last Name"
+	              'label',
+	              { className: 'control-label' },
+	              'Last Name'
 	            ),
-	            _react2.default.createElement("input", {
-	              id: "signupName",
-	              type: "text",
-	              maxLength: "50",
-	              className: "form-control",
+	            _react2.default.createElement('input', {
+	              id: 'signupName',
+	              type: 'text',
+	              maxLength: '50',
+	              className: 'form-control',
 	              value: this.state.name,
 	              onChange: this.onChange,
-	              name: "lastName" })
+	              name: 'lastName' }),
+	            errors.lastName && _react2.default.createElement(
+	              'span',
+	              { className: 'help-block' },
+	              errors.lastName
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: (0, _classnames2.default)("form-group", { "has-error": errors.email }) },
 	            _react2.default.createElement(
-	              "label",
-	              { className: "control-label" },
-	              "Email"
+	              'label',
+	              { className: 'control-label' },
+	              'Email'
 	            ),
-	            _react2.default.createElement("input", {
-	              id: "signupEmail",
-	              type: "email",
-	              maxLength: "50",
-	              className: "form-control",
+	            _react2.default.createElement('input', {
+	              id: 'signupEmail',
+	              type: 'email',
+	              maxLength: '50',
+	              className: 'form-control',
 	              value: this.state.name,
 	              onChange: this.onChange,
-	              name: "email" })
+	              name: 'email' }),
+	            errors.email && _react2.default.createElement(
+	              'span',
+	              { className: 'help-block' },
+	              errors.email
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: (0, _classnames2.default)("form-group", { "has-error": errors.password }) },
 	            _react2.default.createElement(
-	              "label",
-	              { className: "control-label" },
-	              "Password"
+	              'label',
+	              { className: 'control-label' },
+	              'Password'
 	            ),
-	            _react2.default.createElement("input", {
-	              id: "signupPassword",
-	              type: "password",
-	              maxLength: "25",
-	              className: "form-control",
-	              placeholder: "at least 6 characters",
+	            _react2.default.createElement('input', {
+	              id: 'signupPassword',
+	              type: 'password',
+	              maxLength: '25',
+	              className: 'form-control',
+	              placeholder: 'at least 6 characters',
 	              value: this.state.name,
 	              onChange: this.onChange,
-	              name: "password" })
+	              name: 'password' }),
+	            errors.password && _react2.default.createElement(
+	              'span',
+	              { className: 'help-block' },
+	              errors.password
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: (0, _classnames2.default)("form-group", { "has-error": errors.passwordConfirmation }) },
 	            _react2.default.createElement(
-	              "label",
-	              { className: "control-label" },
-	              "Password Confirmation"
+	              'label',
+	              { className: 'control-label' },
+	              'Password Confirmation'
 	            ),
-	            _react2.default.createElement("input", {
-	              id: "signupPasswordagain",
-	              type: "password",
-	              maxLength: "25",
-	              className: "form-control",
+	            _react2.default.createElement('input', {
+	              id: 'signupPasswordagain',
+	              type: 'password',
+	              maxLength: '25',
+	              className: 'form-control',
 	              value: this.state.name,
 	              onChange: this.onChange,
-	              name: "passwordConfirmation" })
+	              name: 'passwordConfirmation' }),
+	            errors.passwordConfirmation && _react2.default.createElement(
+	              'span',
+	              { className: 'help-block' },
+	              errors.passwordConfirmation
+	            )
 	          ),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "form-group" },
+	            'div',
+	            { className: 'form-group' },
 	            _react2.default.createElement(
-	              "button",
+	              'button',
 	              {
-	                id: "signupSubmit",
-	                className: "btn btn-info btn-block" },
-	              "Create your account"
+	                id: 'signupSubmit',
+	                className: 'btn btn-info btn-block' },
+	              'Create your account'
 	            )
 	          ),
-	          _react2.default.createElement("hr", null),
+	          _react2.default.createElement('hr', null),
 	          _react2.default.createElement(
-	            "p",
+	            'p',
 	            null,
-	            "Already have an account?",
+	            'Already have an account?',
 	            _react2.default.createElement(
-	              "a",
-	              { href: "#" },
-	              "Sign in"
+	              'a',
+	              { href: '#' },
+	              'Sign in'
 	            )
 	          )
 	        )
@@ -30938,6 +30970,60 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
 
 
 /***/ }
