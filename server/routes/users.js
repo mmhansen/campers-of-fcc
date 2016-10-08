@@ -1,5 +1,6 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
+import passport from "passport"
 
 
 import { validateRegister } from '../shared/validation'
@@ -7,6 +8,9 @@ import User from '../models/UserModel'
 import conf from '../conf/main'
 
 var router = express.Router()
+
+const requireAuth = passport.authenticate('jwt', {session: false})
+const requireLogin = passport.authenticate('local', {session:  false})
 
 function generateToken(user) {
   return jwt.sign(user, conf.secret, {
@@ -50,9 +54,15 @@ router.post('/', (req, res, next) => {
 
     })
   })
+})
 
+router.post('/login', requireLogin, function(req, res, next) {
+  let userInfo = setUserInfo(req.user);
 
-
+  res.status(200).json({
+    token: 'JWT ' + generateToken(userInfo),
+    user: userInfo
+  });
 })
 
 

@@ -4,7 +4,6 @@ import favicon from "serve-favicon"
 import logger from "morgan"
 import bodyParser from "body-parser"
 import mongoose from "mongoose"
-import passport from "passport"
 //
 import config from './conf/main'
 import passportConfig from './conf/passport'
@@ -15,9 +14,6 @@ import story from './routes/story'
 var app = express();
 mongoose.connect(config.mongodb);// connect to db
 app.set('secretKey', config.secret)
-
-const requireAuth = passport.authenticate('jwt', {session: false})
-const requireLogin = passport.authenticate('local', {session:  false})
 
 
 /*
