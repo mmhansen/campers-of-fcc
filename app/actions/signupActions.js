@@ -9,7 +9,7 @@ export function userSignupRequest(userData){
       browserHistory.push('/')
     })
     .catch((err) => {
-      return err.data
+      return err
     })
   }
 }

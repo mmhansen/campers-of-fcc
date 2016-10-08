@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import classnames from 'classnames'
 
 class SignupForm extends React.Component {
   constructor (props){
@@ -27,19 +28,21 @@ class SignupForm extends React.Component {
     this.setState({ errors: {} });
     e.preventDefault();
     this.props.userSignupRequest(this.state).then(
-      () => {},
-      ({ data }) => this.setState({ errors: data })
+      ({ data }) => {
+      this.setState({ errors: data })
+      }
     );
   }
   //
   render (){
+    const { errors } = this.state;
     return (
       <div className="panel-body">
         <form onSubmit={this.onSubmit} role="form" method="post">
           <div className="form-group">
             <h2>Create account</h2>
           </div>
-          <div className="form-group">
+          <div className={classnames("form-group", {"has-error": errors.firstName})}>
             <label className="control-label" >First Name</label>
             <input
               id="signupName"
@@ -49,8 +52,9 @@ class SignupForm extends React.Component {
               value={this.state.name}
               onChange={this.onChange}
               name="firstName" />
+            { errors.firstName && <span className="help-block">{ errors.firstName }</span> }
           </div>
-          <div className="form-group">
+          <div className={classnames("form-group", {"has-error": errors.lastName})}>
             <label className="control-label" >Last Name</label>
             <input
               id="signupName"
@@ -60,8 +64,9 @@ class SignupForm extends React.Component {
               value={this.state.name}
               onChange={this.onChange}
               name="lastName" />
+            { errors.lastName && <span className="help-block">{ errors.lastName }</span> }
           </div>
-          <div className="form-group">
+          <div className={classnames("form-group", {"has-error": errors.email})}>
             <label className="control-label" >Email</label>
             <input
               id="signupEmail"
@@ -71,8 +76,9 @@ class SignupForm extends React.Component {
               value={this.state.name}
               onChange={this.onChange}
               name="email" />
+            { errors.email && <span className="help-block">{ errors.email }</span> }
           </div>
-          <div className="form-group">
+          <div className={classnames("form-group", {"has-error": errors.password})}>
             <label className="control-label" >Password</label>
             <input
               id="signupPassword"
@@ -83,8 +89,9 @@ class SignupForm extends React.Component {
               value={this.state.name}
               onChange={this.onChange}
               name="password"/>
+            { errors.password && <span className="help-block">{ errors.password }</span> }
           </div>
-          <div className="form-group">
+          <div className={classnames("form-group", {"has-error": errors.passwordConfirmation})}>
             <label className="control-label" >Password Confirmation</label>
             <input
               id="signupPasswordagain"
@@ -94,6 +101,7 @@ class SignupForm extends React.Component {
               value={this.state.name}
               onChange={this.onChange}
               name="passwordConfirmation"/>
+            { errors.passwordConfirmation && <span className="help-block">{ errors.passwordConfirmation }</span> }
           </div>
           {
           // this button needs to take you somewhere
