@@ -8,6 +8,7 @@ require('./stylesheets/style.scss');
 import Main from './containers/Main';
 import SignupPage from './components/Signup/SignupPage';
 import LoginPage from './components/Login/LoginPage'
+import StoryPage from './components/Story/StoryPage'
 import Home from './components/Home';
 //
 
@@ -20,6 +21,7 @@ class Routes extends React.Component{
           <IndexRoute component={ Home } />
           <Route path="signup" component={ SignupPage } />
           <Route path="login" component={ LoginPage } />
+          <Route path="story" component={ StoryPage } />
         </Route>
       </Router>
     )
