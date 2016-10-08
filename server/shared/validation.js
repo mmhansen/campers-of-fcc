@@ -11,7 +11,7 @@ export function validateRegister(data){
     if (!validator.equals(data.password, data.passwordConfirmation)){
       errors.passwordConfirmation = "Passwords must match"
     }
-    if (!validator.matches(data.password), /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/){
+    if (!validator.matches(data.password, /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)){
       errors.password = "Password must be atleast 8 characters, contain an uppercase, number and symbol"
     }
     // last name

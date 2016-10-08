@@ -1,7 +1,7 @@
 // dependencies
 import React from 'react';
 import  { render } from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 // including styling
 require('./stylesheets/style.scss');
 // components
@@ -15,7 +15,7 @@ class Routes extends React.Component{
   render(){
     return(
       // routes
-      <Router history={ hashHistory }>
+      <Router history={ browserHistory }>
         <Route path="/" component={ Main }>
           <IndexRoute component={ Home } />
           <Route path="signup" component={ SignupPage } />
