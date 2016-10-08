@@ -4,7 +4,8 @@ class SignupForm extends React.Component {
   constructor (props){
     super(props);
     this.state = {
-      username: "",
+      firstName: "",
+      lastName: "",
       password: "",
       passwordConfirmation: "",
       email: "",
@@ -39,7 +40,7 @@ class SignupForm extends React.Component {
             <h2>Create account</h2>
           </div>
           <div className="form-group">
-            <label className="control-label" >Username</label>
+            <label className="control-label" >First Name</label>
             <input
               id="signupName"
               type="text"
@@ -47,7 +48,18 @@ class SignupForm extends React.Component {
               className="form-control"
               value={this.state.name}
               onChange={this.onChange}
-              name="username" />
+              name="firstName" />
+          </div>
+          <div className="form-group">
+            <label className="control-label" >Last Name</label>
+            <input
+              id="signupName"
+              type="text"
+              maxLength="50"
+              className="form-control"
+              value={this.state.name}
+              onChange={this.onChange}
+              name="lastName" />
           </div>
           <div className="form-group">
             <label className="control-label" >Email</label>

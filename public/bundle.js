@@ -28913,7 +28913,7 @@
 /* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28924,11 +28924,18 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _reactRouter = __webpack_require__(172);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function userSignupRequest(userData) {
 	  return function (dispatch) {
-	    return _axios2.default.post('/api/users', userData);
+	    return _axios2.default.post('/api/users', userData).then(function (resp) {
+	      console.log(resp);
+	      _reactRouter.browserHistory.push('/');
+	    }).catch(function (err) {
+	      return err.data;
+	    });
 	  };
 	}
 
@@ -30179,7 +30186,8 @@
 	    var _this = _possibleConstructorReturn(this, (SignupForm.__proto__ || Object.getPrototypeOf(SignupForm)).call(this, props));
 
 	    _this.state = {
-	      username: "",
+	      firstName: "",
+	      lastName: "",
 	      password: "",
 	      passwordConfirmation: "",
 	      email: "",
@@ -30239,7 +30247,7 @@
 	            _react2.default.createElement(
 	              "label",
 	              { className: "control-label" },
-	              "Username"
+	              "First Name"
 	            ),
 	            _react2.default.createElement("input", {
 	              id: "signupName",
@@ -30248,7 +30256,24 @@
 	              className: "form-control",
 	              value: this.state.name,
 	              onChange: this.onChange,
-	              name: "username" })
+	              name: "firstName" })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "form-group" },
+	            _react2.default.createElement(
+	              "label",
+	              { className: "control-label" },
+	              "Last Name"
+	            ),
+	            _react2.default.createElement("input", {
+	              id: "signupName",
+	              type: "text",
+	              maxLength: "50",
+	              className: "form-control",
+	              value: this.state.name,
+	              onChange: this.onChange,
+	              name: "lastName" })
 	          ),
 	          _react2.default.createElement(
 	            "div",

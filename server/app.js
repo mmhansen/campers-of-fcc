@@ -1,27 +1,44 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+import express from "express"
+import path from "path"
+import favicon from "serve-favicon"
+import logger from "morgan"
+import bodyParser from "body-parser"
+import mongoose from "mongoose"
+//
+import config from './conf/main'
+import users from './routes/users'
+import story from './routes/story'
 
-
+// start server
 var app = express();
-// connect to db
-var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/projects');
-// serve favicon
+mongoose.connect(config.mongodb);// connect to db
+app.set('secretKey', config.secret)
+
+
+/*
+*  Middleware
+*/
 app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
 app.use(logger('dev'));
 // parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 // serve public folder
 app.use(express.static(path.join(__dirname, '../public')));
-// app.use('/', routes);
-var users = require('./routes/users');
+
+
+/*
+* Routes
+*/
+
 app.use('/api/users', users);
+app.use('/api/story', story);
+
+
+/*
+* Error handling Middleware
+*/
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -29,14 +46,12 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json({
       message: err.message,
       error: err
     });
@@ -47,7 +62,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.json({
     message: err.message,
     error: {}
   });

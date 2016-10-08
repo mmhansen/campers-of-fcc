@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "run-p serve pack",
-    "serve": "nodemon --watch server ./server/bin/www",
-    "pack": "webpack -w"
+    "start": "run-p serve build",
+    "serve": "nodemon --watch server --exec babel-node -- ./server/bin/www",
+    "build": "webpack -w"
   },
   "dependencies": {
     "axios": "^0.12.0",
@@ -16,6 +16,7 @@
     "babel-preset-stage-1": "^6.16.0",
     "bcrypt-nodejs": "~0.0.3",
     "body-parser": "~1.15.1",
+    "classnames": "^2.2.5",
     "connect-flash": "~0.1.1",
     "cookie-parser": "~1.4.3",
     "css-loader": "^0.25.0",
@@ -40,6 +41,7 @@
     "webpack": "^1.13.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.16.0",
     "chai": "^3.5.0",
     "nodemon": "^1.10.2",
     "npm-run-all": "^3.1.0",

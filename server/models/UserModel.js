@@ -2,10 +2,13 @@ var mongoose =  require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 
 var userSchema = mongoose.Schema({
-  username: {
+  firstName: {
     type: String,
-    required: true,
-    unique: true
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
   },
   email: {
     type: String,
@@ -17,7 +20,9 @@ var userSchema = mongoose.Schema({
   }
 });
 
-var SALT_FACTOR = 10;
+let SALT_FACTOR = 10;
+
+let noop = () => {}
 
 userSchema.pre("save", function(done){
   var user = this;
@@ -42,4 +47,5 @@ userSchema.methods.checkPassword = function(guess, done) {
   });
 };
 
-var User = mongoose.model("user", userSchema);
+let User = mongoose.model("user", userSchema);
+export default User
