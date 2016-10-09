@@ -3,14 +3,20 @@
   text-align: center;
 }
 
-.brick {
-  width: 400px;
-  display: block;
-  background: rgba(0,0,0,0.7);
-}
 
 @media only screen and (max-width: 600px) {
   .brick {
     width: 350px;
+  }
+}
+
+.home-content {
+  #items {
+    margin: auto;
+  }
+  .brick {
+    width: 400px;
+    display: block;
+    background: rgba(0,0,0,0.7);
   }
 }

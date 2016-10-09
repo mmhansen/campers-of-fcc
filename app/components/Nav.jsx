@@ -3,39 +3,54 @@ import { Link, IndexLink } from 'react-router';
 
 class Main extends React.Component {
   render (){
-    // we will pass the authentiation prop to navbar
-    // for now I will just pass nav auth=false in main.jsx;
-    const { isAuthenticated } = this.props.auth;
-    // this is a Component for being logged in
+
+    // const { isAuthenticated } = this.props.auth;
+    //
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
-         <li><a href="#" onClick="Logout">Logout</a></li>
+        <li><Link to="/story">Create</Link></li>
+        <li><Link to="/">Logout</Link></li>
       </ul>
     );
-   // this is a Component for NOT being logged in
-    const guestLinks = (
-      <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/signup">Sign up</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/story">Create</Link></li>
-      </ul>
+   //
+  const guestLinks = (
+    <ul className="nav navbar-nav navbar-right">
+      <li><Link to="/signup">Sign up</Link></li>
+      <li><Link to="/login">Login</Link></li>
+    </ul>
+   );
+   //
+   const adminLinks = (
+     <ul className="nav navbar-nav navbar-right">
+       <li><Link to="/story">Create</Link></li>
+       <li><Link to="/admin">Admin</Link></li>
+       <li><Link to="/">Logout</Link></li>
+     </ul>
    );
    // rendering
     return (
-      <nav className="navbar navbar-default">
-        {/* title */}
+      <nav className="navbar navbar-default ">
+        <div className="container-fluid">
+          {/* Title and Image */}
           <div className="navbar-header">
-             <IndexLink
-              to="/"
-              className="navbar-brand"
-              activeClassName="active">
-              <h2>Campfire Stories</h2>
-              </IndexLink>
-           </div>
-          {/* SignUp or Login link */}
-           <div className="collapse navbar-collapse">
-             { isAuthenticated ? userLinks : guestLinks }
-           </div>
+            <IndexLink
+             to="/"
+             className="navbar-brand"
+             activeClassName="active">
+             <h2>Campfire Stories</h2>
+             </IndexLink>
+          </div>
+          {/* Links */}
+          <div>
+            <ul className="nav navbar-nav navbar-right">
+              <li><Link to="/signup">Sign up</Link></li>
+              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/story">Create</Link></li>
+              <li><Link to="/admin">Admin</Link></li>
+              <li><Link to="/">Logout</Link></li>
+            </ul>
+          </div>
+        </div>
       </nav>
     )
   }

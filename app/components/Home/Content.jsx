@@ -38,13 +38,11 @@ class Content extends Component {
     let { items } = this.state;
     let size = [
       { columns: 1, gutter: 20 },
-      { mq: '768px', columns: 2, gutter: 20 },
-      { mq: '1024px', columns: 2, gutter: 20 }
+      { mq: '768px', columns: 2, gutter: 60 },
+      { mq: '1024px', columns: 2, gutter: 60 }
     ]
     return (
-      <div className="container">
-      <div className="row">
-
+      <div className="home-content">
         <MasonryLayout
           id="items"
           sizes={size}
@@ -63,7 +61,6 @@ class Content extends Component {
             )
           }
         </MasonryLayout>
-      </div>
       </div>
     );
   }

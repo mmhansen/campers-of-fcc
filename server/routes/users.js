@@ -31,7 +31,9 @@ router.post('/', (req, res, next) => {
   let { firstName, lastName, email, password, passwordConfirmation } = req.body
   let { errors, isValid } = validateRegister(req.body)
 
-  if (!isValid) { return res.status(400).json(errors) }
+  if (!isValid) {
+    return res.status(400).json(errors)
+  }
 
   User.findOne({email}, (err, existingUser) => {
     if (err) { next(err) }

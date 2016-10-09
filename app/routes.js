@@ -5,11 +5,11 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 // including styling
 require('./stylesheets/style.scss');
 // components
-import Main from './containers/Main';
+import Main from './components/Main';
 import SignupPage from './components/Signup/SignupPage';
 import LoginPage from './components/Login/LoginPage'
 import StoryPage from './components/Story/StoryPage'
-import Home from './components/Landing/Home';
+import Home from './components/Home/LandingPage';
 //
 
 class Routes extends React.Component{
