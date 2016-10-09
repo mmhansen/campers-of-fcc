@@ -1,4 +1,16 @@
 /* Home page styles */
 .home-page {
-  margin-top: 200px;
+  text-align: center;
+}
+
+.brick {
+  width: 400px;
+  display: block;
+  background: rgba(0,0,0,0.7);
+}
+
+@media only screen and (max-width: 600px) {
+  .brick {
+    width: 350px;
+  }
 }
