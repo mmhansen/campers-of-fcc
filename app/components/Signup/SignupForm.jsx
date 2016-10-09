@@ -85,7 +85,7 @@ class SignupForm extends React.Component {
               type="password"
               maxLength="25"
               className="form-control"
-              placeholder="at least 6 characters"
+              placeholder="at least 8 characters containing an uppercase, number and symbol"
               value={this.state.name}
               onChange={this.onChange}
               name="password"/>
@@ -118,7 +118,7 @@ class SignupForm extends React.Component {
           // route to sign in page
           }
           <p>Already have an account?
-            <a href="#">Sign in</a>
+            <a href="#"> Sign in</a>
           </p>
         </form>
       </div>
