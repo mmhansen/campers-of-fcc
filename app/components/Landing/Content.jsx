@@ -1,40 +1,7 @@
-import React from 'react'
-// import MasonryLayout from 'react-masonry-layout'
-import MasonryInfiniteScroller from 'react-masonry-infinite';
+import React, { Component } from 'react';
+import MasonryLayout from 'react-masonry-layout'
 
-
-/*
-
-      <MasonryLayout
-        id="items"
-        infiniteScroll={this.getItems}
-        size={sizes}
-        >
-
-        {
-          items.map((v, i) => {
-
-            return (
-              <div
-                key={i}
-                style={
-                  {
-                  width: '20 em',
-                  height: `${i % 2 === 0 ? 4 * 50 : 50 }px`,
-                  display: 'block',
-                  background: 'rgba(0,0,0,0.6)'
-                }
-              }
-              >
-              <p>this is text</p>
-              </div>
-            )
-          })
-        }
-      </MasonryLayout>
-*/
-
-class Content extends React.Component {
+class Content extends Component {
   constructor(){
     super();
     this.state = {
@@ -42,70 +9,65 @@ class Content extends React.Component {
       isLoading: false,
       items: Array(20).fill()
     }
-    this.getItems = this.getItems.bind(this)
   }
-  //
+
   getItems() {
-    let { perPage, maxCount } = this.props;
-    let { count, items } = this.state;
-    if (count >= maxCount) return
-    this.setState(Object.assign(
-      {},
-      this.state,
-      { isLoading: true }
-    ), () => {
-      setTimeout(() => {
-        this.setState(Object.assign(
-          {},
-          this.state,
-          {
-            isLoading: false,
-            items: items.concat(
-              Array(perPage).fill()
-            )
-          }
-        ))
-      })
-    })
-  }
+    let { perPage } = this.props;
 
-  render() {
-    let { maxCount } = this.props
-    let { items, isLoading } = this.state
-    const sizes = [
-      { columns: 2, gutter: 10 }
+    if (this.state.count >= this.props.maxCount) return
+        this.setState(Object.assign( {},
+        this.state,
+        { isLoading: true }
+        ), () => {
+        setTimeout(() => {
+          this.setState(Object.assign(
+            {},
+            this.state,
+            {
+              isLoading: false,
+              items: this.state.items.concat(
+                Array(perPage).fill()
+              )
+            }
+          ))
+        })
+        })
+    }
+
+  render () {
+    let { items } = this.state;
+    let size = [
+      { columns: 1, gutter: 20 },
+      { mq: '768px', columns: 2, gutter: 20 },
+      { mq: '1024px', columns: 2, gutter: 20 }
     ]
-    const loadMore = () => {
-      console.log('more')
-      this.setState( { elements: this.state.items.push("Element") } )
-    };
-
     return (
-      <MasonryInfiniteScroller
-        hasMore={ this.state.hasMore }
-        loadMore={ loadMore }
-        sizes={sizes}>
-        {
-            this.state.items.map((el, index) =>
-                <div
-                  key={index}
-                  style={
-                    {
-                    width: '20 em',
-                    height: `${index % 2 === 0 ? 4 * 50 : 50 }px`,
-                    display: 'block',
-                    background: 'rgba(0,0,0,0.6)'
-                  }
-                }
-                >
-                  <span>somestuff</span>
-                </div>
+      <div className="container">
+      <div className="row">
+
+        <MasonryLayout
+          id="items"
+          sizes={size}
+          infiniteScroll={this.getItems.bind(this)}
+          infiniteScrollLoading={this.state.isLoading}
+          >
+          {
+            items.map((v, i) => {
+              return (
+                <div className="brick"
+                  key={i}
+                  style={{ height: `${i % 2 === 0 ? 200 : 100 }px` }}
+                  />
+                )
+              }
             )
           }
-      </MasonryInfiniteScroller>
-
-    )
+        </MasonryLayout>
+      </div>
+      </div>
+    );
   }
 }
 
-export default Content
+
+export default Content;
