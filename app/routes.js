@@ -9,6 +9,7 @@ import Main from './containers/Main';
 import SignupPage from './components/Signup/SignupPage';
 import LoginPage from './components/Login/LoginPage'
 import StoryPage from './components/Story/StoryPage'
+import NotFoundPage from './components/Pages/NotFoundPage'
 import Home from './components/Home';
 //
 
@@ -22,6 +23,8 @@ class Routes extends React.Component{
           <Route path="signup" component={ SignupPage } />
           <Route path="login" component={ LoginPage } />
           <Route path="story" component={ StoryPage } />
+
+          <Route path="*" component={NotFoundPage} />
         </Route>
       </Router>
     )

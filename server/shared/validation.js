@@ -23,10 +23,11 @@ export function validateRegister(data){
       errors.firstName = "Name must be atleast 5 letters"
     }
 
-    return {
-      errors: errors,
-      isValid: isEmpty(errors)
-    }
+    // return {
+    //   errors: errors,
+    //   isValid: isEmpty(errors)
+    // }
+    return isEmpty(errors) ? {} : errors
 }
 
 export function vaidateLogin(){

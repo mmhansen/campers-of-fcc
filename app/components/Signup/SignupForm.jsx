@@ -1,124 +1,84 @@
 import React from 'react'
-import classnames from 'classnames'
+import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+
+import { validateRegister } from '../../../server/shared/validation'
+import { registerUser } from '../../actions/signupActions'
+
+
+// const form = reduxForm({
+//   form: 'register',
+//   validate: validateRegister
+// })
+const form = reduxForm({
+  form: 'register'
+})
+
+const renderField = field => (
+    <div>
+      <input className="form-control" {...field.input}/>
+      {field.touched && field.error && <div className="error">{field.error}</div>}
+    </div>
+);
 
 class SignupForm extends React.Component {
   constructor (props){
     super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      password: "",
-      passwordConfirmation: "",
-      email: "",
-      errors: {}
-    }
 
     // bind this to our event handlers so we don't have to do it somehwere else
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
   //
-  onChange(e){
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-  //
-  onSubmit(e){
-    this.setState({ errors: {} });
+  onSubmit(formProps){
     e.preventDefault();
-    this.props.userSignupRequest(this.state).then(
+    this.props.registerUser().then(
       ({ data }) => {
-      this.setState({ errors: data })
+        console.log(data)
       }
     );
   }
   //
   render (){
-    const { errors } = this.state;
+    const { handleSubmit } = this.props;
+
     return (
       <div className="panel-body">
-        <form onSubmit={this.onSubmit} role="form" method="post">
+        <form onSubmit={handleSubmit(this.onSubmit)} role="form">
           <div className="form-group">
             <h2>Create account</h2>
           </div>
-          <div className={classnames("form-group", {"has-error": errors.firstName})}>
-            <label className="control-label" >First Name</label>
-            <input
-              id="signupName"
-              type="text"
-              maxLength="50"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChange}
-              name="firstName" />
-            { errors.firstName && <span className="help-block">{ errors.firstName }</span> }
-          </div>
-          <div className={classnames("form-group", {"has-error": errors.lastName})}>
-            <label className="control-label" >Last Name</label>
-            <input
-              id="signupName"
-              type="text"
-              maxLength="50"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChange}
-              name="lastName" />
-            { errors.lastName && <span className="help-block">{ errors.lastName }</span> }
-          </div>
-          <div className={classnames("form-group", {"has-error": errors.email})}>
-            <label className="control-label" >Email</label>
-            <input
-              id="signupEmail"
-              type="email"
-              maxLength="50"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChange}
-              name="email" />
-            { errors.email && <span className="help-block">{ errors.email }</span> }
-          </div>
-          <div className={classnames("form-group", {"has-error": errors.password})}>
-            <label className="control-label" >Password</label>
-            <input
-              id="signupPassword"
-              type="password"
-              maxLength="25"
-              className="form-control"
-              placeholder="at least 6 characters"
-              value={this.state.name}
-              onChange={this.onChange}
-              name="password"/>
-            { errors.password && <span className="help-block">{ errors.password }</span> }
-          </div>
-          <div className={classnames("form-group", {"has-error": errors.passwordConfirmation})}>
-            <label className="control-label" >Password Confirmation</label>
-            <input
-              id="signupPasswordagain"
-              type="password"
-              maxLength="25"
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChange}
-              name="passwordConfirmation"/>
-            { errors.passwordConfirmation && <span className="help-block">{ errors.passwordConfirmation }</span> }
-          </div>
-          {
-          // this button needs to take you somewhere
-          // right now it throws error about engine
-          }
           <div className="form-group">
-            <button
-              id="signupSubmit"
+            <label className="control-label" >First Name</label>
+              <Field name="firstName" className="form-control" maxLength="50" component={renderField} type="text" />
+          </div>
+          <div className="form-group">
+            <label className="control-label" >Last Name</label>
+            <Field name="lastName" className="form-control" maxLength="50" component={renderField} type="text" />
+          </div>
+          <div className="form-group">
+            <label className="control-label" >Email</label>
+            <Field name="email" maxLength="50" className="form-control" component={renderField} type="text" />
+          </div>
+          <div className="form-group">
+            <label className="control-label" >Password</label>
+            <Field name="password" maxLength="25" className="form-control" component={renderField} type="password" />
+          </div>
+          <div className="form-group">
+            <label className="control-label" >Password Confirmation</label>
+            <Field name="passwordConfirmation" maxLength="25" className="form-control" component={renderField} type="text" />
+          </div>
+
+          <div className="form-group">
+            <button type="submit"
               className="btn btn-info btn-block">
               Create your account</button>
           </div>
           <hr />
-          {
-          // route to sign in page
-          }
-          <p>Already have an account?
-            <a href="#">Sign in</a>
+
+          <p>Already have an account? &nbsp;
+            <Link to="/login">Sign in</Link>
           </p>
         </form>
       </div>
@@ -127,8 +87,14 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: React.PropTypes.func.isRequired
+  registerUser: React.PropTypes.func.isRequired
 }
 
+function mapStateToProps(state) {
+  return {
+    errorMessage: state.auth.message,
+    authenticated: state.auth.authenticated
+  }
+}
 
-export default SignupForm;
+export default connect(null, { registerUser })(form(SignupForm));

@@ -1,6 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import passport from "passport"
+import _ from 'lodash'
 
 
 import { validateRegister } from '../shared/validation'
@@ -28,6 +29,9 @@ function setUserInfo(request) {
 }
 
 router.post('/', (req, res, next) => {
+  req.body = _.mapObj(req.body, (v) => {
+    return v.trim()
+  })
   let { firstName, lastName, email, password, passwordConfirmation } = req.body
   let { errors, isValid } = validateRegister(req.body)
 

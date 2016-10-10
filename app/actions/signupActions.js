@@ -1,7 +1,7 @@
 import axios from "axios";
 import {browserHistory} from 'react-router'
 
-export function userSignupRequest(userData){
+export function registerUser(userData){
   return dispatch => {
     return axios.post('/api/users', userData)
     .then((resp) => {
