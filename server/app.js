@@ -1,73 +1,48 @@
+/*
+ * Dependencies
+ */
 import express from "express"
 import path from "path"
 import favicon from "serve-favicon"
 import logger from "morgan"
 import bodyParser from "body-parser"
 import mongoose from "mongoose"
-//
-import config from './conf/main'
-import passportConfig from './conf/passport'
-import users from './routes/users'
-import story from './routes/story'
-
-// start server
-var app = express();
-mongoose.connect(config.mongodb);// connect to db
-app.set('secretKey', config.secret)
-
-
+import cors from 'cors'
 /*
-*  Middleware
-*/
-app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
+ * Local imports, connect db, and start server
+ */
+import config from './conf/main'
+import router from './routes'
+const app = express() // start server
+app.listen(config.port) // server listen on 3000 by default
+mongoose.connect(config.mongodb) // connect to db
+app.set('secretKey', config.secret) // set secret key
+
+console.log(`magic happens on port ${config.port}`)
+/*
+ * Middleware
+ */
+const corsOptions = {
+  origin: 'http://localhost:8080' // client server
+}
+app.use(cors(corsOptions))
 app.use(logger('dev'));
-// parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// serve public folder
-app.use(express.static(path.join(__dirname, '../public')));
-
 
 /*
-* Routes
-*/
-
-app.use('/api/users', users);
-app.use('/api/story', story);
-
+ * Route app
+ */
+router(app);
 
 /*
-* Error handling Middleware
-*/
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({
-    message: err.message,
-    error: {}
-  });
-});
-
-
-module.exports = app;
+ * Error handling
+ */
+ app.use(function(req, res, next) {
+   var err = new Error('Not Found');
+   err.status = 404;
+   res.json({
+     message: err.message,
+     error: {}
+   });
+ });

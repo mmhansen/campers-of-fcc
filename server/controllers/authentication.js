@@ -1,61 +1,59 @@
-import jwt from 'jsonwebtoken'
+/*
+ * Dependencies
+ */
+import jwt from 'jwt-simple'
 import User from '../models/UserModel'
-import config from '../conf/main';
-import validator from 'validator'
-import { validateRegister } from '../shared/validation'
+import config from '../conf/main'
 
-
-function generateToken(user) {
-  return jwt.sign(user, config.secret, {
-    expiresIn: 7 * 24 * 60 * 60
-  })
+/*
+ * Helper functions
+ */
+ // make token
+function tokenForUser(user) {
+  const timestamp = new Date().getTime();
+  // iat = issued at time
+  // sub = identifying characteristic
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret)
 }
 
-function setUserInfo(request) {
-  return {
-    _id: request._id,
-    firstName: request.firstName,
-    lastName: request.lastName,
-    email: request.email
-  }
-}
-exports.login = function (req, res) {
-  let userInfo = setUserInfo(req.user);
 
-  res.status(200).json({
-    token: 'JWT ' + generateToken(userInfo),
-    user: userInfo
-  });
-}
-
-exports.register = function (req, res, next) {
-  let { firstName, lastName, email, password, passwordConfirmation } = req.body
-  let { errors, isValid } = validateRegister(req.body)
-
-  if (!isValid) {
-    return res.status(400).json(errors)
-  }
-
+/*
+ * Register
+ */
+export function register (req, res, next) {
+  // trim inputs
+  //req.body = _.mapObj(req.body, (v) => { v.trim(); } )
+  // define vars
+  let { email, password, firstName, lastName } = req.body
+  // see if user with email already exists
   User.findOne({email}, (err, existingUser) => {
-    if (err) { next(err) }
+    if (err) { return next(err); }
     if (existingUser) {
-      errors.email = "Email already exists"
-      return res.status(400).json(errors)
+      return res.status(400).json({ errors: "Email already exists" })
     }
-
-    let newUser = new User({email, firstName, lastName, password})
-
+    // make new user
+    let newUser = new User({ email, password, firstName, lastName })
+    // save new user
     newUser.save((err, user) => {
-      if (err) {
-        next(err)
-      }
-
-      let userInfo = setUserInfo(user)
+      if (err) { return next(err); }
+      // return user with their token
       res.status(201).json({
-        token: `JWT ${generateToken(userInfo)}`,
-        user: userInfo
+        token: tokenForUser(user),
+        user
       })
-
     })
   })
+}
+
+/*
+ * Login
+ */
+
+export function login (req, res, next) {
+  // user already authenticated
+  // just give them a token
+  res.send({
+    token: tokenForUser(req.user),
+    user: req.user
+  });
 }
