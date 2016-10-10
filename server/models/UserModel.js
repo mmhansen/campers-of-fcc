@@ -1,6 +1,12 @@
-var mongoose =  require("mongoose");
-var bcrypt = require("bcrypt-nodejs");
+/*
+ * Dependencies
+ */
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt-nodejs'
 
+/*
+ * Schema
+ */
 var userSchema = mongoose.Schema({
   firstName: {
     type: String,
@@ -13,7 +19,8 @@ var userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    lowercase: true
   },
   password: {
     type: String
@@ -25,19 +32,21 @@ var userSchema = mongoose.Schema({
   }
 });
 
+/*
+ * Password encryption
+ */
 let SALT_FACTOR = 10;
 
 let noop = () => {}
 
 userSchema.pre("save", function(done){
   var user = this;
-
-  if (!user.isModified("password")) {
-    return done();
-  }
+  // only hash password if it has been modified
+  if (!user.isModified("password")) { return done(); }
   // make the hacker salty
   bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
     if (err) { return done(err); }
+    // hash the password
     bcrypt.hash(user.password, salt, noop, function(err, hashedPassword) {
       if (err) { return done(err); }
       user.password = hashedPassword;
@@ -46,11 +55,18 @@ userSchema.pre("save", function(done){
   });
 });
 
+/*
+ * Check password method
+ */
 userSchema.methods.checkPassword = function(guess, done) {
   bcrypt.compare(guess, this.password, function(err, isMatch) {
-    done(err, isMatch);
+    if (err) { return done(err); }
+    done(null, isMatch); // match -> respond with no errs
   });
 };
 
-let User = mongoose.model("user", userSchema);
+/*
+ * Export User
+ */
+let User = mongoose.model("user", userSchema)
 export default User
