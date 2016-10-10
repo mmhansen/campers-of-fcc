@@ -1,16 +1,18 @@
 // dependencies
-import React from 'react';
-import  { render } from 'react-dom';
+import React from 'react'
+import  { render } from 'react-dom'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 // including styling
-require('./stylesheets/style.scss');
+require('./stylesheets/style.scss')
 // components
-import Main from './containers/Main';
-import SignupPage from './components/Signup/SignupPage';
+import Main from './components/Main'
+import SignupPage from './components/Signup/SignupPage'
 import LoginPage from './components/Login/LoginPage'
 import StoryPage from './components/Story/StoryPage'
+<<<<<<< HEAD
 import NotFoundPage from './components/Pages/NotFoundPage'
-import Home from './components/Home';
+import Home from './components/Home'
+import Home from './components/Home/LandingPage'
 //
 
 class Routes extends React.Component{
