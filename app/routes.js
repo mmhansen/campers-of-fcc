@@ -9,9 +9,7 @@ import Main from './components/Main'
 import SignupPage from './components/Signup/SignupPage'
 import LoginPage from './components/Login/LoginPage'
 import StoryPage from './components/Story/StoryPage'
-<<<<<<< HEAD
 import NotFoundPage from './components/Pages/NotFoundPage'
-import Home from './components/Home'
 import Home from './components/Home/LandingPage'
 //
 
