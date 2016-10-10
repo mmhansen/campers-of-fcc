@@ -1,14 +1,14 @@
 module.exports = {
   devtools: 'eval-source-map',
-  entry: './app/app.jsx',
+  entry: './client/app/app.jsx',
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './client/public/bundle.js'
   },
   resolve: {
     root: __dirname,
     alias: {
-      Main: 'app/containers/Main.jsx'
+      Main: 'app/components/Main.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
@@ -17,7 +17,7 @@ module.exports = {
       {
         loader: 'babel-loader',
         query: {
-          presets: ["latest", "react", "stage-1"]
+          presets: ["es2015", "react"]
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/

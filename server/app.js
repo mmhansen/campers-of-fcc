@@ -29,7 +29,8 @@ app.use(cors(corsOptions))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(favicon(path.join(__dirname, '../client/public', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, '../client/public')));
 /*
  * Route app
  */

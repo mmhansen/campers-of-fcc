@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import { validateRegister } from '../../../server/shared/validation'
 import { registerUser } from '../../actions/signupActions'
 
 
