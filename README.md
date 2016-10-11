@@ -1,6 +1,6 @@
 ## Campers of FCC  
 
-**[Installation and Usage]()**  
+**[Installation and Usage](https://github.com/mmhansen/campers-of-fcc/wiki)**  
 
 **Contributors**  
 mmhansen  
