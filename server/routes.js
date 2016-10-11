@@ -8,6 +8,13 @@ import passport from 'passport'
  */
 import { register, login } from './controllers/authentication'
 import passportService from './services/passport'
+import {
+  approveContent,
+  getContent,
+  deleteContent,
+  submitContent
+} from './controllers/content'
+import { authAdmin } from './services/passport'
 /*
  * Auth middleware
  */
@@ -34,9 +41,15 @@ export default function (app){
   /*
    * Content
    */
+  // all -> get content
+  contentRoutes.get('/:page', getContent)
+  // all -> add content
+  contentRoutes.post('/', submitContent)
+  // admin -> approving content
+  contentRoutes.post('/approve/:id', requireAuth, authAdmin, approveContent)
+  // admin -> delete content
+  contentRoutes.delete('/:id', requireAuth, authAdmin, deleteContent)
 
-  contentRoutes.get('/getStory')
-  contentRoutes.post('/addStory')
 
 
 
