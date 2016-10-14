@@ -47,13 +47,25 @@ const opts = {
 }
 // payload is decoded token, use it to check if it is a valid token
 const jwtLogin = new Strategy(opts, (payload, done) => {
-  User.findOne({ _id: payload._id }, (err, user) => {
+  User.findById(payload.sub, (err, user) => {
     if(err) { return done(err, false); } // catch db err
     if(!user) { return done(null, false); } // user doesn't exist with given ID
     // all good -> return user
     return done(null, user)
   })
 })
+
+
+/*
+ * Helper function (For admin authentication through token ID)
+ */
+export function authAdmin (req, res, next)  {
+  User.findById(req.user._id, (err, user) => {
+      if (err) { return next(err); }
+      if (user.role !== "Admin") { return res.status(401).json({ res: 'unauthorized' }); }
+      next();
+  })
+}
 
 /*
  * Add Strategies as middleware
