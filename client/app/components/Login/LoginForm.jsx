@@ -1,55 +1,57 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+
+import { renderField, renderAlert } from '../common/formFields'
+import { loginUser } from '../../actions/authentication-actions'
+
+
+const loginForm = reduxForm({
+  form: 'login'
+})
 
 class LoginForm extends React.Component {
   constructor (props){
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
-
   }
-  
+
   //
-  onSubmit(e){
-    e.preventDefault();
+  onSubmit({email, password}){
+    this.props.loginUser({email, password})
   }
   //
   render (){
-    // destructuring state in variables
-    const { errors, identifier, password, isLoading } = this.state;
-    //
+
+    const { handleSubmit } = this.props
+
     return (
       <div className="">
-        <form onSubmit={this.onSubmit}>
-          <h1>Login</h1>
+        <form onSubmit={handleSubmit(this.onSubmit)}>
+          {renderAlert(this.props.errorMessage)}
+          <div className="form-group">
+            <h2>Login</h2>
+          </div>
+          <Field type="text" name="email" component={renderField} label="Email" />
+          <Field type="password" name="password" component={renderField} label="Password" />
 
-        <div className="form-group">
-          <label className="control-label" >Username/Email</label>
-          <input
-            className="form-control"
-            name="identifier"
-            label="Username / Email"
-            value={identifier}
-            onChange={this.onChange}
-          />
-      </div>
-
-      <div className="form-group">
-        <label className="control-label" >Password</label>
-          <input
-            className="form-control"
-            name="password"
-            label="Password"
-            value={password}
-            onChange={this.onChange}
-            type="password"
-            />
-        </div>
-
-          <div className="form-group"><button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button></div>
+          <div className="form-group">
+            <button type="submit"
+              className="btn btn-info btn-block">
+              Login</button>
+          </div>
+          <hr />
         </form>
       </div>
     )
   }
 }
 
-export default LoginForm;
+const mapStateToProps = (state) => {
+  return {
+    errorMessage: state.auth.error
+  }
+}
+
+export default connect(mapStateToProps, { loginUser })(loginForm(LoginForm))

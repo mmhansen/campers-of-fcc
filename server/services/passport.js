@@ -25,11 +25,11 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
   // try to find user based on given email
   User.findOne({ email: email }, (err, user) => {
     if (err) { return done(err); } // catch db err
-    if(!user) { return done(null, false); } // couldn't find user by email
+    if(!user) { return done(null, false) } // couldn't find user by email
     // compare passwords
     user.checkPassword(password, (err, isMatch) => {
       if (err) { return done(err); } // catch func err
-      if (!isMatch) { return done(null, false); } // passwords don't match
+      if (!isMatch) { return done(null, false) } // passwords don't match
       // all good, forward on the user
       return done(null, user)
     })

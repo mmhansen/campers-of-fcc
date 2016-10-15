@@ -36,7 +36,6 @@ export function register (req, res, next) {
   // trim inputs
   //req.body = _.mapObj(req.body, (v) => { v.trim(); } )
   // define vars
-  console.log(req.body)
   let { email, password, firstName, lastName } = req.body
   // see if user with email already exists
   User.findOne({email}, (err, existingUser) => {

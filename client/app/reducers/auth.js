@@ -16,7 +16,7 @@ let initialState = {
 export default function auth_reducer(state = initialState, action) {
   switch(action.type) {
     case AUTH_USER:
-      return { ...state, authenticated: true };
+      return { ...state, authenticated: true, error: null };
     case AUTH_ERROR:
       return { ...state, error: action.payload }
     default:

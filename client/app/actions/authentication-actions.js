@@ -15,7 +15,7 @@ export function errorHandler(dispatch, error, type) {
     errorMessage = error;
   }
 
-  if (error.status === 401) {
+  if (error.status === 403) {
     dispatch({
       type: type,
       payload: 'You are not authorized to do this. Please login and try again.'
@@ -29,14 +29,29 @@ export function errorHandler(dispatch, error, type) {
   }
 }
 
-export function registerUser(userData){
+export function registerUser(userData) {
   return dispatch => {
     return axios.post('/api/auth/register', userData)
     .then((resp) => {
       //  this only gets called with 200 codes
       cookie.save('token', resp.data.token, { path: '/' })
       dispatch({type: AUTH_USER})
+      browserHistory.push('/')
+    })
+    .catch((err) => {
+      errorHandler(dispatch, err, AUTH_ERROR)
+    })
+  }
+}
 
+export function loginUser(data) {
+  console.log(data)
+  return dispatch => {
+    return axios.post('/api/auth/login', data)
+    .then((resp) => {
+      cookie.save('token', resp.data.token, { path: '/' })
+      dispatch({type: AUTH_USER})
+      browserHistory.push('/')
     })
     .catch((err) => {
       errorHandler(dispatch, err, AUTH_ERROR)
