@@ -8,6 +8,18 @@ import config from '../conf/main'
 /*
  * Helper functions
  */
+
+ function setUserInfo(request) {
+   let getUserInfo = {
+     _id: request._id,
+     firstName: request.firstName,
+     lastName: request.lastName,
+     email: request.email
+   };
+
+   return getUserInfo;
+ }
+
  // make token
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
@@ -24,12 +36,13 @@ export function register (req, res, next) {
   // trim inputs
   //req.body = _.mapObj(req.body, (v) => { v.trim(); } )
   // define vars
+  console.log(req.body)
   let { email, password, firstName, lastName } = req.body
   // see if user with email already exists
   User.findOne({email}, (err, existingUser) => {
     if (err) { return next(err); }
     if (existingUser) {
-      return res.status(400).json({ errors: "Email already exists" })
+      return res.status(400).json({ error: "Email already exists" })
     }
     // make new user
     let newUser = new User({ email, password, firstName, lastName })
@@ -39,7 +52,7 @@ export function register (req, res, next) {
       // return user with their token
       res.status(201).json({
         token: tokenForUser(user),
-        user
+        user: setUserInfo(user)
       })
     })
   })
@@ -54,6 +67,6 @@ export function login (req, res, next) {
   // just give them a token
   res.send({
     token: tokenForUser(req.user),
-    user: req.user
+    user: setUserInfo(req.user)
   });
 }

@@ -1,7 +1,7 @@
 // dependencies
 import React from 'react';
 import  { render } from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute } from 'react-router'
 // redux
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
@@ -11,10 +11,11 @@ require('./stylesheets/style.scss');
 // components
 import Routes from './routes';
 //
-const store = createStore(
-  (state = {}) => state,
-  applyMiddleware(thunk)
-)
+import rootReducer from './reducers'
+
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 // render to DOM
 render(
   // redux provder

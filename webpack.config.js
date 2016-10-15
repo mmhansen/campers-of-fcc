@@ -1,5 +1,5 @@
 module.exports = {
-  devtools: 'eval-source-map',
+  devtools: 'source-map',
   entry: './client/app/app.jsx',
   output: {
     path: __dirname,
@@ -17,7 +17,7 @@ module.exports = {
       {
         loader: 'babel-loader',
         query: {
-          presets: ["es2015", "react"]
+          presets: ["stage-0", "es2015", "react"]
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/

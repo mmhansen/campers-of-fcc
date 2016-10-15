@@ -1,38 +1,38 @@
-import validator from 'validator'
-import isEmpty from 'lodash/isEmpty'
+exports.validateRegister = (data) => {
+    let errors = {};
 
-export function validateRegister(data){
-    var errors = {};
-    // validate email
-    if (!validator.isEmail(data.email)){
+    let emailPattern = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+    if (!data.email) {
+      errors.email = "Email is required"
+    } else if (!emailPattern.test(data.email)) {
       errors.email = "Email is invalid"
     }
-    // validate passwords
-    if (!validator.equals(data.password, data.passwordConfirmation)){
+
+    if (!data.firstName || data.firstName.length < 5) {
+      errors.firstName = "First name is required and must be at least 5 letters"
+    }
+
+    if (!data.lastName || data.lastName.length < 5) {
+      errors.lastName = "Last name is required and must be at least 5 letters"
+    }
+
+    let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/
+    if (!passwordPattern.test(data.password)) {
+      errors.password = "Password must be at least 8 characters, contain an uppercase, number and symbol"
+    }
+
+    if (data.password !== data.passwordConfirmation) {
+      errors.password = "Passwords must match"
       errors.passwordConfirmation = "Passwords must match"
     }
-    if (!validator.matches(data.password, /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)){
-      errors.password = "Password must be atleast 8 characters, contain an uppercase, number and symbol"
-    }
-    // last name
-    if (!validator.matches(data.lastName, /\w{5,}/)){
-      errors.lastName = "Name must be atleast 5 letters"
-    }
-    // first name
-    if (!validator.matches(data.firstName, /\w{5,}/)){
-      errors.firstName = "Name must be atleast 5 letters"
-    }
 
-    // return {
-    //   errors: errors,
-    //   isValid: isEmpty(errors)
-    // }
-    return isEmpty(errors) ? {} : errors
+
+    return errors
 }
 
-export function vaidateLogin(){
+exports.vaidateLogin = () => {
 
 }
-export function validatePost(){
+exports.validatePost = () => {
 
 }

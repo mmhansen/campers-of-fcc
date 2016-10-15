@@ -5,10 +5,6 @@ import mongoose, { Schema } from 'mongoose';
  */
 
 const StorySchema = new Schema({
-  name: {
-    type: String,
-    requried: true
-  },
   title: {
     type: String,
     required: true
@@ -21,11 +17,14 @@ const StorySchema = new Schema({
     type: String,
     required: true
   },
-  time: {
-    type: String,
-    required: true
+  created_at: {
+    type: Date
   },
-  role: {
+  postedBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  status: {
     type: String,
     enum: ['Pending', 'Approved'],
     default: 'Pending'

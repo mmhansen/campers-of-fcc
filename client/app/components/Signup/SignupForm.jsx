@@ -2,8 +2,10 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import classnames from 'classnames'
 
-import { registerUser } from '../../actions/signupActions'
+import {registerUser} from '../../actions/authentication-actions'
+import { validateRegister as validate} from '../../actions/validation'
 
 
 // const form = reduxForm({
@@ -11,15 +13,19 @@ import { registerUser } from '../../actions/signupActions'
 //   validate: validateRegister
 // })
 const form = reduxForm({
-  form: 'register'
+  form: 'register',
+  validate: validate
 })
 
-const renderField = field => (
+const renderField = (field) => (
+  <div className={classnames('form-group', {'has-error': field.meta.error})}>
+    <label className="control-label" >{field.label}</label>
     <div>
-      <input className="form-control" {...field.input}/>
-      {field.touched && field.error && <div className="error">{field.error}</div>}
+      <input {...field.input} className="form-control" placeholder={field.label} type={field.type} />
+      {field.meta.touched && field.meta.error && <div className="text-danger">{field.meta.error}</div>}
     </div>
-);
+  </div>
+)
 
 class SignupForm extends React.Component {
   constructor (props){
@@ -30,44 +36,36 @@ class SignupForm extends React.Component {
   }
 
   //
-  onSubmit(formProps){
-    e.preventDefault();
-    this.props.registerUser().then(
-      ({ data }) => {
-        console.log(data)
-      }
-    );
+  onSubmit({firstName, lastName, email, password, passwordConfirmation}){
+    this.props.registerUser({firstName, lastName, email, password, passwordConfirmation})
   }
+
+  renderAlert() {
+    if(this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <span><strong>Error!</strong> {this.props.errorMessage}</span>
+        </div>
+      );
+    }
+  }
+
   //
   render (){
     const { handleSubmit } = this.props;
 
     return (
       <div className="panel-body">
-        <form onSubmit={handleSubmit(this.onSubmit)} role="form">
+        <form onSubmit={ handleSubmit(this.onSubmit) } role="form">
+          {this.renderAlert()}
           <div className="form-group">
             <h2>Create account</h2>
           </div>
-          <div className="form-group">
-            <label className="control-label" >First Name</label>
-              <Field name="firstName" className="form-control" maxLength="50" component={renderField} type="text" />
-          </div>
-          <div className="form-group">
-            <label className="control-label" >Last Name</label>
-            <Field name="lastName" className="form-control" maxLength="50" component={renderField} type="text" />
-          </div>
-          <div className="form-group">
-            <label className="control-label" >Email</label>
-            <Field name="email" maxLength="50" className="form-control" component={renderField} type="text" />
-          </div>
-          <div className="form-group">
-            <label className="control-label" >Password</label>
-            <Field name="password" maxLength="25" className="form-control" component={renderField} type="password" />
-          </div>
-          <div className="form-group">
-            <label className="control-label" >Password Confirmation</label>
-            <Field name="passwordConfirmation" maxLength="25" className="form-control" component={renderField} type="text" />
-          </div>
+          <Field type="text" name="firstName" component={renderField} label="First Name" />
+          <Field type="text" name="lastName" component={renderField} label="Last Name" />
+          <Field type="email" name="email" component={renderField} label="Email" />
+          <Field type="password" name="password" component={renderField} label="Password" />
+          <Field type="password" name="passwordConfirmation" component={renderField} label="Password Confirmation" />
 
           <div className="form-group">
             <button type="submit"
@@ -89,11 +87,12 @@ SignupForm.propTypes = {
   registerUser: React.PropTypes.func.isRequired
 }
 
+
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.message,
+    errorMessage: state.auth.error,
     authenticated: state.auth.authenticated
   }
 }
 
-export default connect(null, { registerUser })(form(SignupForm));
+export default connect(mapStateToProps, { registerUser })(form(SignupForm));
