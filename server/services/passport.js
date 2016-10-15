@@ -62,7 +62,7 @@ const jwtLogin = new Strategy(opts, (payload, done) => {
 export function authAdmin (req, res, next)  {
   User.findById(req.user._id, (err, user) => {
       if (err) { return next(err); }
-      if (user.role !== "Admin") { return res.status(401).json({ res: 'unauthorized' }); }
+      if (user.role !== "Admin") { return res.status(403).json({ res: 'Forbidden' }); }
       next();
   })
 }

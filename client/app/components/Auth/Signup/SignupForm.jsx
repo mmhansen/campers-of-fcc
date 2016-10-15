@@ -3,9 +3,9 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import {registerUser} from '../../actions/authentication-actions'
-import { validateRegister as validate} from '../../actions/validation'
-import { renderField, renderAlert } from '../common/formFields'
+import {registerUser} from '../../../actions/authentication-actions'
+import { validateRegister as validate} from '../../../utils/validation'
+import { renderField, renderAlert } from '../../common/formFields'
 
 
 const form = reduxForm({

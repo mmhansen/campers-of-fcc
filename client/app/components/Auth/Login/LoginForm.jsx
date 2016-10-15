@@ -2,8 +2,8 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { renderField, renderAlert } from '../common/formFields'
-import { loginUser } from '../../actions/authentication-actions'
+import { renderField, renderAlert } from '../../common/formFields'
+import { loginUser } from '../../../actions/authentication-actions'
 
 
 const loginForm = reduxForm({
