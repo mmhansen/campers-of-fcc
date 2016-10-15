@@ -7,7 +7,7 @@ import cookie from 'react-cookie'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
-import { AUTH_USER } from './actions/types'
+import { AUTH_USER, SET_USER_ROLE } from './actions/types'
 // including styling
 require('./stylesheets/style.scss');
 // components
@@ -23,6 +23,7 @@ const token = cookie.load('token');
 if (token) {
   // Update application state. User has token and is probably authenticated
   store.dispatch({ type: AUTH_USER });
+  store.dispatch({ type: SET_USER_ROLE, payload: cookie.load('user').role })
 }
 
 // render to DOM
