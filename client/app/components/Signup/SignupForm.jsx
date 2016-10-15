@@ -2,30 +2,16 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import classnames from 'classnames'
 
 import {registerUser} from '../../actions/authentication-actions'
 import { validateRegister as validate} from '../../actions/validation'
+import { renderField, renderAlert } from '../common/formFields'
 
 
-// const form = reduxForm({
-//   form: 'register',
-//   validate: validateRegister
-// })
 const form = reduxForm({
   form: 'register',
   validate: validate
 })
-
-const renderField = (field) => (
-  <div className={classnames('form-group', {'has-error': field.meta.error})}>
-    <label className="control-label" >{field.label}</label>
-    <div>
-      <input {...field.input} className="form-control" placeholder={field.label} type={field.type} />
-      {field.meta.touched && field.meta.error && <div className="text-danger">{field.meta.error}</div>}
-    </div>
-  </div>
-)
 
 class SignupForm extends React.Component {
   constructor (props){
@@ -40,16 +26,6 @@ class SignupForm extends React.Component {
     this.props.registerUser({firstName, lastName, email, password, passwordConfirmation})
   }
 
-  renderAlert() {
-    if(this.props.errorMessage) {
-      return (
-        <div className="alert alert-danger">
-          <span><strong>Error!</strong> {this.props.errorMessage}</span>
-        </div>
-      );
-    }
-  }
-
   //
   render (){
     const { handleSubmit } = this.props;
@@ -57,7 +33,7 @@ class SignupForm extends React.Component {
     return (
       <div className="panel-body">
         <form onSubmit={ handleSubmit(this.onSubmit) } role="form">
-          {this.renderAlert()}
+          {renderAlert(this.props.errorMessage)}
           <div className="form-group">
             <h2>Create account</h2>
           </div>
@@ -90,8 +66,7 @@ SignupForm.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
-    authenticated: state.auth.authenticated
+    errorMessage: state.auth.error
   }
 }
 

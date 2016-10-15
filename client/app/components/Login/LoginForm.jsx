@@ -3,22 +3,11 @@ import React from 'react';
 class LoginForm extends React.Component {
   constructor (props){
     super(props);
-    this.state = {
-      identifier: "",
-      password: '',
-      errors: {},
-      isLoading: false
-    }
-    this.onChange = this.onChange.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
 
   }
-  //
-  onChange(e){
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  
   //
   onSubmit(e){
     e.preventDefault();
