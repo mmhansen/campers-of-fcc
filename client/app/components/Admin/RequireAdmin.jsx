@@ -6,7 +6,7 @@ import { logoutUser } from '../../actions/authentication-actions'
 
 export default function(ComposedComponent) {
   class RequireAdmin extends Component {
-    componentWillMount() {
+    checkAdmin() {
       if (!this.props.authenticated) {
         this.props.handleNotAdmin('You are not authorized to do this. Please login with an admin account.')
         this.context.router.push('/login');
@@ -17,15 +17,12 @@ export default function(ComposedComponent) {
       }
     }
 
+    componentWillMount() {
+      this.checkAdmin()
+    }
+
     componentWillUpdate(nextProps) {
-      if (!this.props.authenticated) {
-        this.props.handleNotAdmin('You are not authorized to do this. Please login with an admin account.')
-        this.context.router.push('/login');
-      } else if (this.props.role !== "Admin")  {
-        this.props.handleNotAdmin('You are not authorized to do this. Please login with an admin account.')
-        this.props.logoutUser()
-        this.context.router.push('/login');
-      }
+      this.checkAdmin()
     }
 
     render() {

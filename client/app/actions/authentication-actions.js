@@ -29,16 +29,20 @@ export function errorHandler(dispatch, error, type) {
   }
 }
 
+function authenticateAndSetRole(response, dispatch) {
+  cookie.save('token', response.data.token, { path: '/' })
+  cookie.save('user', response.data.user, { path: '/'})
+  dispatch({type: AUTH_USER})
+  dispatch({type: SET_USER_ROLE, payload: response.data.user.role})
+  browserHistory.push('/')
+}
+
 export function registerUser(userData) {
   return dispatch => {
     return axios.post('/api/auth/register', userData)
     .then((resp) => {
       //  this only gets called with 200 codes
-      cookie.save('token', resp.data.token, { path: '/' })
-      cookie.save('user', resp.data.user, { path: '/'})
-      dispatch({type: AUTH_USER})
-      dispatch({type: SET_USER_ROLE, payload: resp.data.user.role})
-      browserHistory.push('/')
+      authenticateAndSetRole(resp, dispatch)
     })
     .catch((err) => {
       errorHandler(dispatch, err, AUTH_ERROR)
@@ -52,12 +56,7 @@ export function loginUser(data) {
     return dispatch => {
       return axios.post('/api/auth/login', data)
       .then((resp) => {
-        cookie.save('token', resp.data.token, { path: '/' })
-        cookie.save('user', resp.data.user, { path: '/' })
-        dispatch({type: AUTH_USER})
-        console.log(resp.data.user.role)
-        dispatch({type: SET_USER_ROLE, payload: resp.data.user.role})
-        browserHistory.push('/')
+        authenticateAndSetRole(resp, dispatch)
       })
       .catch((err) => {
         errorHandler(dispatch, err, AUTH_ERROR)
@@ -73,13 +72,12 @@ export function logoutUser() {
   if (token) {
     const user = cookie.load('user')
     return dispatch => {
-      cookie.remove(token, { path: '/' })
-      cookie.remove(user, { path: '/' })
+      cookie.remove('token', { path: '/' })
+      cookie.remove('user', { path: '/' })
       dispatch({type: UNAUTH_USER})
       browserHistory.push('/login')
     }
   }
 
-  console.log('No cookie')
   browserHistory.push('/login')
 }
