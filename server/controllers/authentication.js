@@ -14,7 +14,8 @@ import config from '../conf/main'
      _id: request._id,
      firstName: request.firstName,
      lastName: request.lastName,
-     email: request.email
+     email: request.email,
+     role: request.role
    };
 
    return getUserInfo;
@@ -36,7 +37,6 @@ export function register (req, res, next) {
   // trim inputs
   //req.body = _.mapObj(req.body, (v) => { v.trim(); } )
   // define vars
-  console.log(req.body)
   let { email, password, firstName, lastName } = req.body
   // see if user with email already exists
   User.findOne({email}, (err, existingUser) => {

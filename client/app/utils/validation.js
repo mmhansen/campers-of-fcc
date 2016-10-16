@@ -1,7 +1,9 @@
+const emailPattern = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/
+
 exports.validateRegister = (data) => {
     let errors = {};
 
-    let emailPattern = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
     if (!data.email) {
       errors.email = "Email is required"
     } else if (!emailPattern.test(data.email)) {
@@ -16,7 +18,6 @@ exports.validateRegister = (data) => {
       errors.lastName = "Last name is required and must be at least 5 letters"
     }
 
-    let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/
     if (!passwordPattern.test(data.password)) {
       errors.password = "Password must be at least 8 characters, contain an uppercase, number and symbol"
     }
@@ -30,7 +31,21 @@ exports.validateRegister = (data) => {
     return errors
 }
 
-exports.vaidateLogin = () => {
+exports.validateLogin = (data) => {
+
+  let errors = {}
+
+  if (!data.email) {
+    errors.email = "Email is required"
+  } else if (!emailPattern.test(data.email)) {
+    errors.email = "Email is invalid"
+  }
+
+  if (!passwordPattern.test(data.password)) {
+      errors.password = "Password must be at least 8 characters, contain an uppercase, number and symbol"
+  }
+
+  return errors
 
 }
 exports.validatePost = () => {
