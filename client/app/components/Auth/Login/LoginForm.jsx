@@ -29,23 +29,22 @@ class LoginForm extends React.Component {
     const { handleSubmit } = this.props
 
     return (
-      <div className="panel-body">
-        <form onSubmit={ handleSubmit(this.onSubmit) }>
+      <form id="login-form" onSubmit={ handleSubmit(this.onSubmit) } >
           {renderAlert(this.props.errorMessage)}
           <div className="form-group">
-            <h2>Login</h2>
+            <Field type="text" name="email" component={renderField} label="Email" id="username" tabIndex="1" className="form-control" placeholder="Username"/>
           </div>
-          <Field type="text" name="email" component={renderField} label="Email" />
-          <Field type="password" name="password" component={renderField} label="Password" />
-
           <div className="form-group">
-            <button type="submit"
-              className="btn btn-info btn-block">
-              Login</button>
+            <Field type="password" name="password" component={renderField} label="Password" id="password" tabIndex="2" className="form-control" placeholder="Password"/>
           </div>
-          <hr />
-        </form>
-      </div>
+          <div className="form-group">
+              <div className="row">
+                  <div className="col-sm-6 col-sm-offset-3">
+                      <input type="submit" name="login-submit" id="login-submit" tabIndex="4" className="form-control btn btn-login" value="Log In" />
+                  </div>
+              </div>
+          </div>
+      </form>
     )
   }
 }

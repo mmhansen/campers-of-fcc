@@ -9,8 +9,8 @@ class Main extends React.Component {
     let links = []
 
     let guestLinks = [
-      <li key={1}><Link to="/signup">Sign up</Link></li>,
-      <li key={2}><Link to="/login">Login</Link></li>
+      <li key={2}><Link to="/au/login">Login</Link></li>,
+      <li key={1}><Link to="/au/register">Register</Link></li>
     ]
 
     if (this.props.authenticated) {

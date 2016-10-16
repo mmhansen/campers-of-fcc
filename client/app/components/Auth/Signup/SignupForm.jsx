@@ -31,30 +31,50 @@ class SignupForm extends React.Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div className="panel-body">
-        <form onSubmit={ handleSubmit(this.onSubmit) } role="form">
-          {renderAlert(this.props.errorMessage)}
+      <form onSubmit={ handleSubmit(this.onSubmit) } role="form" id="register-form" method="post" >
+        {renderAlert(this.props.errorMessage)}
           <div className="form-group">
-            <h2>Create account</h2>
+            <Field
+              type="text"
+              name="firstName"
+              component={renderField}
+              label="First Name"
+              id="username"
+              tabIndex="1"
+              className="form-control"
+              placeholder="Username"/>
           </div>
-          <Field type="text" name="firstName" component={renderField} label="First Name" />
-          <Field type="text" name="lastName" component={renderField} label="Last Name" />
-          <Field type="email" name="email" component={renderField} label="Email" />
-          <Field type="password" name="password" component={renderField} label="Password" />
-          <Field type="password" name="passwordConfirmation" component={renderField} label="Password Confirmation" />
-
           <div className="form-group">
-            <button type="submit"
-              className="btn btn-info btn-block">
-              Create your account</button>
+            <Field
+              type="text"
+              name="lastName"
+              component={renderField}
+              label="Last Name"
+              id="username" tabIndex="1" className="form-control" placeholder="Username"/>
           </div>
-          <hr />
-
-          <p>Already have an account? &nbsp;
-            <Link to="/login">Sign in</Link>
-          </p>
-        </form>
-      </div>
+          <div className="form-group">
+            <Field
+              type="email"
+              name="email"
+              component={renderField}
+              label="Email"
+              id="email" tabIndex="1" className="form-control" placeholder="Email Address"/>
+          </div>
+          <div className="form-group">
+            <Field type="password" name="password" component={renderField} label="Password" id="password" tabIndex="2" className="form-control" placeholder="Password"/>
+          </div>
+          <div className="form-group">
+            <Field type="password" name="passwordConfirmation" component={renderField} label="Password Confirmation"
+              id="confirm-password" tabIndex="2" className="form-control" placeholder="Confirm Password"/>
+          </div>
+          <div className="form-group">
+              <div className="row">
+                  <div className="col-sm-6 col-sm-offset-3">
+                      <input type="submit" name="register-submit" id="register-submit" tabIndex="4" className="form-control btn btn-register" value="Register" />
+                  </div>
+              </div>
+          </div>
+      </form>
     )
   }
 }
