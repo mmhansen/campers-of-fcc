@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 
 import { renderField, renderAlert } from '../../common/formFields'
 import { loginUser } from '../../../actions/authentication-actions'
+import { validateLogin as validate } from '../../../utils/validation'
 
 
 const loginForm = reduxForm({
-  form: 'login'
+  form: 'login',
+  validate: validate
 })
 
 class LoginForm extends React.Component {
@@ -27,8 +29,8 @@ class LoginForm extends React.Component {
     const { handleSubmit } = this.props
 
     return (
-      <div className="">
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+      <div className="panel-body">
+        <form onSubmit={ handleSubmit(this.onSubmit) }>
           {renderAlert(this.props.errorMessage)}
           <div className="form-group">
             <h2>Login</h2>
