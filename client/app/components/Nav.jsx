@@ -9,16 +9,49 @@ class Main extends React.Component {
     let links = []
 
     let guestLinks = [
-      <li key={2}><Link to="/au/login">Login</Link></li>,
-      <li key={1}><Link to="/au/register">Register</Link></li>
+      <li key={2}>
+        <Link
+          activeClassName="active"
+          to="/au/login">
+          Login
+        </Link>
+      </li>,
+      <li key={1}>
+        <Link
+          activeClassName="active"
+          to="/au/register">
+          Register
+        </Link>
+      </li>
     ]
 
     if (this.props.authenticated) {
-      links.push(<li key={1 + 'header'}><Link to="/story">Create</Link></li>)
+      links.push(
+        <li
+          key={1 + 'header'}>
+          <Link
+            to="/story">
+            Create
+          </Link>
+        </li>)
       if (this.props.role === 'Admin') {
-        links.push(<li key={2 + 'header'}><Link to="/admin">Admin</Link></li>)
+        links.push(
+          <li
+            key={2 + 'header'}>
+            <Link
+              to="/admin">
+              Admin
+            </Link>
+          </li>)
       }
-      links.push(<li key={3 + 'header'}><Link to="/logout">Logout</Link></li>)
+      links.push(
+        <li
+          key={3 + 'header'}>
+          <Link
+            to="/logout">
+            Logout
+          </Link>
+        </li>)
     } else {
       links = links.concat(guestLinks)
     }
@@ -27,28 +60,14 @@ class Main extends React.Component {
   }
 
   render (){
-
    // rendering
     return (
-      <nav className="navbar navbar-default ">
-        <div className="container-fluid">
-          {/* Title and Image */}
-          <div className="navbar-header">
-            <IndexLink
-             to="/"
-             className="navbar-brand"
-             activeClassName="active">
-             <h2>Campfire Stories</h2>
-             </IndexLink>
-          </div>
-          {/* Links */}
-          <div>
-            <ul className="nav navbar-nav navbar-right">
-              {this.renderLinks()}
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <div className="col-sm-12" id="navbar">
+            {/* Links */}
+              <ul className="nav nav-pills">
+                {this.renderLinks()}
+              </ul>
+      </div>
     )
   }
 }
@@ -61,3 +80,13 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Main);
+
+
+/*
+
+  <IndexLink
+    to="/"
+    className="navbar-brand"
+    activeClassName="active">
+  </IndexLink>
+*/

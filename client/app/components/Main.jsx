@@ -4,9 +4,15 @@ import Nav from './Nav';
 class Main extends Component {
   render () {
     return (
-      <div>
-        <Nav/>
-        { this.props.children }
+      <div className="container-fluid">
+        {/* Navbar Row */}
+        <div className="row">
+          <Nav/>
+        </div>
+        {/* Content Row */}
+        <div className="row content">
+          { this.props.children }
+        </div>
       </div>
     )
   }

@@ -1,3 +1,22 @@
+/* Vars */
+$darkblue: #4E5166;
+$green: /*#79F7A5*/ #7BE5A0;
+$red: #DD8371;
+
+/* General */
+body {
+  height:100%;
+  font-family: "Open Sans", sans-serif;
+}
+
+.content {
+  margin-top: 32px;
+}
+
+/* 404 */
+.not-found {
+  margin: 50px;
+}
 // @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 
 @import "partials/Nav";
