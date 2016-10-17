@@ -17,13 +17,14 @@ class StoryPage extends React.Component {
     this.state = {
       title: "",
       image: "",
-      text: "lorem ipsum",
-      username: "",
+      text: "",
+      username: "exampleUsername",
       time: moment().format('LL'),
       errors: {}
     }
   this.onChange = this.onChange.bind(this);
   this.onSubmit = this.onSubmit.bind(this);
+  this.onChangeMediumEditor = this.onChangeMediumEditor.bind(this);
 }
 //
 onChange(e){
@@ -31,47 +32,87 @@ onChange(e){
     [e.target.name]: e.target.value
   })
 }
-//
-onSubmit(e){
+
+onChangeMediumEditor(text, medium){
+  this.setState({
+    text: medium['elements'][0]['innerHTML']
+  })
+}
+
+onSubmit(event){
   this.setState({ errors: {} });
-  e.preventDefault();
   this.props.handleStorySubmit(this.state).then(
     ({ data }) => {
     this.setState({ errors: data })
     }
   );
 }
+
   render (){
-    let { errors, time, username } = this.state
+    
+    let { errors, time, username, title, image, text } = this.state
+
     return (
-      <div className="container" id="login-page">
-   		<div className="row">
-   			<div className="col-sm-12 col-md-4 col-md-offset-4">
-          {time}
-   			</div>
-
-        <div className="app">
-               <h1>react-medium-editor</h1>
-               <h3>Html content</h3>
-               <div>{this.state.text}</div>
-
-               <h3>Editor #1 (&lt;pre&gt; tag)</h3>
-               <Editor
-                 tag="pre"
-                 text={this.state.text}
-                 onChange={this.onChange}
-                 options={{toolbar: {buttons: ['bold', 'italic', 'underline']}}}
-               />
-               <h3>Editor #2</h3>
-               <Editor
-                 text={this.state.text}
-                 onChange={this.onChange}
-               />
-             </div>
-
-        <form onSubmit={this.onSubmit} role="form" method="post">
-        </form>
-     	</div>
+      <div className="container-fluid" id="story-form">
+      <div className="row">
+          <div className="col-sm-12 col-md-6">
+          <form className="storyForm">
+          <h2>Create</h2>
+          <p>{time}</p>
+          <div className="form-group">
+          <label>Name
+          <input
+            className="form-control"
+            name="username"
+            type="text"
+            value={username}
+            onChange={this.onChange} 
+            disabled/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label>Image
+          <input
+            className="form-control"
+            name="image"          
+            type="url"
+            value={image}
+            onChange={this.onChange} />
+          </label>  
+          </div>
+          <div className="form-group">
+          <label>Title
+          <input
+            className="form-control"          
+            name="title"
+            type="text"
+            value={title}
+            onChange={this.onChange} 
+            placeholder="A short title for your submission" />
+          </label>
+          </div>
+          <div className="form-group">
+          <h3>Tell your story</h3>
+          <Editor
+            className="form-control"          
+            data-placeholder="Tell people about yourself, how you got started with FCC, and what you hope to achieve. Or something."
+            text={text}
+            onChange={this.onChangeMediumEditor}
+            options={{toolbar: {buttons: ['bold', 'italic', 'underline','anchor']}}}
+          />
+          </div>
+          <input type="submit" value="Post" className="btn btn-primary pull-right"/>          
+          </form>       
+        </div>
+        <div className="col-sm-12 col-md-3 col-md-offset-1 well well-sm">
+          <h2>Tips for greatness</h2>
+          <ol>
+            <li>Make sure to include X,Y,Z</li>
+            <li>Highlight text to apply formatting</li>
+            <li>Have fun</li>
+          </ol>
+        </div>        
+      </div>
       </div>
     )
   }
