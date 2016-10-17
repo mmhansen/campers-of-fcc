@@ -33,25 +33,31 @@ class SignupForm extends React.Component {
     return (
       <form onSubmit={ handleSubmit(this.onSubmit) } role="form" id="register-form" method="post" >
         {renderAlert(this.props.errorMessage)}
-          <div className="form-group">
-            <Field
-              type="text"
-              name="firstName"
-              component={renderField}
-              label="First Name"
-              id="username"
-              tabIndex="1"
-              className="form-control"
-              placeholder="Username"/>
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <Field
+                type="text"
+                name="firstName"
+                component={renderField}
+                label="Name"
+                tabIndex="1"
+                className="form-control"
+                placeholder="First"/>
+            </div>
           </div>
-          <div className="form-group">
-            <Field
-              type="text"
-              name="lastName"
-              component={renderField}
-              label="Last Name"
-              id="username" tabIndex="1" className="form-control" placeholder="Username"/>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <Field
+                type="text"
+                name="lastName"
+                component={renderField}
+                label="Name"
+                id="lastName" tabIndex="1" className="form-control" placeholder="Last"/>
+            </div>
           </div>
+        </div>
+
           <div className="form-group">
             <Field
               type="email"

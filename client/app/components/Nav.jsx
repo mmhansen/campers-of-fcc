@@ -79,7 +79,7 @@ class Main extends React.Component {
           {/* Title and Image */}
           <div className="navbar-header">
              {/* Title Icon */}
-            <h2>Campfire Stories</h2>
+              <h2>Campfire Stories</h2>
           </div>
           {/* Links */}
           {/* handle navbar collapse on smaller devices */}
