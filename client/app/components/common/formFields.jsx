@@ -4,10 +4,9 @@ import classnames from 'classnames'
 exports.renderField = (field) => (
   <div className={classnames('form-group', {'has-error': field.meta.error})}>
     <label className="control-label" >{field.label}</label>
-    <div>
-      <input {...field.input} className="form-control" placeholder={field.label} type={field.type} />
-      {field.meta.touched && field.meta.error && <div className="text-danger">{field.meta.error}</div>}
-    </div>
+    <input {...field.input} className="form-control" placeholder={field.placeholder}
+      type={field.type} value={field.value} disabled={field.disabled} />
+    {field.meta.touched && field.meta.error && <div className="text-danger">{field.meta.error}</div>}
   </div>
 )
 
