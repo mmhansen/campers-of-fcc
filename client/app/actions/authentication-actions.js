@@ -55,9 +55,9 @@ export function logoutUser() {
       cookie.remove('token', { path: '/' })
       cookie.remove('user', { path: '/' })
       dispatch({type: UNAUTH_USER})
-      browserHistory.push('/login')
+      browserHistory.push('/au/login')
     }
   }
 
-  browserHistory.push('/login')
+  browserHistory.push('/au/login')
 }

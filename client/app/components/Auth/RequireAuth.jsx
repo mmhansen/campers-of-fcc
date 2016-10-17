@@ -5,13 +5,13 @@ export default function(ComposedComponent) {
   class RequireAuth extends Component {
     componentWillMount() {
       if (!this.props.authenticated) {
-        this.context.router.push('/login');
+        this.context.router.push('/au/login');
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.context.router.push('/login');
+        this.context.router.push('/au/login');
       }
     }
 
