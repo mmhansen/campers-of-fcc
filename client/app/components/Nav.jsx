@@ -5,18 +5,21 @@ import { Link, IndexLink } from 'react-router';
 class Main extends React.Component {
 
   renderLinks() {
+    /*
+    <p class="navbar-text">Signed in as Mark Otto</p>
+    */
 
     let links = []
 
     let guestLinks = [
-      <li key={2}>
+      <li key={2} role="presentation">
         <Link
           activeClassName="active"
           to="/au/login">
           Login
         </Link>
       </li>,
-      <li key={1}>
+      <li key={1} role="presentation">
         <Link
           activeClassName="active"
           to="/au/register">
@@ -28,8 +31,10 @@ class Main extends React.Component {
     if (this.props.authenticated) {
       links.push(
         <li
+          role="presentation"
           key={1 + 'header'}>
           <Link
+            activeClassName="active"
             to="/story">
             Create
           </Link>
@@ -37,8 +42,10 @@ class Main extends React.Component {
       if (this.props.role === 'Admin') {
         links.push(
           <li
+            role="presentation"
             key={2 + 'header'}>
             <Link
+              activeClassName="active"
               to="/admin">
               Admin
             </Link>
@@ -46,8 +53,10 @@ class Main extends React.Component {
       }
       links.push(
         <li
+          role="presentation"
           key={3 + 'header'}>
           <Link
+            activeClassName="active"
             to="/logout">
             Logout
           </Link>
@@ -62,12 +71,30 @@ class Main extends React.Component {
   render (){
    // rendering
     return (
-      <div className="col-sm-12" id="navbar">
-            {/* Links */}
-              <ul className="nav nav-pills">
-                {this.renderLinks()}
-              </ul>
-      </div>
+      <nav
+        id="navbar"
+        className="navbar navbar-default navbar-static-top">
+        <div className="container-fluid">
+          {/* Title and Image */}
+          <div className="navbar-header">
+             {/* Title Icon */}
+            <h2>Campfire Stories</h2>
+          </div>
+          {/* Links */}
+          <div>
+            <ul className="nav navbar-nav navbar-right">
+              <li key='homie'>
+                <IndexLink
+                  to="/"
+                  activeClassName="active">
+                  Home
+                </IndexLink>
+              </li>
+              {this.renderLinks()}
+            </ul>
+          </div>
+        </div>
+      </nav>
     )
   }
 }

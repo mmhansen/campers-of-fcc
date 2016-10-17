@@ -1,9 +1,18 @@
 #navbar {
-  padding: 8px;
   background: $darkblue;
   color: white;
-  font-size: 1.5em;
-  .active {
-    background: $green;
+  h2 {
+    padding: 0;
+    margin-top: 14px;
+  }
+  .navbar-right {
+    margin-right: 24px;
+    li {
+      margin: 4px;
+      > * {
+        color: $green;
+        font-size: 1.2sem;
+      }
+    }
   }
 }
