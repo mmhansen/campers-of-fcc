@@ -2,32 +2,8 @@ import axios from "axios";
 import cookie from "react-cookie"
 import { browserHistory } from "react-router"
 
+import { errorHandler } from './utils'
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SET_USER } from './types'
-
-export function errorHandler(dispatch, error, type) {
-  let errorMessage = '';
-
-  if (error.data.error) {
-    errorMessage = error.data.error;
-  } else if (error.data){
-    errorMessage = error.data;
-  } else {
-    errorMessage = error;
-  }
-
-  if (error.status === 403) {
-    dispatch({
-      type: type,
-      payload: 'You are not authorized to do this. Please login with an admin account.'
-    });
-    logoutUser();
-  } else {
-    dispatch({
-      type: type,
-      payload: errorMessage
-    });
-  }
-}
 
 function authenticateAndSetRole(response, dispatch) {
   cookie.save('token', response.data.token, { path: '/' })
@@ -35,7 +11,7 @@ function authenticateAndSetRole(response, dispatch) {
   dispatch({type: AUTH_USER})
   dispatch({
     type: SET_USER,
-    fullName: `${response.data.user.firstName} ${response.data.user.lastName}`, 
+    fullName: `${response.data.user.firstName} ${response.data.user.lastName}`,
     role: response.data.user.role
   })
   browserHistory.push('/')

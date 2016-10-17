@@ -36,8 +36,8 @@ class StoryPage extends React.Component {
   }
 
   onSubmit({username, image, title}){
-    let story = this.state.story
-    this.props.addNewStory({username, image, title, story})
+    let body = this.state.story
+    this.props.addNewStory({username, image, title, body})
   }
 
   render (){

@@ -22,11 +22,12 @@ const token = cookie.load('token');
 
 if (token) {
   // Update application state. User has token and is probably authenticated
+  const user = cookie.load('user')
   store.dispatch({ type: AUTH_USER });
   store.dispatch({
     type: SET_USER,
-    fullName: `${cookie.load('user').firstName} ${cookie.load('user').lastName}`,
-    role: cookie.load('user').role
+    fullName: `${user.firstName} ${user.lastName}`,
+    role: user.role
   })
 }
 

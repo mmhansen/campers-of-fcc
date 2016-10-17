@@ -9,16 +9,15 @@ import moment from 'moment'
 /*
  * Submit Stories
  */
-export function submitContent (req, res, next){
-  let time = moment().format('LL')
-  let { name, title, body, image } = req.body;
-  let newStory = new Story ({ name, title, body, image, time })
-  newStory.save(newStory, (err, stroy) => {
-    if (err) { next(err); }
+export function submitContent(req, res, next) {
+  let { name, title, body, image, postedBy } = req.body;
+  let newStory = new Story ({ name, title, body, image, postedBy })
+  newStory.save(newStory, (err, story) => {
+    if (err) { next(err) }
     res.status(201).json({
-      success: "true"
+      story: story
     })
-  });
+  })
 }
 
 /*
