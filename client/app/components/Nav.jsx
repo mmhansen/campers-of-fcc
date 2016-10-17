@@ -75,13 +75,15 @@ class Main extends React.Component {
         id="navbar"
         className="navbar navbar-default navbar-static-top">
         <div className="container-fluid">
+
           {/* Title and Image */}
           <div className="navbar-header">
              {/* Title Icon */}
             <h2>Campfire Stories</h2>
           </div>
           {/* Links */}
-          <div>
+          {/* handle navbar collapse on smaller devices */}
+          <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
               <li key='homie'>
                 <IndexLink
