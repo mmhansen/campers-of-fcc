@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import {Field, reduxForm } from 'redux-form'
 import moment from 'moment'
+import classnames from 'classnames'
 // load theme styles with webpack
 require('medium-editor/dist/css/medium-editor.css');
 require('medium-editor/dist/css/themes/bootstrap.css');
@@ -10,11 +11,13 @@ require('medium-editor/dist/css/themes/bootstrap.css');
 import Editor from 'react-medium-editor';
 
 //components
-import { addNewStory } from '../../actions/story-actions';
+import { addNewStory, createStoryValidationError } from '../../actions/story-actions';
 import { renderField } from '../common/formFields'
+import { validatePost as validate } from '../../utils/validation'
 
 const newStoryForm = reduxForm({
-  form: 'new-story'
+  form: 'new-story',
+  validate
 })
 
 class StoryPage extends React.Component {
@@ -37,12 +40,17 @@ class StoryPage extends React.Component {
 
   onSubmit({username, image, title}){
     let body = this.state.story
+    console.log(body)
+    if (!body || body.length < 1) {
+      this.props.createStoryValidationError("You definitly need a story, please write one.")
+      return
+    }
     this.props.addNewStory({username, image, title, body})
   }
 
   render (){
 
-    let { handleSubmit, userFullName } = this.props
+    let { handleSubmit, userFullName, errorMessage } = this.props
     let time = moment().format('LL')
     let { story } = this.state
 
@@ -58,7 +66,7 @@ class StoryPage extends React.Component {
               <Field type="url" name="image" component={renderField} label="Image" />
               <Field type="text" name="title" component={renderField} label="Title"
                     placeholder="A short title for your submission" />
-              <div className="form-group">
+              <div className={classnames('form-group', {'has-error': errorMessage})}>
                 <h3>Tell your story</h3>
                 <Editor
                   className="form-control"
@@ -67,6 +75,7 @@ class StoryPage extends React.Component {
                   onChange={this.onChangeMediumEditor}
                   options={{toolbar: {buttons: ['bold', 'italic', 'underline','anchor']}}}
                 />
+                {errorMessage && <div className="text-danger">{errorMessage}</div>}
               </div>
               <input type="submit" value="Post" className="btn btn-primary pull-right"/>
             </form>
@@ -87,8 +96,9 @@ class StoryPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    userFullName: state.user.userFullName
+    userFullName: state.user.userFullName,
+    errorMessage: state.stories.error
   }
 }
 
-export default connect(mapStateToProps, { addNewStory })(newStoryForm(StoryPage));
+export default connect(mapStateToProps, { addNewStory, createStoryValidationError })(newStoryForm(StoryPage));

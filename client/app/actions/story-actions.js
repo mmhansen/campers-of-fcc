@@ -22,3 +22,10 @@ export function addNewStory (data) {
       })
   }
 }
+
+export function createStoryValidationError(error) {
+  return {
+    type: STORY_ERROR,
+    payload: error
+  }
+}
