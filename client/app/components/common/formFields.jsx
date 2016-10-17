@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 exports.renderField = (field) => (
-  <div className={classnames('form-group', {'has-error': field.meta.error})}>
+  <div className={classnames('form-group', {'has-error': field.meta.visited && field.meta.invalid})}>
     <label className="control-label" >{field.label}</label>
     <input {...field.input} className="form-control" placeholder={field.placeholder}
       type={field.type} value={field.value} disabled={field.disabled} />
