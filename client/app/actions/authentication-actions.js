@@ -2,7 +2,7 @@ import axios from "axios";
 import cookie from "react-cookie"
 import { browserHistory } from "react-router"
 
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SET_USER_ROLE } from './types'
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SET_USER } from './types'
 
 export function errorHandler(dispatch, error, type) {
   let errorMessage = '';
@@ -33,7 +33,11 @@ function authenticateAndSetRole(response, dispatch) {
   cookie.save('token', response.data.token, { path: '/' })
   cookie.save('user', response.data.user, { path: '/'})
   dispatch({type: AUTH_USER})
-  dispatch({type: SET_USER_ROLE, payload: response.data.user.role})
+  dispatch({
+    type: SET_USER,
+    fullName: `${response.data.user.firstName} ${response.data.user.lastName}`, 
+    role: response.data.user.role
+  })
   browserHistory.push('/')
 }
 
