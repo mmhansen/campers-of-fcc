@@ -10,7 +10,6 @@ import moment from 'moment'
  * Submit Stories
  */
 export function submitContent(req, res, next) {
-  console.log(req.body)
   let { name, title, body, image, postedBy } = req.body;
   let newStory = new Story ({ name, title, body, image, postedBy })
   newStory.save(newStory, (err, story) => {
@@ -25,11 +24,15 @@ export function submitContent(req, res, next) {
  * Get Stories
  */
 export function getContent (req, res, next){
-  let limit = req.params.page || 10   // handle req.params.page being null
+  let page = parseInt(req.query.page) || 1
+  let limit = parseInt(req.body.limit) || 20
+
   Story
-    .find({ role: 'Approved' }) // get all stories
-    .sort() // reverse date -> newest first
-    .limit(10) // return only 10
+    .find({ status: 'Approved' })
+    .sort('-date')
+    .skip(limit * (page-1))
+    .limit(limit)
+    .populate('postedBy')
     .exec((err, storyArr) => {
     if (err) { return next(err); }
     res.status(200).json({

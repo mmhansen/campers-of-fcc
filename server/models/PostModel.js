@@ -17,9 +17,6 @@ const StorySchema = new Schema({
     type: String,
     required: true
   },
-  created_at: {
-    type: Date
-  },
   postedBy: {
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -28,7 +25,11 @@ const StorySchema = new Schema({
     type: String,
     enum: ['Pending', 'Approved'],
     default: 'Pending'
-  }
+  },
+  created_at: {
+    type: Date,
+    default: new Date()
+   }
 })
 
 let Story = mongoose.model('story', StorySchema)

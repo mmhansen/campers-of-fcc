@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MasonryLayout from 'react-masonry-layout'
+import { connect } from 'react-redux'
+import { getContent } from '../../actions/story-actions'
 
 class Content extends Component {
   constructor(){
@@ -10,7 +12,9 @@ class Content extends Component {
       items: Array(20).fill()
     }
   }
-
+  componentWillMount(){
+    getContent(1)
+  }
   getItems() {
     let { perPage } = this.props;
 
@@ -67,4 +71,4 @@ class Content extends Component {
 }
 
 
-export default Content;
+export default connect(null, null)(Content);

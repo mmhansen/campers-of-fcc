@@ -19,7 +19,7 @@ class Main extends React.Component {
           Login
         </Link>
       </li>,
-      <li key={1} role="presentation">
+      <li key={1} role="presentation" id="register">
         <Link
           activeClassName="active"
           to="/au/register">
@@ -79,19 +79,17 @@ class Main extends React.Component {
           {/* Title and Image */}
           <div className="navbar-header">
              {/* Title Icon */}
-              <h2>Campfire Stories</h2>
+             <IndexLink
+               to="/"
+               activeClassName="active" id="home">
+               <h2>Campfire Stories</h2>
+             </IndexLink>
           </div>
           {/* Links */}
           {/* handle navbar collapse on smaller devices */}
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
-              <li key='homie'>
-                <IndexLink
-                  to="/"
-                  activeClassName="active">
-                  Home
-                </IndexLink>
-              </li>
+          
               {this.renderLinks()}
             </ul>
           </div>
