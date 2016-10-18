@@ -41,16 +41,11 @@ export default function (app){
   /*
    * Content
    */
-  // all -> get content
-  contentRoutes.get('/:page', getContent)
-  // all -> add content
-  contentRoutes.post('/', submitContent)
-  // admin -> approving content
-  contentRoutes.post('/approve/:id', requireAuth, authAdmin, approveContent)
-  // admin -> delete content
-  contentRoutes.delete('/:id', requireAuth, authAdmin, deleteContent)
-
-
+  contentRoutes.route('/:id?')
+    .get(getContent)
+    .post(submitContent)
+    .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
+    .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
 
 
   // pass to server

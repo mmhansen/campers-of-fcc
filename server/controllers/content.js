@@ -10,6 +10,7 @@ import moment from 'moment'
  * Submit Stories
  */
 export function submitContent(req, res, next) {
+  console.log(req.body)
   let { name, title, body, image, postedBy } = req.body;
   let newStory = new Story ({ name, title, body, image, postedBy })
   newStory.save(newStory, (err, story) => {
