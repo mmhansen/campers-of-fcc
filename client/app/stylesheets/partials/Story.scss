@@ -6,7 +6,7 @@
     -moz-appearance: textfield-multiline;
     -webkit-appearance: textarea;
     background-color: #fff;
-    background-image: none;    
+    background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
     height: 300px;
@@ -14,4 +14,8 @@
     padding: 2px;
     resize: both;
     width: 100%;
+}
+
+#story-form {
+  color: $darkblue;
 }
