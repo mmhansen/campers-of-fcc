@@ -45,7 +45,7 @@
     "react": "^15.3.2",
     "react-cookie": "^0.4.8",
     "react-dom": "^15.3.2",
-    "react-masonry-layout": "^0.2.3",
+    "react-masonry-component": "^4.2.2",
     "react-medium-editor": "^1.8.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",

@@ -12,7 +12,8 @@ import {
   approveContent,
   getContent,
   deleteContent,
-  submitContent
+  submitContent,
+  getCount
 } from './controllers/content'
 import { authAdmin } from './services/passport'
 /*
@@ -38,6 +39,8 @@ export default function (app){
   authRoutes.post('/register', register)
   authRoutes.post('/login', requireLogin, login)
 
+
+  contentRoutes.get('/count', getCount)
   /*
    * Content
    */
@@ -46,6 +49,9 @@ export default function (app){
     .post(submitContent)
     .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
     .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
+
+
+
 
 
   // pass to server

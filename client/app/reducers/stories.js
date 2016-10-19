@@ -1,17 +1,24 @@
-import { ADD_NEW_STORY, STORY_ERROR } from '../actions/types'
+import { ADD_NEW_STORY, STORY_ERROR, FETCH_STORIES, GET_COUNT } from '../actions/types'
 
 let initialState = {
   stories: [],
+  page: 1,
+  count: 0,
   error: null
 }
 
 export default function stories_reducer(state = initialState, action) {
   switch(action.type) {
-    case ADD_NEW_STORY:
+    case FETCH_STORIES:
       return {
         ...state,
-        error: null,
-        stories: [...state.stories, action.story]
+        page: action.page,
+        stories: action.payload
+      }
+    case GET_COUNT:
+      return {
+        ...state,
+        count: action.count
       }
     case STORY_ERROR:
       return {
