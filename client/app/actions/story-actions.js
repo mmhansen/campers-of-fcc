@@ -5,7 +5,11 @@ import axios from 'axios'
 import cookie from 'react-cookie'
 import { browserHistory } from 'react-router'
 import { errorHandler } from './utils'
-import { ADD_NEW_STORY, STORY_ERROR } from './types'
+import {
+  GET_COUNT,
+  STORY_ERROR,
+  FETCH_STORIES
+} from './types'
 
 /*
  * Handle Post
@@ -16,10 +20,6 @@ export function addNewStory (data) {
   return dispatch => {
     return axios.post('/api/content/', data)
       .then( (resp) => {
-        dispatch({
-          type: ADD_NEW_STORY,
-          story: resp.data.story
-        })
         browserHistory.push('/')
       })
       .catch( (err) => {
@@ -38,8 +38,33 @@ export function createStoryValidationError(error) {
 /*
  * Handle Get
  */
-export function getContent (page) {
-  return axios.get(`/api/content/?page=${page}`)
-    .then( res => res )
-    .catch( err => err )
+export function getContent (page=1) {
+  return dispatch => {
+    return axios.get(`/api/content/?page=${page}`)
+      .then( res => {
+        dispatch({
+          type: FETCH_STORIES,
+          page: page,
+          payload: res.data.content
+        })
+      } )
+      .catch( err => err )
+
+  }
 }
+
+/*
+ * Get the number of stories in the DB
+ */
+ export function getCount() {
+   return dispatch => {
+     return axios.get('/api/content/count')
+          .then((res) => {
+            console.log(res.data)
+            dispatch({
+              type: GET_COUNT,
+              count: res.data.count
+            })
+          })
+   }
+ }

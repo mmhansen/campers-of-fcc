@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
+import { getCount } from '../actions/story-actions'
 import Nav from './Nav';
 
 class Main extends Component {
+
+  componentWillMount() {
+    this.props.getCount()
+  }
+
   render () {
     return (
       <div>
@@ -18,4 +26,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(null, { getCount })(Main);

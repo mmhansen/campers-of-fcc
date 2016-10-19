@@ -8,6 +8,7 @@ export const SET_USER_ROLE = 'set_user_role'
 export const SET_USER = 'set_user'
 
 // Story management actions
-export const ADD_NEW_STORY = 'add_new_story'
 export const APPROVE_STORY = 'approve_story'
 export const STORY_ERROR = 'story_error'
+export const FETCH_STORIES = 'fetch_stories'
+export const GET_COUNT = 'get_count'

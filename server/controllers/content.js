@@ -42,6 +42,20 @@ export function getContent (req, res, next){
 }
 
 /*
+ * Get count of stories
+ */
+ export function getCount(req, res, next) {
+   Story.count({}, (err, count) => {
+     if (err) next(err)
+     console.log("Here: ", count)
+     res.json({
+       count
+     })
+   })
+ }
+
+
+/*
  * Approve Story
  */
 export function approveContent (req, res, next){
