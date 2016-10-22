@@ -60,7 +60,6 @@ export function getContent (page=1) {
    return dispatch => {
      return axios.get('/api/content/count')
           .then((res) => {
-            console.log(res.data)
             dispatch({
               type: GET_COUNT,
               count: res.data.count

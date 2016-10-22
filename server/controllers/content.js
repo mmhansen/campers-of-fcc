@@ -45,9 +45,8 @@ export function getContent (req, res, next){
  * Get count of stories
  */
  export function getCount(req, res, next) {
-   Story.count({}, (err, count) => {
+   Story.count({ status: "Approved" }, (err, count) => {
      if (err) next(err)
-     console.log("Here: ", count)
      res.json({
        count
      })
@@ -80,5 +79,24 @@ export function deleteContent (req, res, next){
     res.status(200).json({
       delete: 'success'
     })
+  })
+}
+
+
+/*
+ * Get stories for approving
+ * Only returns 20 most recent
+ */
+export function reviewStories (req, res, next) {
+  Story
+    .find({ status: 'Pending' })
+    .sort('-date')
+    .limit(20)
+    .populate('postedBy')
+    .exec((err, storyArr) => {
+    if (err) { return next(err); }
+    res.status(200).json({
+      content: storyArr
+    });
   })
 }

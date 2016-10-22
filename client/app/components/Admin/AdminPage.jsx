@@ -1,33 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getPending } from '../../actions/admin-actions'
 
-//components
+/*
+ * Admin Control Component
+ */
+class AdminPage extends Component {
 
-class AdminPage extends React.Component {
-  constructor(){
-    super()
-    // content is a flag for stories or users
-    this.state = {
-      content: 'stories'
-    }
+  componentWillMount(){
+    // get the stories
+    this.props.getPending()
   }
   onClick(e){
     e.preventDefault();
-    let get = e.target.name;
-    // make axios request with get
+    // get the stories
+    this.props.getPending()
   }
   render (){
+    let { content } = this.props
+
+    let childElements = content.map((x,i) => {
+        return(
+          <div className="row story" key={i}>
+            <div className="col-sm-4">
+              <span className="title">Author: </span>
+              <span className="content">{ x.postedBy.firstName +" "+x.postedBy.lastName }</span>
+            </div>
+            <div className="col-sm-4">
+              <span className="title">Date Submitted: </span>
+              <span className="content">{ x["created_at"].slice(0,10) }</span>
+            </div>
+            <div className="col-sm-2">
+              <button className="btn btn-default">Review</button>
+            </div>
+          </div>
+        )
+      })
+
     return (
       <div className="col-xs-12 col-sm-12 col-md-8 col-md-offset-2" id="admin">
         <div className="panel panel-login">
           <div className="panel-heading">
-            <button name="stories" onClick={this.onClick.bind(this)} className="btn btn-primary btn-lg">Stories</button>
-            <button name="users" onClick={this.onClick.bind(this)} className="btn btn-primary btn-lg">Users</button>
+            <button onClick={this.onClick.bind(this)} className="btn btn-default">Refresh</button>
           </div>
           <hr />
           <div className="panel-body">
-            <div>
-              <span>clicking on this will let you see the whole article</span> <span>shows username and date posted</span>
-            </div>
+            {/* Stories to be approved */}
+            { childElements }
+
           </div>
         </div>
       </div>
@@ -35,4 +55,9 @@ class AdminPage extends React.Component {
   }
 }
 
-export default AdminPage;
+const mapStateToProps = (state) => {
+  return {
+    content: state.user.content
+  }
+}
+export default connect(mapStateToProps, { getPending })(AdminPage);

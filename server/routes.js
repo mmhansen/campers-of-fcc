@@ -13,7 +13,8 @@ import {
   getContent,
   deleteContent,
   submitContent,
-  getCount
+  getCount,
+  reviewStories
 } from './controllers/content'
 import { authAdmin } from './services/passport'
 /*
@@ -28,31 +29,35 @@ import { authAdmin } from './services/passport'
 export default function (app){
   const apiRoutes     = express.Router(),
         authRoutes    = express.Router(),
-        contentRoutes = express.Router();
+        contentRoutes = express.Router(),
+        adminRoutes   = express.Router();
 
-  apiRoutes.use('/auth', authRoutes)
+  apiRoutes.use('/auth',    authRoutes)
   apiRoutes.use('/content', contentRoutes)
-
+  apiRoutes.use('/admin',   adminRoutes)
   /*
    * Authorization
    */
   authRoutes.post('/register', register)
   authRoutes.post('/login', requireLogin, login)
 
-
+  //
   contentRoutes.get('/count', getCount)
   /*
-   * Content
+   * User Content
    */
-  contentRoutes.route('/:id?')
+  contentRoutes.route('/')
     .get(getContent)
     .post(submitContent)
-    .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
+
+
+  /*
+   * Admin Content Control
+   */
+  adminRoutes.route('/:id?')
+    .get(reviewStories)
+    .post(requireAuth, authAdmin, approveContent) // just to approve story by ID
     .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
-
-
-
-
 
   // pass to server
   app.use('/api', apiRoutes)

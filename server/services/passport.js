@@ -48,6 +48,7 @@ const opts = {
 // payload is decoded token, use it to check if it is a valid token
 const jwtLogin = new Strategy(opts, (payload, done) => {
   User.findById(payload.sub, (err, user) => {
+    console.log('token')
     if(err) { return done(err, false); } // catch db err
     if(!user) { return done(null, false); } // user doesn't exist with given ID
     // all good -> return user

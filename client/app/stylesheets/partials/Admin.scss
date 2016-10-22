@@ -4,4 +4,14 @@
     color: $green;
     margin: 0 50px;
   }
+  .story {
+    background: #7986CB;
+    color: white;
+    margin: 8px;
+    padding: 8px;
+    .content {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
 }
