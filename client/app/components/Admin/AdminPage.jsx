@@ -12,6 +12,10 @@ class AdminPage extends Component {
   componentWillMount(){
     this.props.getPending()
   }
+  updateContent(e){
+    e.preventDefault();
+    this.props.getPending()
+  }
   /*
    * Rendering
    */
@@ -30,6 +34,10 @@ class AdminPage extends Component {
     return (
       <div className="col-xs-12 col-sm-12 col-md-8 col-md-offset-2" id="admin">
         <div className="panel panel-login">
+          <div className="panel-heading">
+            <button onClick={this.updateContent.bind(this)} className="btn btn-default">Refresh</button>
+          </div>
+          <hr />
           <div className="panel-body">
             {/* Stories to be approved */}
             { childElements }

@@ -27,21 +27,18 @@ export function getPending() {
 /*
  * Approving and Deleting Stories
  */
-
 const token = cookie.load('token');
-console.log(token)
-let config = {
-  headers: { 'authorization': token }
-}
+axios.defaults.headers.common['authorization'] = token;
+
 
 export function approveStory(id) {
   return dispatch => {
-    return axios.put(`/api/admin/${id}`, config)
+    return axios.put(`/api/admin/${id}`)
   }
 }
 
 export function deleteStory(id) {
   return dispatch => {
-    return axios.delete(`/api/admin/${id}`, config)
+    return axios.delete(`/api/admin/${id}`)
   }
 }
