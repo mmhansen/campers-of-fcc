@@ -56,7 +56,7 @@ export default function (app){
    */
   adminRoutes.route('/:id?')
     .get(reviewStories)
-    .post(requireAuth, authAdmin, approveContent) // just to approve story by ID
+    .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
     .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
 
   // pass to server

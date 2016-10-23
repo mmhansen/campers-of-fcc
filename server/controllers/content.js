@@ -60,7 +60,7 @@ export function getContent (req, res, next){
 export function approveContent (req, res, next){
   let story = req.params.id;
   // approve story with given ID
-  Story.update({ id: story }, { $set: { role: 'Approved' }}, { new: true }, (err, updatedStory) => {
+  Story.update({ id: story }, { $set: { status: 'Approved' }}, { new: true }, (err, updatedStory) => {
     if (err) { return next(err); }
     res.status(200).json({
       update: 'success'
