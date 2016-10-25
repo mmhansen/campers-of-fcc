@@ -1,6 +1,14 @@
+.navbar {
+  margin-bottom: 0;
+}
 #navbar {
   background: $darkblue;
   color: white;
+  @media only screen and (max-width: 720px){
+    h2 {
+      text-align: center;
+    }
+  }
   h2 {
     padding: 0;
     margin-top: 14px;

@@ -14,7 +14,9 @@ class Content extends Component {
       this.props.getContent(page)
     }
   }
-
+  mouseEnter(){
+    console.log('enter')
+  }
   render () {
     let { items, page, count }  = this.props
 
@@ -24,11 +26,25 @@ class Content extends Component {
 
     let childElements = items.map(function(element, index){
        return (
-            <div key={index} className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <h4>{element.title}</h4>
-                <p>{element.body}</p>
+        <div key={index} className="col-sm-12 col-md-6 col-lg-6 card">
+          <div className="brick">
+            <img src={element.image} className="img-responsive"/>
+
+            <div className="text-title">
+              <p className="header">{element.title}</p>
+                <div className="row info">
+                    <span>By {element.postedBy.firstName +" "+ element.postedBy.lastName} | On {element["created_at"].slice(0,10)}</span>
+                </div>
             </div>
-        )
+
+            <div className="text-body">
+              <p>{element.body}</p>
+
+            </div>
+
+          </div>
+        </div>
+      )
     })
 
     let dis = true
@@ -37,29 +53,24 @@ class Content extends Component {
     if (page === Math.ceil(count/20) ) nextDis = true
 
     let controls = (
-      <div className="row">
-        <div className="col-lg-6">
-          <button disabled={dis}
-             className="btn btn-default" onClick={this.fetchStories(page-1)}>Previous</button>
-        </div>
-        <div className="col-lg-6">
-          <button disabled={nextDis}
-             className="btn btn-default" onClick={this.fetchStories(page+1)}>Next</button>
-        </div>
+      <div className="row home-controls">
+          <button onMouseEnter={this.fetchStories(page-1)} disabled={dis}
+             className="btn btn-default left-control" onClick={this.fetchStories(page-1)}>&#x02AA6;</button>
+          <button onMouseEnter={this.fetchStories(page+1)} disabled={nextDis}
+             className="btn btn-default right-control" onClick={this.fetchStories(page+1)}>&#x02AA7;</button>
       </div>
     )
 
     return (
-        <div>
+        <div className="col-sm-12 home-page">
           {controls}
           <Masonry
-              options={masonryOptions} // default {}
-              disableImagesLoaded={false} // default false
-              updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-          >
-              {childElements}
+            options={masonryOptions} // default {}
+            disableImagesLoaded={false} // default false
+            updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+            >
+            {childElements}
           </Masonry>
-          {controls}
         </div>
     )
   }

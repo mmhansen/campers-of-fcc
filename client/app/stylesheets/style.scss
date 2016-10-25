@@ -2,15 +2,14 @@
 $darkblue: #4E5166;
 $green: /*#79F7A5*/ #7BE5A0;
 $red: #DD8371;
-
+$bg-grey: #F0F0F0;
 /* General */
 body {
   height:100%;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Lato", sans-serif;
 }
-
-.content {
-  margin-top: 32px;
+.container-fluid > .row {
+  margin-bottom: 0;
 }
 
 /* 404 */
