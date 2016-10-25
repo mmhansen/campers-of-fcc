@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Masonry from 'react-masonry-component'
 import { connect } from 'react-redux'
 import { getContent } from '../../actions/story-actions'
+import moment from 'moment'
 
 class Content extends Component {
 
@@ -25,6 +26,8 @@ class Content extends Component {
     }
 
     let childElements = items.map(function(element, index){
+      let time = moment(element.created_at, "YYYY-MM-DD").format('LL');
+
        return (
         <div key={index} className="col-sm-12 col-md-6 col-lg-6 card">
           <div className="brick">
@@ -33,7 +36,7 @@ class Content extends Component {
             <div className="text-title">
               <p className="header">{element.title}</p>
                 <div className="row info">
-                    <span>By {element.postedBy.firstName +" "+ element.postedBy.lastName} | On {element["created_at"].slice(0,10)}</span>
+                  <span>By {element.postedBy.firstName +" "+ element.postedBy.lastName} | On {time}</span>
                 </div>
             </div>
 

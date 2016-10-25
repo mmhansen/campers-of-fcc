@@ -55,51 +55,48 @@ class StoryPage extends React.Component {
     let { story } = this.state
 
     return (
-      <div id="story-form" className="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-
-          <div className="row">
-            {/* Content */}
-            <div className="col-sm-8">
-              <form onSubmit={handleSubmit(this.onSubmit)} className="storyForm">
-                <h2>Tell Your Coding Story</h2>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-6">
-                    <h4>{userFullName}</h4>
-                  </div>
-                  <div className="col-sm-6">
-                    <h4>{time}</h4>
-                  </div>
-                </div>
-                <div className="row">
-
-                </div>
-                <Field type="url" label="Image" name="image" component={renderField} placeholder="Include an image url for your header"/>
-                <Field type="text" label="Title" name="title" component={renderField} placeholder="Title" />
-                <div className={classnames('form-group', {'has-error': errorMessage})}>
-                  <br />
-                  <Editor
-                    className="form-control"
-                    data-placeholder="Double click on text to style."
-                    text={story}
-                    onChange={this.onChangeMediumEditor}
-                    options={{toolbar: {buttons: ['bold', 'italic', 'underline','anchor']}}}
-                    />
-                  {errorMessage && <div className="text-danger">{errorMessage}</div>}
-                </div>
-                <input type="submit" value="Post" className="btn btn-primary"/>
-              </form>
+      <div id="story-form" className="row">
+        {/* Content */}
+        <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-1">
+          <form onSubmit={handleSubmit(this.onSubmit)} className="storyForm">
+            <h2>Tell Your Coding Story</h2>
+            <hr />
+            <div className="row">
+              <div className="col-sm-6">
+                <h4>{userFullName}</h4>
+              </div>
+              <div className="col-sm-6">
+                <h4>{time}</h4>
+              </div>
             </div>
-            {/* Tips */}
-            <div className="col-sm-4">
-              <h2>Tips</h2>
-              <ol>
-                <li>Tell people about yourself, how you got started with FCC, and what you hope to achieve. Or something. </li>
-                <li>Highlight text to apply formatting</li>
-              </ol>
+            <div className="row">
+
             </div>
-          </div>
+            <Field type="url" label="Image" name="image" component={renderField} placeholder="Include an image url for your header"/>
+            <Field type="text" label="Title" name="title" component={renderField} placeholder="Title" />
+            <div className={classnames('form-group', {'has-error': errorMessage})}>
+              <br />
+              <Editor
+                className="form-control"
+                data-placeholder="Double click on text to style."
+                text={story}
+                onChange={this.onChangeMediumEditor}
+                options={{toolbar: {buttons: ['bold', 'italic', 'underline','anchor']}}}
+                />
+              {errorMessage && <div className="text-danger">{errorMessage}</div>}
+            </div>
+            <input type="submit" value="Post" className="btn btn-primary"/>
+          </form>
         </div>
+        {/* Tips */}
+        <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-0 ">
+          <h2>Tips</h2>
+          <ol>
+            <li>Tell people about yourself, how you got started with FCC, and what you hope to achieve. Or something. </li>
+            <li>Highlight text to apply formatting</li>
+          </ol>
+        </div>
+      </div>
     )
   }
 }
