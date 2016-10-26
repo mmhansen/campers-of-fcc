@@ -6,15 +6,21 @@ import passport from 'passport'
 /*
  * Local imports
  */
-import { register, login } from './controllers/authentication'
 import passportService from './services/passport'
+import {
+  register,
+  login,
+  deleteUser,
+  getUser,
+  roleControl
+} from './controllers/authentication'
 import {
   approveContent,
   getContent,
   deleteContent,
   submitContent,
   getCount,
-  reviewStories
+  updateContent
 } from './controllers/content'
 import { authAdmin } from './services/passport'
 /*
@@ -40,6 +46,13 @@ export default function (app){
    */
   authRoutes.post('/register', register)
   authRoutes.post('/login', requireLogin, login)
+  authRoutes.route('/user')
+    .get(requireAuth, authAdmin, getUser)
+    .delete(requireAuth, authAdmin, deleteUser)
+    .put(requireAuth, authAdmin, roleControl)
+
+
+
 
   //
   contentRoutes.get('/count', getCount)
@@ -54,8 +67,8 @@ export default function (app){
   /*
    * Admin Content Control
    */
-  adminRoutes.route('/:id?')
-    .get(reviewStories)
+  adminRoutes.route('/')
+    .post(requireAuth, authAdmin, updateContent)
     .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
     .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
 

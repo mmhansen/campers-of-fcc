@@ -10,8 +10,8 @@ import moment from 'moment'
  * Submit Stories
  */
 export function submitContent(req, res, next) {
-  let { name, title, body, image, postedBy } = req.body;
-  let newStory = new Story ({ name, title, body, image, postedBy })
+  let { title, body, image, postedBy } = req.body;
+  let newStory = new Story ({ title, body, image, postedBy })
   newStory.save(newStory, (err, story) => {
     if (err) { next(err) }
     res.status(201).json({
@@ -25,10 +25,11 @@ export function submitContent(req, res, next) {
  */
 export function getContent (req, res, next){
   let page = parseInt(req.query.page) || 1
-  let limit = parseInt(req.body.limit) || 20
+  let limit = parseInt(req.query.limit) || 20
+  let status = req.query.status
 
   Story
-    .find({ status: 'Approved' })
+    .find({ status })
     .sort('-date')
     .skip(limit * (page-1))
     .limit(limit)
@@ -58,7 +59,7 @@ export function getContent (req, res, next){
  * Approve Story
  */
 export function approveContent (req, res, next){
-  let story = req.params.id;
+  let story = req.query.id;
   // approve story with given ID
   Story.update({ _id: story }, { $set: { status: 'Approved' }}, { new: true }, (err, updatedStory) => {
     if (err) { return next(err); }
@@ -74,9 +75,9 @@ export function approveContent (req, res, next){
  * Remove Story
  */
 export function deleteContent (req, res, next){
-  let story = req.params.id;
+  let _id = req.query.id;
   // remove story with given ID
-  Story.findOne({ _id: story }, (err, model) => {
+  Story.findOne({ _id }, (err, model) => {
     if (err) { return next(err); }
     model.remove((err) => {
       if (err) { return next(err); }
@@ -89,21 +90,21 @@ export function deleteContent (req, res, next){
   })
 }
 
-
 /*
- * Get stories for approving
- * Only returns 20 most recent
+ * Update story
  */
-export function reviewStories (req, res, next) {
-  Story
-    .find({ status: 'Pending' })
-    .sort('-date')
-    .limit(20)
-    .populate('postedBy')
-    .exec((err, storyArr) => {
-    if (err) { return next(err); }
-    res.status(200).json({
-      content: storyArr
-    });
-  })
+export function updateContent(req, res, next) {
+  let _id = req.query.id;
+  let { title, body, image } = req.body;
+
+  Story.findOneAndUpdate(
+    { _id },
+    { $set: { title, body, image }},
+    { new: true },
+    (err, story) => {
+      if (err) { return next(err); }
+      res
+      .status(200)
+      .json({ story })
+    })
 }

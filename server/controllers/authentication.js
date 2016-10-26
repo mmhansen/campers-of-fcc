@@ -70,3 +70,66 @@ export function login (req, res, next) {
     user: setUserInfo(req.user)
   });
 }
+
+
+
+/**
+ * User Editing
+ *
+ **/
+ // delete
+export function deleteUser (req, res, next) {
+  let _id = req.query.id
+
+  User
+    .findOne({ _id })
+    .remove((err) => {
+      if(err){return next(err)}
+      res
+        .status(200)
+        .json({ "delete":"success" })
+    })
+  }
+// get users w/ pagination
+export function getUser(req, res, next) {
+  let page = parseInt(req.query.page)
+  let limit = parseInt(req.query.limit)
+
+  User
+    .find({})
+    .skip(limit * (page-1))
+    .limit(limit)
+    .exec((err, users) => {
+      if (err){return next(err); }
+      res
+        .status(200)
+        .json({
+          payload: users
+        })
+    })
+}
+
+// promote and demote users
+export function roleControl (req, res, next) {
+  let _id = req.query.id
+
+  User
+    .findOne({ _id })
+    .exec((err, doc) => {
+      if (err) { return next(err); }
+      let newRole = (doc.role === 'Admin') ? 'Member': 'Admin';
+
+      User.findOneAndUpdate(
+        { _id },
+        { $set: { role: newRole }},
+        { new: true },
+        (err, user) => {
+            if (err){ return next(err); }
+            res
+              .status(200)
+              .json({
+                user
+              })
+        })
+    })
+}
