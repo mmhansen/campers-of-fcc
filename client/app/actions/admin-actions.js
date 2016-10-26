@@ -16,9 +16,21 @@ const getContent = (res) => {
   }
 }
 
-export function switchView(){
-  return {
-    type: SWITCH_VIEW
+
+
+export function switchView(type){
+  return dispatch => {
+    if (type === 'user') {
+      return axios.get('/api/admin/')
+        .then((res) => {
+          dispatch(getContent(res))
+        })
+    } else {
+      return axios.get('/api/auth/user')
+        .then((res) => {
+          dispatch(getContent(res))
+        })
+    }
   }
 }
 
@@ -29,15 +41,6 @@ export function handleNotAdmin(errorMessage) {
   return {
     type: AUTH_ERROR,
     payload: errorMessage
-  }
-}
-
-export function getPending() {
-  return dispatch => {
-    return axios.get('/api/admin/')
-      .then((res) => {
-        dispatch(getContent(res))
-      })
   }
 }
 
@@ -67,14 +70,5 @@ export function deleteStory(id) {
 export function deleteUser(id) {
   return dispatch => {
     return axios.delete(`/api/auth/user/${id}`)
-  }
-}
-
-export function getUser() {
-  return dispatch => {
-    return axios.get('/api/auth/user')
-      .then((res) => {
-        dispatch(getContent(res))
-      })
   }
 }

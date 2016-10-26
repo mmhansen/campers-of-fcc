@@ -9,14 +9,16 @@
   .controls {
     .btn-default {
       display: block;
+      background: $darkblue;
+      color: white;
+      margin: 12px;
     }
   }
-  .btn-default {
-    background: $darkblue;
-    color: white;
-    margin: 12px;
+  .content {
+    .btn {
+      margin: 6px;
+    }
   }
-
   .item {
     margin: 12px;
     padding: 12px;

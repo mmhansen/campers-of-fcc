@@ -11,7 +11,8 @@ import {
   register,
   login,
   deleteUser,
-  getUser
+  getUser,
+  roleControl
 } from './controllers/authentication'
 import {
   approveContent,
@@ -45,10 +46,13 @@ export default function (app){
    */
   authRoutes.post('/register', register)
   authRoutes.post('/login', requireLogin, login)
-  authRoutes.route('/user/:id?')
+  authRoutes.route('/user')
     .get(requireAuth, authAdmin, getUser)
     .delete(requireAuth, authAdmin, deleteUser)
-    .post(requireAuth, authAdmin)
+    .put(requireAuth, authAdmin, roleControl)
+
+
+
 
   //
   contentRoutes.get('/count', getCount)

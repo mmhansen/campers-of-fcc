@@ -9,7 +9,7 @@ let initialState = {
   userFullName: null,
   role: null,
   content: [],
-  view: 'admin'
+  view: 'user'
 }
 
 export default function admin_reducer(state = initialState, action) {
@@ -33,7 +33,7 @@ export default function admin_reducer(state = initialState, action) {
     case SWITCH_VIEW:
       return {
         ...state,
-        view: (state.view === 'admin') ? 'content' : 'admin'
+        view: (state.view === 'user') ? 'story' : 'user'
       }
     default:
       return state
