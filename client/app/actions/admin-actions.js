@@ -1,10 +1,30 @@
 import axios from 'axios'
 import {
   AUTH_ERROR,
-  GET_PENDING
+  GET_CONTENT,
+  SWITCH_VIEW
 } from './types'
 import cookie from 'react-cookie'
 
+/*
+ * Helper
+ */
+const getContent = (res) => {
+  return {
+    type: GET_CONTENT,
+    payload: res.data.payload
+  }
+}
+
+export function switchView(){
+  return {
+    type: SWITCH_VIEW
+  }
+}
+
+/*
+ * Content Control
+ */
 export function handleNotAdmin(errorMessage) {
   return {
     type: AUTH_ERROR,
@@ -16,10 +36,7 @@ export function getPending() {
   return dispatch => {
     return axios.get('/api/admin/')
       .then((res) => {
-        dispatch({
-          type: GET_PENDING,
-          payload: res.data.content
-        })
+        dispatch(getContent(res))
       })
   }
 }
@@ -40,5 +57,24 @@ export function approveStory(id) {
 export function deleteStory(id) {
   return dispatch => {
     return axios.delete(`/api/admin/${id}`)
+  }
+}
+
+
+/*
+ * User Control
+ */
+export function deleteUser(id) {
+  return dispatch => {
+    return axios.delete(`/api/auth/user/${id}`)
+  }
+}
+
+export function getUser() {
+  return dispatch => {
+    return axios.get('/api/auth/user')
+      .then((res) => {
+        dispatch(getContent(res))
+      })
   }
 }

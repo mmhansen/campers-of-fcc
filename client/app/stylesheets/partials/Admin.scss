@@ -1,11 +1,28 @@
 #admin {
-  .btn-primary {
-    background: $darkblue;
-    color: $green;
-    margin: 0 50px;
+  padding-top: 60px;
+  background: $bg-grey;
+  .card {
+    background: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+    padding: 12px;
   }
-  .story {
-    margin: 8px;
-    padding: 8px;
+  .controls {
+    .btn-default {
+      display: block;
+    }
+  }
+  .btn-default {
+    background: $darkblue;
+    color: white;
+    margin: 12px;
+  }
+
+  .item {
+    margin: 12px;
+    padding: 12px;
+    border: 1px solid $darkblue;
+    >span {
+      margin-right: 12px;
+    }
   }
 }

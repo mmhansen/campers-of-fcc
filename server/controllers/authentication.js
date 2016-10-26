@@ -70,3 +70,35 @@ export function login (req, res, next) {
     user: setUserInfo(req.user)
   });
 }
+
+/*
+ * Delete User
+ */
+export function deleteUser (req, res, next) {
+  let _id = req.params.id;
+  console.log(_id)
+  User
+    .findOne({ _id })
+    .remove((err) => {
+      if(err){return next(err)}
+      res
+        .status(200)
+        .json({ "delete":"success" })
+    })
+  }
+
+/*
+ * Get users
+ */
+export function getUser(req, res, next) {
+  User
+    .find({})
+    .exec((err, users) => {
+      if (err){return next(err); }
+      res
+        .status(200)
+        .json({
+          payload: users
+        })
+    })
+}

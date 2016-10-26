@@ -15,14 +15,14 @@ Story.count({}, (err, count) => {
           title: faker.random.words(),
           body: faker.lorem.paragraph(),
           image: faker.image.imageUrl(),
-          postedBy: "57fbfb539b783b13cf8e2568",
+          postedBy: "580fff0bc826b3698e9be310",
         }
         if (i % 2 === 0){
           post.status= "Pending"
         } else {
           post.status= "Approved"
         }
-        
+
         let newStory = new Story(post)
         newStory.save((err, story) => {
           console.log(story.title)

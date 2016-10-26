@@ -6,8 +6,13 @@ import passport from 'passport'
 /*
  * Local imports
  */
-import { register, login } from './controllers/authentication'
 import passportService from './services/passport'
+import {
+  register,
+  login,
+  deleteUser,
+  getUser
+} from './controllers/authentication'
 import {
   approveContent,
   getContent,
@@ -40,6 +45,10 @@ export default function (app){
    */
   authRoutes.post('/register', register)
   authRoutes.post('/login', requireLogin, login)
+  authRoutes.route('/user/:id?')
+    .get(requireAuth, authAdmin, getUser)
+    .delete(requireAuth, authAdmin, deleteUser)
+    .post(requireAuth, authAdmin)
 
   //
   contentRoutes.get('/count', getCount)

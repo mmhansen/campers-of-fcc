@@ -103,7 +103,7 @@ export function reviewStories (req, res, next) {
     .exec((err, storyArr) => {
     if (err) { return next(err); }
     res.status(200).json({
-      content: storyArr
+      payload: storyArr
     });
   })
 }
