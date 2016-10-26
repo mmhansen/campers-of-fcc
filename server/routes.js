@@ -20,7 +20,7 @@ import {
   deleteContent,
   submitContent,
   getCount,
-  reviewStories
+  updateContent
 } from './controllers/content'
 import { authAdmin } from './services/passport'
 /*
@@ -67,8 +67,8 @@ export default function (app){
   /*
    * Admin Content Control
    */
-  adminRoutes.route('/:id?')
-    .get(reviewStories)
+  adminRoutes.route('/')
+    .post(requireAuth, authAdmin, updateContent)
     .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
     .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
 
