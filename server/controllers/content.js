@@ -3,7 +3,7 @@
  */
 import jwt from 'jwt-simple'
 import Story from '../models/PostModel'
-import config from '../conf/main'
+import config from 'config'
 import moment from 'moment'
 
 /*
@@ -11,6 +11,11 @@ import moment from 'moment'
  */
 export function submitContent(req, res, next) {
   let { title, body, image, postedBy } = req.body;
+  if (!title || !body || !image || !postedBy){
+    return res
+      .status(400)
+      .json({"error": 'Bad Request'})
+  }
   let newStory = new Story ({ title, body, image, postedBy })
   newStory.save(newStory, (err, story) => {
     if (err) { next(err) }

@@ -3,7 +3,7 @@
  */
 import jwt from 'jwt-simple'
 import User from '../models/UserModel'
-import config from '../conf/main'
+import config from 'config'
 
 /*
  * Helper functions
