@@ -10,7 +10,7 @@ import LocalStrategy from 'passport-local'
  * Local imports
  */
 import User from '../models/UserModel'
-import config from '../conf/main'
+import config from 'config'
 
 /*
  * Local Strategy (For validating login)
