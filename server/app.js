@@ -10,17 +10,20 @@ import mongoose from "mongoose"
 /*
  * Local imports, connect db, and start server
  */
-import config from './conf/main'
+import config from 'config'
 import router from './routes'
 const app = express() // start server
-app.listen(config.port) // server listen on 3000 by default
+app.listen(config.port, 'localhost') // server listen on 3000 by default
 mongoose.connect(config.mongodb) // connect to db
 
-console.log(`magic happens on port ${config.port}`)
+// get a little feedback
+console.log(`${config.name} config running on port ${config.port}`)
 /*
  * Middleware
  */
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'test'){
+  app.use(logger('dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, '../client/public', 'favicon.ico')));
@@ -67,3 +70,5 @@ app.get('*', function (request, response){
      error: {}
    });
  });
+
+ export default app;
