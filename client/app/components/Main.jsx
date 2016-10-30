@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { getCount } from '../actions/story-actions'
 import Nav from './Nav';
+import Footer from './common/Footer'
 
 class Main extends Component {
 
@@ -21,6 +22,7 @@ class Main extends Component {
             { this.props.children }
           </div>
         </div>
+        <Footer />
       </div>
     )
   }

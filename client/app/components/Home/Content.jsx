@@ -15,9 +15,7 @@ class Content extends Component {
       this.props.getContent(page)
     }
   }
-  mouseEnter(){
-    console.log('enter')
-  }
+
   render () {
     let { items, page, count }  = this.props
 
@@ -57,9 +55,9 @@ class Content extends Component {
 
     let controls = (
       <div className="row home-controls">
-          <button onMouseEnter={this.fetchStories(page-1)} disabled={dis}
+          <button disabled={dis}
              className="btn btn-default left-control" onClick={this.fetchStories(page-1)}>&#x02AA6;</button>
-          <button onMouseEnter={this.fetchStories(page+1)} disabled={nextDis}
+          <button disabled={nextDis}
              className="btn btn-default right-control" onClick={this.fetchStories(page+1)}>&#x02AA7;</button>
       </div>
     )
