@@ -16,6 +16,8 @@ import Home from './components/Home/Content'
 import AdminPage from './components/Admin/AdminPage'
 import RequireAdmin from './components/Admin/RequireAdmin'
 import AuthNav from './components/Auth/AuthNav'
+import FullStory from './components/Admin/FullStory'
+import MainAdmin from './components/Admin/Main'
 //
 
 class Routes extends React.Component{
@@ -31,7 +33,11 @@ class Routes extends React.Component{
           </Route>
           <Route path="story" component={ RequireAuth(StoryPage) } />
           <Route path="logout" component={ RequireAuth(LogoutPage ) } />
-          <Route path="admin" component={ RequireAdmin(AdminPage) } />
+          <Route path="admin" component={MainAdmin}>
+            <IndexRoute component={ RequireAdmin(AdminPage) }></IndexRoute>
+            <Route path="review/:story_id" component={FullStory} />
+          </Route>
+
           // handle 404 routes
           <Route path="*" component={NotFoundPage} />
         </Route>

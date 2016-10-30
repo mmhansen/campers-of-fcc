@@ -40,7 +40,6 @@ class StoryPage extends React.Component {
 
   onSubmit({username, image, title}){
     let body = this.state.story
-    console.log(body)
     if (!body || body.length < 10) {
       this.props.createStoryValidationError("You definitly need a story, please write one.")
       return
