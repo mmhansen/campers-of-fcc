@@ -3,7 +3,8 @@ import {
   SET_USER_ROLE,
   GET_ALL_USERS,
   SWITCH_VIEW,
-  REMOVE
+  REMOVE,
+  UPADTE_USER
 } from '../actions/types'
 
 let initialState = {
@@ -41,6 +42,15 @@ export default function admin_reducer(state = initialState, action) {
         ...state,
         users: state.users.filter((x) => {
           return (x._id !== action.payload)
+        })
+      }
+    case UPADTE_USER:
+    console.log(action.payload)
+      return {
+        ...state,
+        users: state.users.map((x) => {
+          if (x._id === action.payload._id) x.role = action.payload.role
+          return x
         })
       }
     default:

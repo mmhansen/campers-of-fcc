@@ -4,7 +4,8 @@ import {
   GET_CONTENT,
   GET_ALL_USERS,
   SWITCH_VIEW,
-  REMOVE
+  REMOVE,
+  UPADTE_USER
 } from './types'
 import cookie from 'react-cookie'
 
@@ -88,6 +89,12 @@ export function deleteUser(id) {
 export function switchRoles(id) {
   return dispath => {
     return axios.put(`/api/auth/user?id=${id}`)
+    .then( (res) => {
+      dispath({
+        type: UPADTE_USER,
+        payload: res.data.user
+      })
+    })
 
   }
 }
