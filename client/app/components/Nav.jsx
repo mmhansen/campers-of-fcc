@@ -13,59 +13,31 @@ class Main extends React.Component {
 
     let guestLinks = [
       <li key={2} role="presentation">
-        <Link
-          activeClassName="active"
-          to="/au/login">
-          Login
-        </Link>
+        <Link activeClassName="active" to="/au/login">Login</Link>
       </li>,
       <li key={1} role="presentation" id="register">
-        <Link
-          activeClassName="active"
-          to="/au/register">
-          Register
-        </Link>
+        <Link activeClassName="active" to="/au/register">Register</Link>
       </li>
     ]
 
     if (this.props.authenticated) {
       links.push(
-        <li
-          role="presentation"
-          key={1 + 'header'}>
-          <Link
-            activeClassName="active"
-            to="/story">
-            Create
-          </Link>
+        <li role="presentation" key={1 + 'header'}>
+          <Link activeClassName="active" to="/story">Create</Link>
         </li>)
       if (this.props.role === 'Admin') {
         links.push(
-          <li
-            role="presentation"
-            key={2 + 'header'}>
-            <Link
-              activeClassName="active"
-              to="/admin">
-              Admin
-            </Link>
-          </li>)
-      }
-      links.push(
-        <li
-          role="presentation"
-          key={3 + 'header'}>
-          <Link
-            activeClassName="active"
-            to="/logout">
-            Logout
-          </Link>
+          <li role="presentation" key={2 + 'header'}>
+            <Link activeClassName="active" to="/admin">Admin</Link>
+          </li>) } links.push(
+        <li role="presentation" key={3 + 'header'}>
+          <Link activeClassName="active" to="/logout">Logout</Link>
         </li>)
     } else {
       links = links.concat(guestLinks)
     }
 
-    return links
+  return links
   }
 
   render (){
@@ -79,9 +51,7 @@ class Main extends React.Component {
           {/* Title and Image */}
           <div className="navbar-header">
              {/* Title Icon */}
-             <IndexLink
-               to="/"
-               activeClassName="active" id="home">
+             <IndexLink to="/" activeClassName="active" id="home">
                <h2>Campfire Stories</h2>
              </IndexLink>
           </div>
@@ -89,7 +59,6 @@ class Main extends React.Component {
           {/* handle navbar collapse on smaller devices */}
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
-          
               {this.renderLinks()}
             </ul>
           </div>

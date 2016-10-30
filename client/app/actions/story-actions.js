@@ -8,7 +8,8 @@ import { errorHandler } from './utils'
 import {
   GET_COUNT,
   STORY_ERROR,
-  FETCH_STORIES
+  FETCH_STORIES,
+  FETCH_STORY
 } from './types'
 
 /*
@@ -38,9 +39,9 @@ export function createStoryValidationError(error) {
 /*
  * Handle Get
  */
-export function getContent (page=1) {
+export function getContent (page=1, limit=20, status='Approved') {
   return dispatch => {
-    return axios.get(`/api/content/?page=${page}`)
+    return axios.get(`/api/content/?page=${page}&limit=${limit}&status=${status}`)
       .then( res => {
         dispatch({
           type: FETCH_STORIES,
@@ -52,6 +53,21 @@ export function getContent (page=1) {
 
   }
 }
+
+/**
+ *
+ */
+ export function getStory(storyId) {
+   return dispatch => {
+     return axios.get(`/api/content/${storyId}`)
+      .then(res => {
+        dispatch({
+          type: FETCH_STORY,
+          payload: res.data.story
+        })
+      })
+   }
+ }
 
 /*
  * Get the number of stories in the DB

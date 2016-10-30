@@ -1,15 +1,15 @@
 import {
   SET_USER,
   SET_USER_ROLE,
-  GET_CONTENT,
+  GET_ALL_USERS,
   SWITCH_VIEW
 } from '../actions/types'
 
 let initialState = {
   userFullName: null,
   role: null,
-  content: [],
-  view: 'user'
+  users: [],
+  view: 'users'
 }
 
 export default function admin_reducer(state = initialState, action) {
@@ -25,15 +25,15 @@ export default function admin_reducer(state = initialState, action) {
         userFullName: action.fullName,
         role: action.role
       }
-    case GET_CONTENT:
+    case GET_ALL_USERS:
       return {
         ...state,
-        content: action.payload
+        users: action.payload
       }
     case SWITCH_VIEW:
       return {
         ...state,
-        view: (state.view === 'user') ? 'story' : 'user'
+        view: action.payload
       }
     default:
       return state

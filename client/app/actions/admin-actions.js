@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   AUTH_ERROR,
   GET_CONTENT,
+  GET_ALL_USERS,
   SWITCH_VIEW
 } from './types'
 import cookie from 'react-cookie'
@@ -18,19 +19,10 @@ const getContent = (res) => {
 
 
 
-export function switchView(type){
-  return dispatch => {
-    if (type === 'user') {
-      return axios.get('/api/admin/')
-        .then((res) => {
-          dispatch(getContent(res))
-        })
-    } else {
-      return axios.get('/api/auth/user')
-        .then((res) => {
-          dispatch(getContent(res))
-        })
-    }
+export function switchView(view){
+  return {
+    type: SWITCH_VIEW,
+    payload: view
   }
 }
 
@@ -67,6 +59,19 @@ export function deleteStory(id) {
 /*
  * User Control
  */
+
+export function getUsers(page=1) {
+  return dispatch => {
+    return axios.get(`/api/admin/users?page=${page}`)
+      .then( res => {
+        dispatch({
+          type: GET_ALL_USERS,
+          payload: res.data.users
+        })
+      })
+  }
+}
+
 export function deleteUser(id) {
   return dispatch => {
     return axios.delete(`/api/auth/user/${id}`)
