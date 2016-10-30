@@ -45,18 +45,20 @@ class AdminPage extends Component {
    }
 
   render (){
-    let { stories, users, name, approveStory, deleteStory, view, switchView, deleteUser } = this.props
+    let { stories, users, name, approveStory, deleteStory, view, switchView, switchRoles, deleteUser } = this.props
 
     // Change the child element format based on if it loads Stories or Users
     let childElements;
     if (view === 'users') {
       childElements = users.map((user,i) => {
+      let adminButtonText = (user.role === 'Admin') ? 'Demote to user' : 'Promote to admin';
+
         return (
           <div key={i} className="col-sm-3">
             <div className="item">
               <h4>{`${user.firstName} ${user.lastName}`}</h4>
               <hr />
-              <button className="btn">Promote to Admin</button>
+              <button onClick={() => {switchRoles(user._id)}} className="btn">{adminButtonText}</button>
               <button onClick={() => {deleteUser(user._id)}} className="btn btn-danger">Delete</button>
             </div>
           </div>
@@ -86,7 +88,6 @@ class AdminPage extends Component {
             <div className="card controls">
                 <button onClick={this.switchContent('users')} className="btn btn-lg btn-default">Users</button>
                 <button onClick={this.switchContent('stories')} className="btn btn-lg btn-default">Stories</button>
-                <button onClick={""} className="btn btn-lg btn-default">Refresh</button>
             </div>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-7 col-md-offset-1">

@@ -3,7 +3,8 @@ import {
   AUTH_ERROR,
   GET_CONTENT,
   GET_ALL_USERS,
-  SWITCH_VIEW
+  SWITCH_VIEW,
+  REMOVE
 } from './types'
 import cookie from 'react-cookie'
 
@@ -74,6 +75,19 @@ export function getUsers(page=1) {
 
 export function deleteUser(id) {
   return dispatch => {
-    return axios.delete(`/api/auth/user/${id}`)
+    return axios.delete(`/api/auth/user?id=${id}`)
+    .then( () => {
+          dispatch({
+            type: REMOVE,
+            payload: id
+          })
+      })
+  }
+}
+
+export function switchRoles(id) {
+  return dispath => {
+    return axios.put(`/api/auth/user?id=${id}`)
+
   }
 }

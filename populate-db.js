@@ -2,8 +2,7 @@ import faker from 'faker'
 import mongoose from 'mongoose'
 import Story from './server/models/PostModel'
 import User from './server/models/UserModel'
-import config from './server/conf/main'
-
+import config from 'config'
 
 mongoose.connect(config.mongodb)
 
@@ -31,5 +30,7 @@ Story.count({}, (err, count) => {
         })
       }
     })
+  } else {
+    mongoose.disconnect();
   }
 })

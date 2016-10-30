@@ -4,7 +4,7 @@ class Main extends Component {
 
   render () {
     return (
-      <div>
+      <div className="admin-main">
         { this.props.children }
       </div>
     )

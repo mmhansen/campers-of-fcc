@@ -11,12 +11,12 @@ exports.validateRegister = (data) => {
       errors.email = "Email is invalid"
     }
 
-    if (!data.firstName || data.firstName.length < 5) {
-      errors.firstName = "First name is required and must be at least 5 letters"
+    if (!data.firstName || data.firstName.length < 2) {
+      errors.firstName = "First name is required and must be at least 1 letter"
     }
 
-    if (!data.lastName || data.lastName.length < 5) {
-      errors.lastName = "Last name is required and must be at least 5 letters"
+    if (!data.lastName || data.lastName.length < 2) {
+      errors.lastName = "Last name is required and must be at least 1 letter"
     }
 
     if (!passwordPattern.test(data.password)) {

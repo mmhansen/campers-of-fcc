@@ -16,6 +16,9 @@ footer {
   padding: 24px;
   background: $darkblue;
   color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 /* 404 */
 .not-found {
