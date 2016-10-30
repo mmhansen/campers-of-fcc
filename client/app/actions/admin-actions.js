@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 import {
   AUTH_ERROR,
   GET_CONTENT,
@@ -47,13 +48,19 @@ axios.defaults.headers.common['authorization'] = token;
 
 export function approveStory(id) {
   return dispatch => {
-    return axios.put(`/api/admin/${id}`)
+    return axios.put(`/api/admin?id=${id}`)
+      .then( () => {
+        browserHistory.push('/admin')
+      })
   }
 }
 
 export function deleteStory(id) {
   return dispatch => {
-    return axios.delete(`/api/admin/${id}`)
+    return axios.delete(`/api/admin?id=${id}`)
+      .then( () => {
+        browserHistory.push('/admin')
+      })
   }
 }
 

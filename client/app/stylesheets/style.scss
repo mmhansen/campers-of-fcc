@@ -7,6 +7,7 @@ $bg-grey: #F0F0F0;
 body {
   height:100%;
   font-family: "Lato", sans-serif;
+  background: $bg-grey;
 }
 .container-fluid > .row {
   margin-bottom: 0;

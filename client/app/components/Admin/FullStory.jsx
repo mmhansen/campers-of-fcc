@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 import { getStory } from '../../actions/story-actions'
+import { approveStory, deleteStory } from '../../actions/admin-actions'
 
 class FullStory extends Component {
 
@@ -12,7 +13,7 @@ class FullStory extends Component {
   }
 
   render () {
-    let { story } = this.props
+    let { story, approveStory, deleteStory } = this.props
 
     return (
       <div className="col-xs-12 full">
@@ -25,10 +26,10 @@ class FullStory extends Component {
             <p>{story.body}</p>
             <div className="row">
               <div className="col-sm-3">
-                <button className="btn btn-success">Approve</button>
+                <button onClick={() => {approveStory(story._id)}} className="btn btn-success">Approve</button>
               </div>
               <div className="col-sm-3">
-                <button className="btn btn-danger">Delete</button>
+                <button onClick={() => {deleteStory(story._id)}} className="btn btn-danger">Delete</button>
               </div>
               <div className="col-sm-3">
                 <Link to="/admin" className="btn btn-danger">
@@ -49,4 +50,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getStory })(FullStory)
+export default connect(mapStateToProps, { getStory, approveStory, deleteStory })(FullStory)

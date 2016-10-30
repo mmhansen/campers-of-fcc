@@ -45,7 +45,6 @@ export default function admin_reducer(state = initialState, action) {
         })
       }
     case UPADTE_USER:
-    console.log(action.payload)
       return {
         ...state,
         users: state.users.map((x) => {
