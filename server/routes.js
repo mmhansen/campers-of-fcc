@@ -11,12 +11,13 @@ import {
   register,
   login,
   deleteUser,
-  getUser,
+  getUsers,
   roleControl
 } from './controllers/authentication'
 import {
   approveContent,
   getContent,
+  getStory,
   deleteContent,
   submitContent,
   getCount,
@@ -47,7 +48,6 @@ export default function (app){
   authRoutes.post('/register', register)
   authRoutes.post('/login', requireLogin, login)
   authRoutes.route('/user')
-    .get(requireAuth, authAdmin, getUser)
     .delete(requireAuth, authAdmin, deleteUser)
     .put(requireAuth, authAdmin, roleControl)
 
@@ -56,9 +56,12 @@ export default function (app){
 
   //
   contentRoutes.get('/count', getCount)
+
   /*
    * User Content
    */
+
+  contentRoutes.get('/:story_id', getStory)
   contentRoutes.route('/')
     .get(getContent)
     .post(submitContent)
@@ -67,6 +70,9 @@ export default function (app){
   /*
    * Admin Content Control
    */
+
+  adminRoutes.get('/users', requireAuth, authAdmin, getUsers)
+
   adminRoutes.route('/')
     .post(requireAuth, authAdmin, updateContent)
     .put(requireAuth, authAdmin, approveContent) // just to approve story by ID

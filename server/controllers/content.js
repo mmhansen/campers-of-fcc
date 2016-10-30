@@ -26,7 +26,7 @@ export function submitContent(req, res, next) {
 export function getContent (req, res, next){
   let page = parseInt(req.query.page) || 1
   let limit = parseInt(req.query.limit) || 20
-  let status = req.query.status
+  let status = req.query.status || "Approved"
 
   Story
     .find({ status })
@@ -41,6 +41,25 @@ export function getContent (req, res, next){
     });
   })
 }
+
+/**
+ *
+ */
+ export function getStory(req, res, next) {
+   let storyId = req.params.story_id
+
+   Story.findById(storyId)
+        .populate('postedBy')
+        .exec((err, story) => {
+            if (err) next(err)
+            if (!story) {
+              next()
+            }
+            res.json({
+              story
+            })
+        })
+ }
 
 /*
  * Get count of stories

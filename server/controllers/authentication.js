@@ -91,7 +91,7 @@ export function deleteUser (req, res, next) {
     })
   }
 // get users w/ pagination
-export function getUser(req, res, next) {
+export function getUsers(req, res, next) {
   let page = parseInt(req.query.page)
   let limit = parseInt(req.query.limit)
 
@@ -104,7 +104,7 @@ export function getUser(req, res, next) {
       res
         .status(200)
         .json({
-          payload: users
+          users
         })
     })
 }
