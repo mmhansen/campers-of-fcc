@@ -11,21 +11,17 @@ require('medium-editor/dist/css/themes/bootstrap.css');
 import Editor from 'react-medium-editor';
 
 //components
-import { addNewStory, createStoryValidationError } from '../../actions/story-actions';
+import { updateStory, createStoryValidationError, getStory, removeCurrent, getMyStories } from '../../actions/story-actions';
 import { renderField } from '../common/formFields'
 import { validatePost as validate } from '../../utils/validation'
 
-const newStoryForm = reduxForm({
-  form: 'new-story',
-  validate
-})
 
-class StoryPage extends React.Component {
+class EditStory extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      story: ''
+      story: this.props.initialValues.body
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -38,13 +34,16 @@ class StoryPage extends React.Component {
     })
   }
 
-  onSubmit({username, image, title}){
+  onSubmit({ title, image }){
+    let id = this.props.initialValues._id;
     let body = this.state.story
     if (!body || body.length < 10) {
       this.props.createStoryValidationError("You definitly need a story, please write one.")
       return
     }
-    this.props.addNewStory({username, image, title, body})
+    this.props.updateStory(title, body, image, id)
+    this.props.removeCurrent()
+    this.props.getMyStories()
   }
 
   render (){
@@ -84,7 +83,7 @@ class StoryPage extends React.Component {
                 />
               {errorMessage && <div className="text-danger">{errorMessage}</div>}
             </div>
-            <input type="submit" value="Post" className="btn btn-primary"/>
+            <input type="submit" value="Update" className="btn btn-primary"/>
           </form>
         </div>
         {/* Tips */}
@@ -100,11 +99,19 @@ class StoryPage extends React.Component {
   }
 }
 
+const newStoryForm = reduxForm({
+  form: 'new-story',
+  validate
+})
+
+
 function mapStateToProps(state) {
+  let current = state.stories.currentStory
   return {
     userFullName: state.user.userFullName,
-    errorMessage: state.stories.error
+    errorMessage: state.stories.error,
+    initialValues: current
   }
 }
 
-export default connect(mapStateToProps, { addNewStory, createStoryValidationError })(newStoryForm(StoryPage));
+export default connect(mapStateToProps, { updateStory, createStoryValidationError, getStory, removeCurrent, getMyStories })(newStoryForm(EditStory));

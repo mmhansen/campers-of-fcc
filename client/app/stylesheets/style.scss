@@ -4,6 +4,7 @@ $green: /*#79F7A5*/ #7BE5A0;
 $red: #DD8371;
 $bg-grey: #F0F0F0;
 /* General */
+
 body {
   height:100%;
   font-family: "Lato", sans-serif;
@@ -14,12 +15,15 @@ body {
 }
 
 footer {
-  padding: 24px;
+  margin-top: 32px;
+  position: fixed;
+  padding: 1em;
+  padding-bottom: 0;
+  text-align: center;
+  width: 100%;
+  bottom: 0;
   background: $darkblue;
   color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
 /* 404 */
 .not-found {
@@ -30,4 +34,5 @@ footer {
 @import "partials/Nav";
 @import "partials/Home";
 @import "partials/Story";
-@import 'partials/AuthStyles'
+@import 'partials/AuthStyles';
+@import 'partials/myStories';

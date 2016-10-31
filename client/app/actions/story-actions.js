@@ -9,7 +9,9 @@ import {
   GET_COUNT,
   STORY_ERROR,
   FETCH_STORIES,
-  FETCH_STORY
+  FETCH_STORY,
+  REMOVE_CURRENT,
+  GET_MY_STORIES
 } from './types'
 
 /*
@@ -83,3 +85,41 @@ export function getContent (page=1, limit=20, status='Approved') {
           })
    }
  }
+
+
+ /*
+  * Empty current story part of state
+  */
+export function removeCurrent() {
+  return {
+    type: REMOVE_CURRENT
+  }
+}
+
+/*
+ * Update story
+ */
+export function updateStory(title, body, image, id) {
+  return dispatch => {
+    return axios.put(`/api/content?id=${id}`, {title, body, image})
+    .then( () => {
+      browserHistory.push('/')
+    })
+  }
+}
+
+/*
+ * Get my Stories
+ */
+export function getMyStories () {
+  return dispatch => {
+    let user = cookie.load('user')
+    return axios.get(`api/content/my?id=${user._id}`)
+      .then( (res) => {
+        dispatch({
+          type: GET_MY_STORIES,
+          payload: res.data.story
+        })
+      })
+  }
+}

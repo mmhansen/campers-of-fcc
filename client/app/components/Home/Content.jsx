@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Masonry from 'react-masonry-component'
 import { connect } from 'react-redux'
-import { getContent } from '../../actions/story-actions'
+import { getContent, getMyStories } from '../../actions/story-actions'
 import moment from 'moment'
 
 class Content extends Component {
 
   componentWillMount(){
     this.props.getContent()
+    this.props.getMyStories()
   }
 
   fetchStories(page) {
@@ -64,14 +65,19 @@ class Content extends Component {
 
     return (
         <div className="col-sm-12 home-page">
-          {controls}
-          <Masonry
-            options={masonryOptions} // default {}
-            disableImagesLoaded={false} // default false
-            updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-            >
-            {childElements}
-          </Masonry>
+          <div>
+            
+          </div>
+          <div>
+            {controls}
+            <Masonry
+              options={masonryOptions} // default {}
+              disableImagesLoaded={false} // default false
+              updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+              >
+              {childElements}
+            </Masonry>
+          </div>
         </div>
     )
   }
@@ -86,4 +92,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, { getContent })(Content);
+export default connect(mapStateToProps, { getContent, getMyStories })(Content);

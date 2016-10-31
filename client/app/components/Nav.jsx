@@ -22,15 +22,19 @@ class Main extends React.Component {
 
     if (this.props.authenticated) {
       links.push(
-        <li role="presentation" key={1 + 'header'}>
+        <li role="presentation" key={2 + 'header'}>
           <Link activeClassName="active" to="/story">Create</Link>
         </li>)
+        links.push(
+          <li role="presentation" key={1 + 'header'}>
+            <Link activeClassName="active" to="/mystories">My Stories</Link>
+          </li>)
       if (this.props.role === 'Admin') {
         links.push(
-          <li role="presentation" key={2 + 'header'}>
+          <li role="presentation" key={3 + 'header'}>
             <Link activeClassName="active" to="/admin">Admin</Link>
           </li>) } links.push(
-        <li role="presentation" key={3 + 'header'}>
+        <li role="presentation" key={4 + 'header'}>
           <Link activeClassName="active" to="/logout">Logout</Link>
         </li>)
     } else {

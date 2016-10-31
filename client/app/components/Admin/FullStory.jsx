@@ -21,18 +21,29 @@ class FullStory extends Component {
           <div className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
             <h4>{story.postedBy.firstName} {story.postedBy.lastName}</h4>
             <h4>{story.created_at.slice(0,10)}</h4>
-            <img className="img-responsive" src={story.image} />
+            <div className="row">
+              <div className="col-sm-6 ">
+                <img className="img-responsive" src={story.image} />
+              </div>
+            </div>
             <h4>{story.title}</h4>
             <p>{story.body}</p>
+            <br />
+            <br />
             <div className="row">
               <div className="col-sm-3">
                 <button onClick={() => {approveStory(story._id)}} className="btn btn-success">Approve</button>
               </div>
               <div className="col-sm-3">
+                <Link to="/edit" className="btn btn-primary">
+                  Edit
+                </Link>
+              </div>
+              <div className="col-sm-3">
                 <button onClick={() => {deleteStory(story._id)}} className="btn btn-danger">Delete</button>
               </div>
               <div className="col-sm-3">
-                <Link to="/admin" className="btn btn-danger">
+                <Link to="/admin" className="btn btn-default">
                   Back to Stories
                 </Link>
               </div>

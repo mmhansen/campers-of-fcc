@@ -22,7 +22,7 @@ class Main extends Component {
             { this.props.children }
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     )
   }

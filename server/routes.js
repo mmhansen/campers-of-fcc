@@ -21,7 +21,8 @@ import {
   deleteContent,
   submitContent,
   getCount,
-  updateContent
+  updateContent,
+  getMyStories
 } from './controllers/content'
 import { authAdmin } from './services/passport'
 /*
@@ -60,12 +61,13 @@ export default function (app){
   /*
    * User Content
    */
-
+  contentRoutes.get('/my', getMyStories)
+  //
   contentRoutes.get('/:story_id', getStory)
   contentRoutes.route('/')
     .get(getContent)
-    .post(submitContent)
-
+    .post(requireAuth, submitContent)
+    .put(requireAuth, updateContent)
 
   /*
    * Admin Content Control
@@ -74,7 +76,6 @@ export default function (app){
   adminRoutes.get('/users', requireAuth, authAdmin, getUsers)
 
   adminRoutes.route('/')
-    .post(requireAuth, authAdmin, updateContent)
     .put(requireAuth, authAdmin, approveContent) // just to approve story by ID
     .delete(requireAuth, authAdmin, deleteContent) // just to delete story by ID
 

@@ -10,7 +10,6 @@ import SignupForm from './components/Auth/Signup/SignupForm'
 import LoginForm from './components/Auth/Login/LoginForm'
 import LogoutPage from './components/Auth/LogoutPage'
 import RequireAuth from './components/Auth/RequireAuth'
-import StoryPage from './components/Story/StoryPage'
 import NotFoundPage from './components/Pages/NotFoundPage'
 import Home from './components/Home/Content'
 import AdminPage from './components/Admin/AdminPage'
@@ -18,7 +17,10 @@ import RequireAdmin from './components/Admin/RequireAdmin'
 import AuthNav from './components/Auth/AuthNav'
 import FullStory from './components/Admin/FullStory'
 import MainAdmin from './components/Admin/Main'
-//
+// stories
+import MakeStory from './components/Story/MakeStory'
+import EditStory from './components/Story/EditStory'
+import MyStories from './components/Story/MyStories'
 
 class Routes extends React.Component{
   render(){
@@ -31,7 +33,10 @@ class Routes extends React.Component{
             <Route path="login" component= { LoginForm } />
             <Route path="register" component= { SignupForm } />
           </Route>
-          <Route path="story" component={ RequireAuth(StoryPage) } />
+
+          <Route path="story" component={ RequireAuth(MakeStory) } />
+          <Route path="edit" component={ RequireAuth(EditStory)} />
+          <Route path="mystories" component={ RequireAuth(MyStories)} />
           <Route path="logout" component={ RequireAuth(LogoutPage ) } />
           <Route path="admin" component={MainAdmin}>
             <IndexRoute component={ RequireAdmin(AdminPage) }></IndexRoute>
