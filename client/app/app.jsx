@@ -1,19 +1,12 @@
-// dependencies
-import React from 'react';
-import  { render } from 'react-dom';
-import { Router, Route, IndexRoute } from 'react-router'
-import cookie from 'react-cookie'
-// redux
+/*
+ * Redux
+ */
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { AUTH_USER, SET_USER } from './actions/types'
-// including styling
-require('./stylesheets/style.scss');
-// components
-import Routes from './routes';
-//
 import rootReducer from './reducers'
+import cookie from 'react-cookie'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
@@ -31,12 +24,16 @@ if (token) {
   })
 }
 
-// render to DOM
+/*
+ * render to DOM
+ */
+import React from 'react';
+import  { render } from 'react-dom';
+import Routes from './routes';
+
 render(
-  // redux provder
   <Provider store={store}>
     <Routes />
   </Provider>,
-  // this is where the react app goes
   document.getElementById("app")
 )

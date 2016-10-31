@@ -1,38 +1,15 @@
-/* Vars */
-$darkblue: #4E5166;
-$green: /*#79F7A5*/ #7BE5A0;
-$red: #DD8371;
-$bg-grey: #F0F0F0;
-/* General */
+//
+@import './partials/Variables';
+@import './partials/General';
+// Navbar
+@import './partials/Nav';
+// Footer
+@import './partials/Footer';
 
-body {
-  height:100%;
-  font-family: "Lato", sans-serif;
-  background: $bg-grey;
-}
-.container-fluid > .row {
-  margin-bottom: 0;
-}
 
-footer {
-  margin-top: 32px;
-  position: fixed;
-  padding: 1em;
-  padding-bottom: 0;
-  text-align: center;
-  width: 100%;
-  bottom: 0;
-  background: $darkblue;
-  color: white;
-}
+
+
 /* 404 */
 .not-found {
   margin: 50px;
 }
-
-@import 'partials/Admin';
-@import "partials/Nav";
-@import "partials/Home";
-@import "partials/Story";
-@import 'partials/AuthStyles';
-@import 'partials/myStories';

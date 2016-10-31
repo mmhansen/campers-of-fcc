@@ -1,0 +1,17 @@
+/*footer styles*/
+footer{
+  padding-top: 50px;
+}
+.bg-blue a {
+  color: #fff;
+  text-decoration: underline;
+  -webkit-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -ms-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+  transition: color 0.3s ease-out;
+}
+.bg-blue a:hover {
+  color: #7BE5A0;
+}
+/*end of footer styles*/

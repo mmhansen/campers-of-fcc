@@ -1,0 +1,24 @@
+
+/* General */
+
+body,
+html {
+  height:100%;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  background: $bg-grey;
+}
+// .container-fluid > .row {
+//   margin-bottom: 0;
+// }
+
+
+/*helper classes*/
+.bg-white{
+  background: #fff;
+}
+.bg-blue{
+  background: #4E5166;
+  color: #fff;
+}
+/*end of helper classes*/
