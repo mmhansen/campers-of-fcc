@@ -16,12 +16,7 @@ export default function stories_reducer(state = initialState, action) {
       return {
         ...state,
         page: action.page,
-        stories: action.payload
-      }
-    case actions.FETCH_STORY:
-      return {
-        ...state,
-        currentStory: action.payload
+        current: action.payload
       }
     case actions.GET_COUNT:
       return {
@@ -33,15 +28,10 @@ export default function stories_reducer(state = initialState, action) {
         ...state,
         error: action.payload
       }
-    case actions.REMOVE_CURRENT:
-      return {
-        ...state,
-        currentStory: dumbStory
-      }
     case actions.GET_MY_STORIES:
       return {
         ...state,
-        myStories: [...action.payload]
+        submitted: [...action.payload]
       }
     default:
       return state;

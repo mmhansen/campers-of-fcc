@@ -1,0 +1,221 @@
+
+/*Making wrap and video bg*/
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .fullscreen-bg {
+    background: url('http://touchcielo.com/alive/vid/vid.jpg') center center / cover no-repeat;
+  }
+
+  .fullscreen-bg__video {
+    display: none;
+  }
+}
+/*end of wrap and video bg*/
+
+/*style for the hero content*/
+#hero-content{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+.hero-headline{
+  font-family: 'Rubik', sans-serif;
+  font-size: 3.142em;
+}
+
+.hero-copy{
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 10px;
+}
+
+#overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.8;
+  z-index: -99;
+  background: #4E5166;
+}
+
+#explore-stories{
+  font-size: 3.142em;
+  color: #fff;
+  position: absolute;
+  left:0;
+  right:0;
+  text-align: center;
+  top: 90%;
+  -webkit-transition: transform 0.3s ease-out;
+  -moz-transition: transform 0.3s ease-out;
+  -ms-transition: transform 0.3s ease-out;
+  -o-transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+#explore-stories:hover{
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+}
+/*end of hero content styling*/
+
+/*button styles*/
+.cs-btn-blue{
+  border-radius: 0;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #4E5166;
+  color: #7BE5A0;
+  border: 2px solid #4E5166;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+.cs-btn-blue:hover{
+  background: #7BE5A0;
+  color: #4E5166;
+  border: 2px solid #7BE5A0;
+}
+
+.cs-btn-blue-outline{
+  border-radius: 0;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+.cs-btn-blue-outline:hover{
+  background: #4E5166;
+  color: #7BE5A0;
+  border: 2px solid #4E5166;
+}
+
+.cs-btn-green{
+  border-radius: 0;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #7BE5A0;
+  color: #4E5166;
+  border: 2px solid #7BE5A0;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+.cs-btn-green:hover{
+  background: #4E5166;
+  color: #7BE5A0;
+  border: 2px solid #4E5166;
+}
+
+.cs-btn-green-outline{
+  border-radius: 0;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+.cs-btn-green-outline:hover{
+  background: #7BE5A0;
+  color: #4E5166;
+  border: 2px solid #7BE5A0;
+}
+
+.cs-btn-green-inverted{
+  border-radius: 0;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fff;
+  color: #4E5166;
+  border: 2px solid #fff;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  text-transform: uppercase;
+}
+.cs-btn-green-inverted:hover{
+  background: #7BE5A0;
+  color: #4E5166;
+  border: 2px solid #7BE5A0;
+}
+/*end of button styles*/
+
+/*post styles*/
+.post-header{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.post-title{
+  color: #fff;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.75);
+  line-height: 0.75;
+  text-align: center;
+}
+.post-date{
+  color: #fff;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.75);
+  text-align: center;
+}
+/*end of post styles*/
