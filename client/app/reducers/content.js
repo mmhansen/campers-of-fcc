@@ -9,8 +9,10 @@ let initialState = {
   count: 0,
   error: null,
   path: null,
-  body: ''
+  body: '',
+  view: 'users'
 }
+// view is either users or stories
 
 export default function stories_reducer(state = initialState, action) {
   switch(action.type) {
@@ -49,6 +51,31 @@ export default function stories_reducer(state = initialState, action) {
       return {
         ...state,
         body: ''
+      }
+    case actions.SWITCH_VIEW:
+      return {
+        ...state,
+        view: action.payload
+      }
+    case actions.GET_ALL_USERS:
+      return {
+        ...state,
+        adminUsers: action.payload
+      }
+    case actions.REMOVE:
+      return {
+        ...state,
+        adminUsers: state.adminUsers.filter((x) => {
+          return (x._id !== action.payload)
+        })
+      }
+    case actions.UPADTE_USER:
+      return {
+        ...state,
+        adminUsers: state.adminUsers.map((x) => {
+          if (x._id === action.payload._id) x.role = action.payload.role
+          return x
+        })
       }
     default:
       return state;

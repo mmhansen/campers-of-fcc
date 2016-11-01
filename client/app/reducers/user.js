@@ -25,41 +25,16 @@ export default function auth_reducer(state = initialState, action) {
       }
     case actions.AUTH_ERROR:
       return { ...state, error: action.payload }
-      case actions.SET_USER_ROLE:
-        return {
-          ...state,
-          role: action.payload
-        }
+    case actions.SET_USER_ROLE:
+      return {
+        ...state,
+        role: action.payload
+      }
     case actions.SET_USER:
       return {
         ...state,
         name: action.fullName,
         role: action.role
-      }
-    case actions.GET_ALL_USERS:
-      return {
-        ...state,
-        users: action.payload
-      }
-    case actions.SWITCH_VIEW:
-      return {
-        ...state,
-        view: action.payload
-      }
-    case actions.REMOVE:
-      return {
-        ...state,
-        users: state.users.filter((x) => {
-          return (x._id !== action.payload)
-        })
-      }
-    case actions.UPADTE_USER:
-      return {
-        ...state,
-        users: state.users.map((x) => {
-          if (x._id === action.payload._id) x.role = action.payload.role
-          return x
-        })
       }
     default:
       return state

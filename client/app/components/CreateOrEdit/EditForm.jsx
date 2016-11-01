@@ -112,6 +112,7 @@ function matchStory(state){
 
 }
 
+
 function mapStateToProps(state) {
   return {
     name: state.user.name,

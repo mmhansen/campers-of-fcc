@@ -21,17 +21,15 @@ const getContent = (res) => {
 }
 
 
-
-export function switchView(view){
-  return {
-    type: SWITCH_VIEW,
-    payload: view
-  }
-}
-
 /*
  * Content Control
  */
+export function switchView(payload) {
+  return {
+    type: SWITCH_VIEW,
+    payload
+  }
+}
 export function handleNotAdmin(errorMessage) {
   return {
     type: AUTH_ERROR,

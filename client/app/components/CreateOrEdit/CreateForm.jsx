@@ -100,29 +100,3 @@ function mapStateToProps(state) {
 CreateForm = connect(mapStateToProps, actions)(CreateForm)
 
 export default CreateForm
-
-
-//
-// constructor(props){
-//   super(props);
-//
-//   this.state = {
-//     story: ''
-//   }
-//
-//   this.onSubmit = this.onSubmit.bind(this);
-//   this.onChangeMediumEditor = this.onChangeMediumEditor.bind(this);
-// }
-//
-
-//
-// onSubmit({image, title}){
-//   let body = this.state.story
-//   if (!body || body.length < 10) {
-//     this.props.createStoryValidationError("You definitly need a story, please write one.")
-//     return
-//   }
-//   this.props.addNewStory({image, title, body})
-//   this.props.getMyStories();
-// }
-//
