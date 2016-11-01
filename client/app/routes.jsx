@@ -11,7 +11,8 @@ import LogoutPage from './components/utils/LogoutPage'
  */
 import NotFoundPage from './Pages/NotFoundPage'
 import AdminPage from './Pages/AdminPage'
-import CreateOrEditPage from './Pages/CreateOrEditPage'
+import CreatePage from './Pages/CreatePage'
+import EditPage from './Pages/EditPage'
 import HomePage from './Pages/HomePage'
 import MyStoriesPage from './Pages/MyStoriesPage'
 import AuthPage from './Pages/AuthPage'
@@ -31,7 +32,9 @@ const Routes = () => {
         // Sign Up
         <Route path="register" component={ AuthPage } />
         // Make Story
-        <Route path="story" component={ RequireAuth(CreateOrEditPage) } />
+        <Route path="story" component={ RequireAuth(CreatePage) } />
+        // Edit Story
+        <Route path="edit/:story_id" component={ RequireAuth(EditPage) } />
         // My Stories
         <Route path="mystories" component={ RequireAuth(MyStoriesPage) } />
         // Admin Page

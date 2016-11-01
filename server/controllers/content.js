@@ -140,8 +140,8 @@ export function updateContent(req, res, next) {
  */
 export function getMyStories(req, res, next) {
   let id = req.query.id;
-  if (id) { return res.json({ story: [] }) }
-  
+  if (!id) { return res.json({ story: [] }) }
+
   Story.find({ postedBy: id }, (err, story) => {
     if (err) {return next(err); }
     res

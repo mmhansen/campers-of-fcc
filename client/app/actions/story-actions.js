@@ -11,7 +11,10 @@ import {
   FETCH_STORIES,
   FETCH_STORY,
   REMOVE_CURRENT,
-  GET_MY_STORIES
+  GET_MY_STORIES,
+  UPDATE_PATH,
+  HANDLE_STORY_BODY,
+  EMPTY_BODY
 } from './types'
 
 /*
@@ -99,9 +102,9 @@ export function removeCurrent() {
 /*
  * Update story
  */
-export function updateStory(title, body, image, id) {
+export function updateStory(data, id) {
   return dispatch => {
-    return axios.put(`/api/content?id=${id}`, {title, body, image})
+    return axios.put(`/api/content?id=${id}`, data)
     .then( () => {
       browserHistory.push('/')
     })
@@ -127,5 +130,27 @@ export function getMyStories () {
           payload: res.data.story
         })
       })
+  }
+}
+/*
+ * get path address
+ */
+export function updatePath(path) {
+  return {
+    type: UPDATE_PATH,
+    payload: path
+  }
+}
+
+export function emptyBody(){
+  return {
+    type: EMPTY_BODY
+  }
+}
+
+export function handleStoryBody(payload){
+  return {
+    type: HANDLE_STORY_BODY,
+    payload
   }
 }

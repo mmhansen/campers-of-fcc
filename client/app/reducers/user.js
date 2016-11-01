@@ -33,7 +33,7 @@ export default function auth_reducer(state = initialState, action) {
     case actions.SET_USER:
       return {
         ...state,
-        userFullName: action.fullName,
+        name: action.fullName,
         role: action.role
       }
     case actions.GET_ALL_USERS:

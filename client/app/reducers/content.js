@@ -7,7 +7,9 @@ let initialState = {
   adminStories: [],
   page: 1,
   count: 0,
-  error: null
+  error: null,
+  path: null,
+  body: ''
 }
 
 export default function stories_reducer(state = initialState, action) {
@@ -31,7 +33,22 @@ export default function stories_reducer(state = initialState, action) {
     case actions.GET_MY_STORIES:
       return {
         ...state,
-        submitted: [...action.payload]
+        submitted: action.payload
+      }
+    case actions.UPDATE_PATH:
+      return {
+        ...state,
+        path: action.payload
+      }
+    case actions.HANDLE_STORY_BODY:
+      return {
+        ...state,
+        body: action.payload
+      }
+    case actions.EMPTY_BODY:
+      return {
+        ...state,
+        body: ''
       }
     default:
       return state;
