@@ -1,16 +1,11 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 /*
- * Authentication
- */
-import SignupForm from './components/Auth/Signup/SignupForm'
-import LoginForm from './components/Auth/Login/LoginForm'
-/*
  * Authorization
  */
-import RequireAdmin from './components/Admin/RequireAdmin'
-import RequireAuth from './components/Auth/RequireAuth'
-import LogoutPage from './components/Auth/LogoutPage'
+import RequireAdmin from './components/utils/RequireAdmin'
+import RequireAuth from './components/utils/RequireAuth'
+import LogoutPage from './components/utils/LogoutPage'
 /*
  * Views
  */
@@ -31,11 +26,10 @@ const Routes = () => {
       <Route path="/" component={ Container }>
         // Home Page
         <IndexRoute component={ HomePage } />
-        // Authentication
-        <Route path="au" component={ AuthPage }>
-          <Route path="login" component= { LoginForm } />
-          <Route path="register" component= { SignupForm } />
-        </Route>
+        // Sign In
+        <Route path="login" component={ AuthPage } />
+        // Sign Up
+        <Route path="register" component={ AuthPage } />
         // Make Story
         <Route path="story" component={ RequireAuth(CreateOrEditPage) } />
         // My Stories
@@ -43,7 +37,7 @@ const Routes = () => {
         // Admin Page
         <Route path="admin" component={ RequireAdmin(AdminPage) } />
         // Logout
-        <Route path="logout" component={ RequireAuth(LogoutPage) } />
+        <Route path="logout" component={ LogoutPage } />
         // handle 404 routes
         <Route path="*" component={NotFoundPage} />
       </Route>

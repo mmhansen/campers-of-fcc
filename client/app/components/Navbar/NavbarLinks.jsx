@@ -16,11 +16,11 @@ const NavbarLinks = ({ role, authenticated }) => {
   if ( role === 'Guest' ) {
     links.push(
       <li key={1} role="presentation">
-        <Link activeClassName="active" to="/au/login">Login</Link>
+        <Link activeClassName="active" to="/login">Login</Link>
       </li>)
     links.push(
       <li key={2} role="presentation" id="register">
-        <Link activeClassName="active" to="/au/register">Register</Link>
+        <Link activeClassName="active" to="/register">Register</Link>
       </li>)
   }
   /*

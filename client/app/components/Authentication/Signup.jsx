@@ -3,20 +3,14 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
-import {registerUser} from '../../../actions/authentication-actions'
-import { validateRegister as validate} from '../../../utils/validation'
-import { renderField, renderAlert } from '../../common/formFields'
+import { renderField, renderAlert } from '../utils/formFields'
+import * as actions from '../../actions/authentication-actions'
+import { validateLogin as validate } from '../../utils/validation'
 
-
-const form = reduxForm({
-  form: 'register',
-  validate: validate
-})
 
 class SignupForm extends React.Component {
   constructor (props){
     super(props);
-
     // bind this to our event handlers so we don't have to do it somehwere else
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -84,16 +78,22 @@ class SignupForm extends React.Component {
     )
   }
 }
-
+/*
+ * Redux
+ */
 SignupForm.propTypes = {
   registerUser: React.PropTypes.func.isRequired
 }
 
+const form = reduxForm({
+  form: 'register',
+  validate: validate
+})
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error
+    errorMessage: state.user.error
   }
 }
 
-export default connect(mapStateToProps, { registerUser })(form(SignupForm));
+export default connect(mapStateToProps, actions )(form(SignupForm));

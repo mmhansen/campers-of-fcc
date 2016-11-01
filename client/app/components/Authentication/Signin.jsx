@@ -2,9 +2,9 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { renderField, renderAlert } from '../../common/formFields'
-import { loginUser } from '../../../actions/authentication-actions'
-import { validateLogin as validate } from '../../../utils/validation'
+import { renderField, renderAlert } from '../utils/formFields'
+import { loginUser } from '../../actions/authentication-actions'
+import { validateLogin as validate } from '../../utils/validation'
 
 
 const loginForm = reduxForm({
@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.auth.error
+    errorMessage: state.user.error
   }
 }
 

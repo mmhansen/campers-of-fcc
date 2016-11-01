@@ -1,21 +1,19 @@
 import React from 'react';
-import Nav from './components/Nav';
-import Footer from './components/Footer'
+import Nav from './components/Navbar/Nav';
+import Footer from './components/BitsAndBobs/Footer'
 require('./stylesheets/style.scss')
 
-const Main = ({ children }) => {
+const Container = ({ children }) => {
   return (
     <div>
       {/* Navbar */}
       <Nav />
+      <div className="spacer" />
+      {/* Content */}
+      { children }
       {/* Footer */}
       <Footer />
-
     </div>
   )
 }
-export default Main;
-
-
-// {/* Content */}
-// { children }
+export default Container;

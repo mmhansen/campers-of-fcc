@@ -20,7 +20,8 @@ export default function auth_reducer(state = initialState, action) {
     case actions.UNAUTH_USER:
       return {
         ...state,
-        authenticated: false
+        authenticated: false,
+        role: 'Guest'
       }
     case actions.AUTH_ERROR:
       return { ...state, error: action.payload }
