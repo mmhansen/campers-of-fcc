@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import * as adminActions from '../actions/admin-actions'
 import * as storyActions from '../actions/story-actions'
-
-
+import { FETCH_PENDING_STORIES } from '../actions/types'
+import { Link } from 'react-router'
  /*
   * Component
   */
@@ -12,7 +12,7 @@ class HomePage extends Component {
     // get users
     this.props.getUsers()
     // get pending stories
-    this.props.getContent(1, 10, 'Pending')
+    this.props.getContent(1, 10, 'Pending', FETCH_PENDING_STORIES)
   }
   /*
    * Render
@@ -42,7 +42,7 @@ class HomePage extends Component {
     } else {
       childElements = stories.map((story, i) => {
         return (
-           <Link key={i} to={`/a/${story._id}`}>
+           <Link key={i} to={`/edit/${story._id}`}>
              <div className="col-md-4">
                <div className="item">
                  <img src={story.image} className="img-responsive"/>

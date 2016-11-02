@@ -44,12 +44,12 @@ export function createStoryValidationError(error) {
 /*
  * Handle Get
  */
-export function getContent (page=1, limit=20, status='Approved') {
+export function getContent (page=1, limit=20, status='Approved', type=FETCH_STORIES) {
   return dispatch => {
     return axios.get(`/api/content/?page=${page}&limit=${limit}&status=${status}`)
       .then( res => {
         dispatch({
-          type: FETCH_STORIES,
+          type,
           page: page,
           payload: res.data.content
         })
@@ -103,6 +103,7 @@ export function removeCurrent() {
  * Update story
  */
 export function updateStory(data, id) {
+  console.log('update')
   return dispatch => {
     return axios.put(`/api/content?id=${id}`, data)
     .then( () => {

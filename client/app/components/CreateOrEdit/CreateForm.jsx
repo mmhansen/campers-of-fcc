@@ -6,7 +6,6 @@ import moment from 'moment'
 import classnames from 'classnames'
 import Editor from 'react-medium-editor';
 // locals
-import FormButton from './FormButtons'
 import * as adminActions from '../../actions/admin-actions'
 import * as storyActions from '../../actions/story-actions'
 import { renderField } from '../utils/formFields'

@@ -6,7 +6,6 @@ import moment from 'moment'
 import classnames from 'classnames'
 import Editor from 'react-medium-editor';
 // locals
-import FormButton from './FormButtons'
 import * as adminActions from '../../actions/admin-actions'
 import * as storyActions from '../../actions/story-actions'
 import { renderField } from '../utils/formFields'
@@ -19,20 +18,30 @@ require('medium-editor/dist/css/themes/bootstrap.css');
 /*
  * Component
  */
-let CreateForm = ({ role, path, name, body, errorMessage, handleSubmit, addNewStory, updateStory, approveStory, deleteStory, handleStoryBody }) => {
+let EditForm = ({ role, path, name, body, errorMessage, handleSubmit, updateStory, approveStory, deleteStory, handleStoryBody }) => {
   /*
    * Handle Story Body Change
    */
+   let pattern = /[a-f0-9]{24}/;
+
   const onChangeMediumEditor = (text, medium) => {
     handleStoryBody(medium['elements'][0]['innerHTML'])
   }
   const onSubmit = ({ image, title  }) => {
-    addNewStory({ body, image, title })
+    // update story
+    let id = path.match(pattern)
+    updateStory({ body, image, title }, id)
   }
-  /*
-   * Render
-   */
   let time = moment().format('LL')
+  // Buttons
+  let childButtons = [ <button key="1" type="submit" className="btn btn-primary">Update</button> ]
+  if (role === 'Admin') {
+    childButtons = childButtons.concat([
+      <button key="2" onClick={() => approveStory(path.match(pattern)) } className="btn btn-primary">Approve</button>,
+      <button key="3" onClick={() => deleteStory(path.match(pattern)) } className="btn btn-primary">Delete</button>
+    ])
+  }
+  console.log(childButtons)
 
   return (
     <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-1">
@@ -71,7 +80,7 @@ let CreateForm = ({ role, path, name, body, errorMessage, handleSubmit, addNewSt
         </div>
 
         {/* Form Buttons */}
-        <button type="submit" className="btn btn-primary">Submit your story</button>
+        { childButtons }
       </form>
     </div>
   )
@@ -81,10 +90,10 @@ let CreateForm = ({ role, path, name, body, errorMessage, handleSubmit, addNewSt
  */
 
 // form
-CreateForm = reduxForm({
+EditForm = reduxForm({
   form: 'new-story',
   validate
-})(CreateForm)
+})(EditForm)
 
 // connect
 const actions = Object.assign({}, adminActions, storyActions)
@@ -99,7 +108,7 @@ function matchStory(state){
     lookup = state.content.submitted
   }
   if (role === 'Admin') {
-    lookup =  state.content.submitted
+    lookup =  [...state.content.submitted, ...state.content.adminStories]
   }
 
   lookup = lookup.filter(( story ) => {
@@ -121,6 +130,6 @@ function mapStateToProps(state) {
     ...matchStory(state)
   }
 }
-CreateForm = connect(mapStateToProps, actions)(CreateForm)
+EditForm = connect(mapStateToProps, actions)(EditForm)
 
-export default CreateForm
+export default EditForm
