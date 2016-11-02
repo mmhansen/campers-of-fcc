@@ -13,10 +13,10 @@ class HomePage extends Component {
  * Get Stuff when this page loads
  */
   componentWillMount(){
-    // get the count
-    this.props.getCount()
     // get the stories to display
     this.props.getContent()
+    // get the count
+    this.props.getCount()
     // get my submitted stories
     this.props.getMyStories()
   }
@@ -27,7 +27,7 @@ class HomePage extends Component {
     return (
       <div>
           <Hero />
-          <Masonry />
+          <Masonry current={this.props.current}/>
       </div>
     )
   }
@@ -35,4 +35,9 @@ class HomePage extends Component {
 /*
  * Redux
  */
-export default connect(null, actions)(HomePage);
+const mapStateToProps = (state) => {
+  return {
+    current: state.content.current
+  }
+}
+export default connect(mapStateToProps, actions)(HomePage);
