@@ -19,6 +19,7 @@ export function submitContent(req, res, next) {
   let newStory = new Story ({ title, body, image, postedBy })
   newStory.save(newStory, (err, story) => {
     if (err) { next(err) }
+    //console.log(story)
     res.status(201).json({
       story: story
     })
@@ -131,4 +132,20 @@ export function updateContent(req, res, next) {
       .status(200)
       .json({ story })
     })
+}
+
+
+/*
+ * Get just my submitted stories
+ */
+export function getMyStories(req, res, next) {
+  let id = req.query.id;
+  if (!id) { return res.json({ story: [] }) }
+
+  Story.find({ postedBy: id }, (err, story) => {
+    if (err) {return next(err); }
+    res
+      .status(200)
+      .json({ story })
+  })
 }

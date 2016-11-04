@@ -1,0 +1,60 @@
+
+/* General */
+
+body,
+html {
+  font-family: "Lato", sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  height: 100%;
+  //background: $bg-grey;
+}
+
+h1, h2, h3, h4{
+  font-family: "Rubik", sans-serif;
+}
+h1{
+  font-size: 3.142em;
+}
+h2{
+  font-size: 1.942em;
+}
+p{
+  line-height: 1.7;
+  padding-bottom: 40px;
+}
+
+/*offset for fixed nav and hero section post etc*/
+.top-offset-large{
+  margin-top: 100vh;
+  height: 300px; /*remove line in final*/
+}
+.top-offset-small{/*to fix fixed top style of navbar*/
+  margin-top: 80px;
+}
+.padding-top{
+  padding-top: 60px;
+}
+/*end of offset for fixed nav and hero section*/
+
+/*helper classes*/
+.bg-white{
+  background: #fff;
+}
+.bg-blue{
+  background: #4E5166;
+  color: #fff;
+}
+.no-padding{
+  padding:0;
+}
+.img-responsive{
+  width: 100%;
+}
+/*end of helper classes*/
+
+
+.spacer {
+  width: 100%;
+  height: 130px;
+}

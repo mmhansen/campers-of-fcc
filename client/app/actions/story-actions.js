@@ -9,7 +9,12 @@ import {
   GET_COUNT,
   STORY_ERROR,
   FETCH_STORIES,
-  FETCH_STORY
+  FETCH_STORY,
+  REMOVE_CURRENT,
+  GET_MY_STORIES,
+  UPDATE_PATH,
+  HANDLE_STORY_BODY,
+  EMPTY_BODY
 } from './types'
 
 /*
@@ -39,12 +44,12 @@ export function createStoryValidationError(error) {
 /*
  * Handle Get
  */
-export function getContent (page=1, limit=20, status='Approved') {
+export function getContent (page=1, limit=20, status='Approved', type=FETCH_STORIES) {
   return dispatch => {
     return axios.get(`/api/content/?page=${page}&limit=${limit}&status=${status}`)
       .then( res => {
         dispatch({
-          type: FETCH_STORIES,
+          type,
           page: page,
           payload: res.data.content
         })
@@ -83,3 +88,70 @@ export function getContent (page=1, limit=20, status='Approved') {
           })
    }
  }
+
+
+ /*
+  * Empty current story part of state
+  */
+export function removeCurrent() {
+  return {
+    type: REMOVE_CURRENT
+  }
+}
+
+/*
+ * Update story
+ */
+export function updateStory(data, id) {
+  console.log('update')
+  return dispatch => {
+    return axios.put(`/api/content?id=${id}`, data)
+    .then( () => {
+      browserHistory.push('/')
+    })
+  }
+}
+
+/*
+ * Get my Stories
+ */
+export function getMyStories () {
+  return dispatch => {
+    let user = cookie.load('user')
+    if (!user) {
+      user = {
+        _id: 0
+      }
+    }
+
+    return axios.get(`api/content/my?id=${user._id}`)
+      .then( (res) => {
+        dispatch({
+          type: GET_MY_STORIES,
+          payload: res.data.story
+        })
+      })
+  }
+}
+/*
+ * get path address
+ */
+export function updatePath(path) {
+  return {
+    type: UPDATE_PATH,
+    payload: path
+  }
+}
+
+export function emptyBody(){
+  return {
+    type: EMPTY_BODY
+  }
+}
+
+export function handleStoryBody(payload){
+  return {
+    type: HANDLE_STORY_BODY,
+    payload
+  }
+}

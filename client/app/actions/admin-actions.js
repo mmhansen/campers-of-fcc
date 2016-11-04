@@ -1,9 +1,12 @@
 import axios from 'axios'
+import { browserHistory } from 'react-router'
 import {
   AUTH_ERROR,
   GET_CONTENT,
   GET_ALL_USERS,
-  SWITCH_VIEW
+  SWITCH_VIEW,
+  REMOVE,
+  UPADTE_USER
 } from './types'
 import cookie from 'react-cookie'
 
@@ -18,17 +21,15 @@ const getContent = (res) => {
 }
 
 
-
-export function switchView(view){
-  return {
-    type: SWITCH_VIEW,
-    payload: view
-  }
-}
-
 /*
  * Content Control
  */
+export function switchView(payload) {
+  return {
+    type: SWITCH_VIEW,
+    payload
+  }
+}
 export function handleNotAdmin(errorMessage) {
   return {
     type: AUTH_ERROR,
@@ -45,13 +46,19 @@ axios.defaults.headers.common['authorization'] = token;
 
 export function approveStory(id) {
   return dispatch => {
-    return axios.put(`/api/admin/${id}`)
+    return axios.put(`/api/admin?id=${id}`)
+      .then( () => {
+        browserHistory.push('/admin')
+      })
   }
 }
 
 export function deleteStory(id) {
   return dispatch => {
-    return axios.delete(`/api/admin/${id}`)
+    return axios.delete(`/api/admin?id=${id}`)
+      .then( () => {
+        browserHistory.push('/admin')
+      })
   }
 }
 
@@ -74,6 +81,25 @@ export function getUsers(page=1) {
 
 export function deleteUser(id) {
   return dispatch => {
-    return axios.delete(`/api/auth/user/${id}`)
+    return axios.delete(`/api/auth/user?id=${id}`)
+    .then( () => {
+          dispatch({
+            type: REMOVE,
+            payload: id
+          })
+      })
+  }
+}
+
+export function switchRoles(id) {
+  return dispath => {
+    return axios.put(`/api/auth/user?id=${id}`)
+    .then( (res) => {
+      dispath({
+        type: UPADTE_USER,
+        payload: res.data.user
+      })
+    })
+
   }
 }

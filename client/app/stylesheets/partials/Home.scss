@@ -1,4 +1,4 @@
-/* Home page styles */
+
 .home-page {
   background: $bg-grey;
   /* Brick styles */
@@ -70,6 +70,7 @@
     background: white;
     font-size: 16px;
   }
+
   /* button */
   .home-controls {
     position: fixed;
@@ -85,13 +86,11 @@
       right: 0;
     }
   }
+
   .btn {
     padding: 0 8px;
     padding-bottom: 12px;
     margin: 0px 12px;
     font-size: 48px;
   }
-
-  /* */
-
 }
