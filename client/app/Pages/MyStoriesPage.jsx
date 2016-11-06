@@ -41,7 +41,7 @@ class MyStoryPage extends Component {
     if (submitted.length === 0) {
       childElemenets.push(
         <div className="col-md-4 col-md-offset-4 no-story">
-          <Link to="/story">
+          <Link type="button" className="btn btn-primary cs-btn-green" to="/story">
             <h2 key={'title'}>Why not write a story?</h2>
           </Link>
         </div>

@@ -1,4 +1,5 @@
 
+
 /*Making full page carousel*/
 
 .carousel {
@@ -11,12 +12,12 @@
 }
 .carousel-inner .item img {
     height: 100vh;
-    width: auto;
+    width: 100%;
     max-width: none;
 }
 @media (max-width: 767px) {
     .carousel-inner .item img {
-        margin-left: -50%;
+        //margin-left: -50%;
     }
 }
 
