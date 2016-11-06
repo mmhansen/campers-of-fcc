@@ -8,11 +8,10 @@ const Container = ({ children }) => {
     <div>
       {/* Navbar */}
       <Nav />
-      <div className="spacer" />
       {/* Content */}
       { children }
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

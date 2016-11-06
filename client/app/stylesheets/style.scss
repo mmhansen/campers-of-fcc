@@ -3,15 +3,17 @@
 @import './partials/General';
 // Navbar
 @import './partials/Nav';
-// Footer
-@import './partials/Footer';
-// Authentication
-@import './partials/AuthStyles';
-// Homepage
+// Home Page styles
 @import './partials/HomeHero';
-@import './partials/Home';
-// My Stories
-@import './partials/MyStories';
+@import './partials/Masonry';
+// Login Page
+@import './partials/AuthStyles';
+// footer
+@import './partials/Footer';
+// create and edit form
+@import './partials/Form';
+// admin page
+@import './partials/AdminPage';
 
 
 /* 404 */

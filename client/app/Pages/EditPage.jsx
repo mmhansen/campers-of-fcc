@@ -16,12 +16,16 @@ class CreateOrEditPage extends Component {
     let path = this.props.location.pathname
     this.props.updatePath(path)
     return (
-      <div className="container-fluid">
-        <div className="row">
-        <EditForm path={path} />
-        <Tips />
+      <section className="section bg-white top-offset" id="edit-page">
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12">
+                    <h2 className="h2">Tell Us Your Story</h2>
+                </div>
+                <EditForm path={path} />
+            </div>
         </div>
-      </div>
+    </section>
     )
   }
 }

@@ -1,60 +1,68 @@
 
-/* General */
+/*declaring basic style*/
 
-body,
-html {
-  font-family: "Lato", sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  height: 100%;
-  //background: $bg-grey;
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Rubik", sans-serif;
+}
+h1 {
+    font-size: 3.142em;
+}
+h2 {
+    font-size: 1.942em;
+}
+.h2 {
+    font-family: "Rubik", sans-serif;
+    padding-bottom: 30px;
+    margin-top: 0;
+    color: #4e5166;
+}
+p {
+    line-height: 1.7;
+    padding-bottom: 40px;
 }
 
-h1, h2, h3, h4{
-  font-family: "Rubik", sans-serif;
-}
-h1{
-  font-size: 3.142em;
-}
-h2{
-  font-size: 1.942em;
-}
-p{
-  line-height: 1.7;
-  padding-bottom: 40px;
-}
-
-/*offset for fixed nav and hero section post etc*/
-.top-offset-large{
-  margin-top: 100vh;
-  height: 300px; /*remove line in final*/
-}
-.top-offset-small{/*to fix fixed top style of navbar*/
-  margin-top: 80px;
-}
-.padding-top{
-  padding-top: 60px;
-}
-/*end of offset for fixed nav and hero section*/
+/*end of declaring basic style*/
 
 /*helper classes*/
-.bg-white{
-  background: #fff;
+
+.bg-white {
+    background: #fff;
 }
-.bg-blue{
-  background: #4E5166;
-  color: #fff;
+.bg-blue {
+    background: #4E5166;
+    color: #fff;
 }
-.no-padding{
-  padding:0;
+.bg-pale-blue {
+    background: #EDEEF0;
 }
-.img-responsive{
-  width: 100%;
+.no-padding-picture {
+    padding: 0;
+    margin: 0;
 }
+.img-responsive {
+    width: 100%;
+}
+
 /*end of helper classes*/
 
+/*offset for fixed nav and hero section post etc*/
 
-.spacer {
-  width: 100%;
-  height: 130px;
+.top-offset {
+    /*to fix fixed top style of navbar*/
+    margin-top: 140px;
 }
+.padding-top {
+    padding-top: 60px;
+}
+.padding-bottom {
+    padding-bottom: 60px;
+}
+
+/*end of offset for fixed nav and hero section*/

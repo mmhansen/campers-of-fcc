@@ -25,28 +25,22 @@ const StoryContent = ({ current, page, count, getContent }) => {
     let time = moment(element.created_at, "YYYY-MM-DD").format('LL');
 
      return (
-      <div key={index} className="col-sm-12 col-md-6 col-lg-6 card">
-        <div className="brick">
-          <img src={element.image} className="img-responsive"/>
-
-          <div className="text-title">
-            <p className="header">{element.title}</p>
-              <div className="row info">
-                <span>By {element.postedBy.firstName +" "+ element.postedBy.lastName} | On {time}</span>
-              </div>
-          </div>
-
-          <div className="text-body">
-            <p>{element.body}</p>
-
-          </div>
-
-        </div>
-      </div>
-    )
+       <div key={index} className="col-md-6 grid-item">
+           <div className="thumbnail">
+               <img src={element.image} alt="Campfire Story" />
+               <div className="caption">
+                   <div className="card-title">
+                       <h2>{element.title}</h2>
+                       <p className="card-info">
+                          Posted on {time} by {element.postedBy.firstName +" "+ element.postedBy.lastName}
+                       </p>
+                   </div>
+                   <p className="card-description">{element.body}</p>
+               </div>
+           </div>
+       </div>
+     )
   })
-  console.log(current)
-  console.log(childElements)
   // controls
   let controls = (
     <div className="row home-controls">
@@ -57,10 +51,10 @@ const StoryContent = ({ current, page, count, getContent }) => {
     </div>
   )
   return (
-    <section className="section bg-white">
-      <section className="container top-offset-large">
-        <div className="row">
-          <div className="col-xs-12 home-page">
+    <section className="section bg-white padding-top" id="cs-stories">
+        <section className="container">
+            <div className="row grid">
+
               <Masonry
                 options={masonryOptions} // default {}
                 disableImagesLoaded={false} // default false
@@ -68,9 +62,9 @@ const StoryContent = ({ current, page, count, getContent }) => {
                 >
                 {childElements}
               </Masonry>
-          </div>
-        </div>
-      </section>
+
+            </div>
+        </section>
     </section>
   )
 }

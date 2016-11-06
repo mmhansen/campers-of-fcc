@@ -4,6 +4,29 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { Link } from 'react-router'
 import * as actions from '../actions/story-actions'
+import classnames from 'classnames'
+/*
+ *
+ */
+ $(document).ready(function () {
+     $('.grid').isotope({
+         itemSelector: '.grid-item',
+         percentPosition: true,
+         masonry: {
+             columnWidth: '.col-md-6'
+         }
+     });
+
+     $('.grid-1').isotope({
+         itemSelector: '.grid-item-1',
+         percentPosition: true,
+         masonry: {
+             columnWidth: '.col-md-4'
+         }
+     });
+ })
+
+
  /*
   * Component
   */
@@ -17,31 +40,45 @@ class MyStoryPage extends Component {
     let childElemenets = [];
     if (submitted.length === 0) {
       childElemenets.push(
-        <h2 key={'title'}>Why not write a story?</h2>
+        <div className="col-md-4 col-md-offset-4 no-story">
+          <Link to="/story">
+            <h2 key={'title'}>Why not write a story?</h2>
+          </Link>
+        </div>
       )
     } else {
        childElemenets = submitted.map((x,i) => {
         return (
-          <div className="row" key={i}>
-            <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-4 outer">
-              <div className="card">
-                <h3>{x.title}</h3>
-                <h4>Status: {x.status}</h4>
-                <Link to={`/edit/${x._id}`} className="btn btn-primary edit">
-                  Edit
-                </Link>
-              </div>
+            <div key={i} className="col-md-4 grid-item-1">
+                <div className="thumbnail">
+                    <img src={x.image} alt="Campfire Story" />
+                    <div className="caption no-border-bottom">
+                        <div className="card-title">
+                            <h4>{x.title}
+                              <Link to={`/edit/${x._id}`} className="pull-right card-buttons">
+                                <span className="glyphicon glyphicon-edit"></span>
+                              </Link>
+                            </h4>
+                            <p className="status">
+                                Status: <span className={classnames("",{ "published" : (x.status === 'Approved')} )} > { x.status } </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         )
       })
     }
     return (
-      <div className="container-fluid" id="my-stories">
-        <div className="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
-            {childElemenets}
-        </div>
-      </div>
+      <section className="section bg-white top-offset">
+        <section className="container">
+            <div className="row grid-1">
+
+              { childElemenets }
+
+            </div>
+        </section>
+    </section>
     );
   }
 }

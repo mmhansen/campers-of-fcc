@@ -10,7 +10,7 @@ let initialState = {
   error: null,
   path: null,
   body: '',
-  view: 'users'
+  view: 'stories'
 }
 // view is either users or stories
 

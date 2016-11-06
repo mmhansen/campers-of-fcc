@@ -103,7 +103,6 @@ export function removeCurrent() {
  * Update story
  */
 export function updateStory(data, id) {
-  console.log('update')
   return dispatch => {
     return axios.put(`/api/content?id=${id}`, data)
     .then( () => {

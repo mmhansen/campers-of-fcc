@@ -4,15 +4,16 @@ import * as adminActions from '../actions/admin-actions'
 import * as storyActions from '../actions/story-actions'
 import { FETCH_PENDING_STORIES } from '../actions/types'
 import { Link } from 'react-router'
+import moment from 'moment'
  /*
   * Component
   */
 class HomePage extends Component {
   componentWillMount(){
-    // get users
-    this.props.getUsers()
     // get pending stories
     this.props.getContent(1, 10, 'Pending', FETCH_PENDING_STORIES)
+    // get user
+    this.props.getUsers()
   }
   /*
    * Render
@@ -29,28 +30,39 @@ class HomePage extends Component {
       let adminButtonText = (user.role === 'Admin') ? 'Demote to user' : 'Promote to admin';
 
         return (
-          <div key={i} className="col-sm-3">
-            <div className="item">
-              <h4>{`${user.firstName} ${user.lastName}`}</h4>
-              <hr />
-              <button onClick={() => {switchRoles(user._id)}} className="btn">{adminButtonText}</button>
-              <button onClick={() => {deleteUser(user._id)}} className="btn btn-danger">Delete</button>
-            </div>
+          <div key={i} className="col-md-12 user-list">
+              <h4>{`${user.firstName} ${user.lastName}`}
+                <a href="#" onClick={() => {deleteUser(user._id)}} className="pull-right card-buttons">
+                  <span className="glyphicon glyphicon-trash"></span>
+                </a>
+                <a href="#" onClick={() => {switchRoles(user._id)}} className="pull-right card-buttons">
+                  {adminButtonText}
+                </a>
+              </h4>
           </div>
         )
       })
     } else {
       childElements = stories.map((story, i) => {
+        let time = moment(story.created_at, "YYYY-MM-DD").format('LL');
         return (
-           <Link key={i} to={`/edit/${story._id}`}>
-             <div className="col-md-4">
-               <div className="item">
-                 <img src={story.image} className="img-responsive"/>
-                 <h4>{story.title}</h4>
-                 <h5>By {story.postedBy.firstName +" "+ story.postedBy.lastName}</h5>
-               </div>
-             </div>
-           </Link>
+            <div key={i} className="col-md-4">
+                <div className="thumbnail">
+                    <img src={story.image} alt="Campfire Story" />
+                    <div className="caption no-border-bottom">
+                        <div className="card-title">
+                            <h4>{story.title}
+                              <Link to={`/edit/${story._id}`} className="pull-right card-buttons">
+                                <span className="glyphicon glyphicon-eye-open"></span>
+                              </Link>
+                            </h4>
+                            <p className="card-info">
+                                Posted on {time} by {story.postedBy.firstName +" "+ story.postedBy.lastName}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
        )
       })
     }
@@ -58,30 +70,45 @@ class HomePage extends Component {
      *
      */
     return (
-      <div className="container-fluid">
-        <div className="col-xs-12" id="admin">
-          <div className="row">
-            <div className="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
-              {/* controls */}
-              <div className="card controls">
-                <button onClick={() => switchView('users') } className="btn btn-lg btn-default">Users</button>
-                <button onClick={() => switchView('stories') } className="btn btn-lg btn-default">Stories</button>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-7 col-md-offset-1">
-              {/*  content */}
-              <div className="card content">
-                <div className="row">
-                  {childElements}
+      <section className="section bg-white top-offset">
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12">
+                    <div className='tabs-x tabs-below'>
+                        <ul className="nav nav-tabs nav-justified" role="tablist">
+                            <li className="active">
+                              <a onClick={() => switchView('stories') } href="#stories" role="tab-kv" data-toggle="tab">STORIES</a>
+                            </li>
+                            <li>
+                              <a onClick={() => switchView('users') } href="#users" role="tab" data-toggle="tab">USERS</a>
+                            </li>
+                        </ul>
+
+                        <div className="tab-content">
+
+
+                            <div className="tab-pane fade" id="users">
+                                <div className="row">
+                                  { childElements }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
+    </section>
     )
   }
 }
+
+
+// <div className="tab-pane fade in active" id="stories">
+//     <div className="row">
+//
+//     </div>
+// </div>
 
 /*
  * Redux

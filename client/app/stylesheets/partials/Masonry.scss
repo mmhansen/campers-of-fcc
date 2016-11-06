@@ -1,0 +1,81 @@
+
+/*card styles*/
+
+.thumbnail {
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75);
+}
+.thumbnail>img {
+    width: 100%;
+    display: block;
+}
+.thumbnail .card-title {
+    border-bottom: solid 1px #eee;
+}
+.no-border-bottom .card-title {
+    border-bottom: 0 !important;
+}
+.thumbnail h2 {
+    color: #7BE5A0;
+}
+.thumbnail h2 {
+    margin: 0;
+    padding: 15px 15px;
+}
+.thumbnail h4 {
+    color: #7BE5A0;
+}
+.thumbnail h4 {
+    margin: 0;
+    padding: 15px 15px;
+}
+.card-description {
+    margin: 0;
+    padding: 15px 15px;
+}
+.caption .cs-btn-green {
+    margin: 15px 15px;
+}
+.thumbnail p {
+    padding-top: 15px;
+}
+.card-title .card-info {
+    font-size: 0.75em;
+    line-height: 1.35;
+    padding: 0px 15px 15px 15px;
+}
+.card-title .status {
+    font-size: 0.75em;
+    line-height: 1.35;
+    padding: 0px 15px 15px 15px;
+}
+.card-title .status .published {
+    color: #7be5a0 !important;
+}
+.grid-item,
+.grid-item-1 {
+    padding-bottom: 15px;
+}
+.card-buttons {
+    color: #7be5a0;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.card-buttons:hover,
+.card-buttons:focus {
+    color: #4e5166;
+}
+.glyphicon-trash,
+.glyphicon-collapse-down {
+    padding-left: 12px;
+}
+.glyphicon-trash {
+    color: red;
+}
+.glyphicon-collapse-down {
+    color: orange;
+}
+
+/*end of card styles*/
