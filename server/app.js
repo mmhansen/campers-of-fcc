@@ -13,7 +13,7 @@ import mongoose from "mongoose"
 import config from 'config'
 import router from './routes'
 const app = express() // start server
-app.listen(config.port, 'localhost') // server listen on 3000 by default
+app.listen(process.env.PORT || config.port) // server listen on 3000 by default
 mongoose.connect(config.mongodb) // connect to db
 
 // get a little feedback
