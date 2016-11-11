@@ -18,7 +18,7 @@ class HomePage extends Component {
     // get the count
     this.props.getCount()
     // get my submitted stories
-    this.props.getMyStories()
+    //this.props.getMyStories()
   }
   /*
    * Render

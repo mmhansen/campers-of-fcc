@@ -65,5 +65,12 @@ exports.validatePost = (data) => {
     errors.image = "This needs to be a url (ex: http://findhere.com/image)"
   }
 
+  if (!data.body || data.body.length < 100) {
+    errors.body = "The story text is too short!"
+  } 
+
+
+
+
   return errors
 }

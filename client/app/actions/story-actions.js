@@ -117,11 +117,6 @@ export function updateStory(data, id) {
 export function getMyStories () {
   return dispatch => {
     let user = cookie.load('user')
-    if (!user) {
-      user = {
-        _id: 0
-      }
-    }
 
     return axios.get(`api/content/my?id=${user._id}`)
       .then( (res) => {

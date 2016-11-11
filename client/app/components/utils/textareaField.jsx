@@ -4,7 +4,7 @@ import classnames from 'classnames'
 exports.renderTextarea = (field) => {
   //console.log(field)
   return (
-    <div className="form-group">
+    <div className={classnames('form-group', {'has-error': field.meta.visited && field.meta.invalid})}>
         <label className="control-label " htmlFor="text">{ field.label }</label>
         <textarea
           {...field.input} className="form-control" name={field.name} placeholder={field.placeholder} type={field.type}
