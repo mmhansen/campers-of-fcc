@@ -20,12 +20,21 @@
         //margin-left: -50%;
     }
 }
-
 /*end of full page carousel*/
 
 
 /*style for the hero content*/
-
+@media (max-width: 767px) {
+  .hero-top {
+    display: none;
+  }
+  section {
+    .grid > div {
+      margin-top: 60px;
+      margin-bottom: 100px;
+    }
+  }
+}
 #hero-content {
     display: table;
     position: absolute;

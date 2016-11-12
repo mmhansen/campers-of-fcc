@@ -2,13 +2,14 @@
 
 /*footer styles*/
 
-.footer {
-    position: absolute !important;
+footer {
+    position: fixed;
+    z-index: 9999;
     bottom: 0;
     width: 100%;
     height: 60px;
 }
-.footer p {
+footer p {
     line-height: 60px;
     padding: 0;
     margin: 0;
@@ -22,7 +23,11 @@
 .bg-blue a:hover {
     color: #7BE5A0;
 }
-
+@media (max-width: 768px) {
+  footer p{
+    font-size: 12px;
+  }
+}
 html {
     position: relative;
     min-height: 100%;

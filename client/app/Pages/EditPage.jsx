@@ -16,7 +16,7 @@ class CreateOrEditPage extends Component {
     let path = this.props.location.pathname
     this.props.updatePath(path)
     return (
-      <section className="section bg-white top-offset" id="edit-page">
+      <section className="section bg-white top-offset bottom-space" id="edit-page">
         <div className="container">
             <div className="row">
                 <div className="col-md-12">

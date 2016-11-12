@@ -3,19 +3,10 @@ import { connect } from 'react-redux'
 import Masonry from 'react-masonry-component'
 import * as actions from '../actions/story-actions'
 import moment from 'moment'
+import { Link } from 'react-router'
 
-const StoryContent = ({ current, page, count, getContent }) => {
-  let dis = true
-  let nextDis = false
-  if (page > 1) dis = false
-  if (page === Math.ceil(count/20) ) nextDis = true
+const StoryContent = ({ updatePath, current, count, getContent }) => {
 
-  // get me the next/previous page
-  const fetchStories = (page) => {
-      return () => {
-        this.props.getContent(page)
-      }
-    }
   // masonry options
   let masonryOptions = {
     transitionDuration: 0
@@ -23,9 +14,10 @@ const StoryContent = ({ current, page, count, getContent }) => {
   // bricks
   let childElements = current.map(function(element, index){
     let time = moment(element.created_at, "YYYY-MM-DD").format('LL');
-
+    let body = (element.body.length >= 400) ? element.body.slice(0,400) + '...' : element.body;
      return (
        <div key={index} className="col-md-6 grid-item">
+         <Link to={`/full/${element._id}`} onClick={()=>{updatePath(element._id)}}>
            <div className="thumbnail">
                <img src={element.image} alt="Campfire Story" />
                <div className="caption">
@@ -35,26 +27,19 @@ const StoryContent = ({ current, page, count, getContent }) => {
                           Posted on {time} by {element.postedBy.firstName +" "+ element.postedBy.lastName}
                        </p>
                    </div>
-                   <p className="card-description">{element.body}</p>
+                   <p className="card-description">{body}</p>
                </div>
            </div>
+         </Link>
        </div>
      )
   })
   // controls
-  let controls = (
-    <div className="row home-controls">
-        <button disabled={dis}
-           className="btn btn-default left-control" onClick={fetchStories(page-1)}>&#x02AA6;</button>
-        <button disabled={nextDis}
-           className="btn btn-default right-control" onClick={fetchStories(page+1)}>&#x02AA7;</button>
-    </div>
-  )
+
   return (
     <section className="section bg-white padding-top" id="cs-stories">
         <section className="container">
             <div className="row grid">
-
               <Masonry
                 options={masonryOptions} // default {}
                 disableImagesLoaded={false} // default false

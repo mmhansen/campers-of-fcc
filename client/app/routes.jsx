@@ -16,6 +16,7 @@ import EditPage from './Pages/EditPage'
 import HomePage from './Pages/HomePage'
 import MyStoriesPage from './Pages/MyStoriesPage'
 import AuthPage from './Pages/AuthPage'
+import FullStoryPage from './Pages/FullStoryPage'
 //
 import Container from './Container'
 /*
@@ -31,6 +32,8 @@ const Routes = () => {
         <Route path="login" component={ AuthPage } />
         // Sign Up
         <Route path="register" component={ AuthPage } />
+        // Full Story
+        <Route path="full/:story_id" component= { FullStoryPage } />
         // Make Story
         <Route path="story" component={ RequireAuth(CreatePage) } />
         // Edit Story

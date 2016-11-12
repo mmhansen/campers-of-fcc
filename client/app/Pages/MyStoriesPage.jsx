@@ -72,7 +72,7 @@ class MyStoryPage extends Component {
     return (
       <section className="section bg-white top-offset">
         <section className="container">
-            <div className="row grid-1">
+            <div className="row grid-1 bottom-space">
 
               { childElemenets }
 

@@ -1,5 +1,37 @@
-
+// btn styles
+.home-controls {
+  z-index: 999;
+  .left-control{
+    left: 30px;
+  }
+  .right-control{
+    right: 30px;
+  }
+  .btn {
+    position: absolute;
+    bottom: 30px;
+    padding: 0 8px;
+    padding-bottom: 12px;
+    margin: 0px 12px;
+    font-size: 48px;
+  }
+}
+// .bottom {
+//   position: relative;
+//   bottom: -100em;
+//   .btn {
+//   }
+// }
+//masonry container
+section {
+  .grid > div {
+    margin-bottom: 70px;
+  }
+}
 /*card styles*/
+.grid-item a {
+  text-decoration: none;
+}
 
 .thumbnail {
     padding: 0;

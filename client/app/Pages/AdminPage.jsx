@@ -73,7 +73,7 @@ class HomePage extends Component {
       <section className="section bg-white top-offset">
         <div className="container">
             <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-12 bottom-space">
                     <div className='tabs-x tabs-below'>
                         <ul className="nav nav-tabs nav-justified" role="tablist">
                             <li className="active">
