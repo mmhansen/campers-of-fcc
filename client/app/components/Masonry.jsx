@@ -5,7 +5,7 @@ import * as actions from '../actions/story-actions'
 import moment from 'moment'
 import { Link } from 'react-router'
 
-const StoryContent = ({ updatePath, current, count, getContent }) => {
+const StoryContent = ({ page, updatePath, current, count, getContent }) => {
 
   // masonry options
   let masonryOptions = {
@@ -35,11 +35,29 @@ const StoryContent = ({ updatePath, current, count, getContent }) => {
      )
   })
   // controls
+  const fetchStories = (page) => {
+    return () => getContent(page)
 
+  }
+  let dis = true
+  let nextDis = false
+  if (page > 1) dis = false
+  if (page === Math.ceil(count/20) ) nextDis = true
+
+  // get me the next/previous page
+  let controls = (
+    <div className=" home-controls">
+        <button disabled={dis}
+           className="btn btn-default left-control" onClick={fetchStories(page-1)}>&#x02AA6;</button>
+        <button disabled={nextDis}
+           className="btn btn-default right-control" onClick={fetchStories(page+1)}>&#x02AA7;</button>
+    </div>
+  )
   return (
     <section className="section bg-white padding-top" id="cs-stories">
         <section className="container">
             <div className="row grid">
+              { controls }
               <Masonry
                 options={masonryOptions} // default {}
                 disableImagesLoaded={false} // default false
@@ -47,7 +65,9 @@ const StoryContent = ({ updatePath, current, count, getContent }) => {
                 >
                 {childElements}
               </Masonry>
-
+              <div className='bottom-buttons'>
+                { controls }
+              </div>
             </div>
         </section>
     </section>

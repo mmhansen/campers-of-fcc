@@ -25,7 +25,7 @@ const Hero = () => {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-12 no-padding-picture">
-                    <div id="myCarousel" className="carousel" data-ride="carousel" data-interval="100000">
+                    <div id="myCarousel" className="carousel" data-ride="carousel" data-interval="2000">
 
                         <div className="carousel-inner" role="listbox">
                             <div className="item active">
