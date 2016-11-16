@@ -1,1 +1,1 @@
-web: export NODE_ENV=prod && babel-node ./server/app.js
+web: export NODE_ENV=prod && webpack -p && babel-node ./server/app.js
