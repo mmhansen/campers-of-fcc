@@ -44,10 +44,10 @@ const common = {
       title: 'Campfire Stories',
       template: './client/index.ejs',
       minify: {
-       removeComments: true,
-       collapseWhitespace: true
-    },
-    inject: true
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      inject: true
   })
   ]
 };

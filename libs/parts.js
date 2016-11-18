@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 exports.devServer = function(options) {
   return {
@@ -30,15 +29,14 @@ exports.extractCSS = function(paths) {
       loaders: [
         {
           test: /(\.css|\.scss)$/,
-          loader: ExtractTextPlugin.extract('style', 'css?sourceMap', 'postcss', 'sass?sourceMap'),
+          loader: ExtractTextPlugin.extract('style', 'css!sass'),
           include: paths
         }
       ]
     },
     plugins: [
       new ExtractTextPlugin('[name].[chunkhash].css')
-    ],
-    postcss: ()=> [autoprefixer]
+    ]
   }
 }
 
