@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from './components/Navbar/Nav';
 import Footer from './components/BitsAndBobs/Footer'
-require('./stylesheets/style.scss')
+//require('./stylesheets/style.scss')
 
 const Container = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const Container = ({ children }) => {
       {/* Content */}
       { children }
       {/* Footer */}
-      <Footer /> 
+      <Footer />
     </div>
   )
 }

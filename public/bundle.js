@@ -32805,7 +32805,11 @@
 
 	var _AuthPage2 = _interopRequireDefault(_AuthPage);
 
-	var _Container = __webpack_require__(603);
+	var _FullStoryPage = __webpack_require__(603);
+
+	var _FullStoryPage2 = _interopRequireDefault(_FullStoryPage);
+
+	var _Container = __webpack_require__(604);
 
 	var _Container2 = _interopRequireDefault(_Container);
 
@@ -32816,7 +32820,7 @@
 	 */
 
 	/*
-	 * Views
+	 * Authorization
 	 */
 	var Routes = function Routes() {
 	  return _react2.default.createElement(
@@ -32831,6 +32835,8 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _AuthPage2.default }),
 	      '// Sign Up',
 	      _react2.default.createElement(_reactRouter.Route, { path: 'register', component: _AuthPage2.default }),
+	      '// Full Story',
+	      _react2.default.createElement(_reactRouter.Route, { path: 'full/:story_id', component: _FullStoryPage2.default }),
 	      '// Make Story',
 	      _react2.default.createElement(_reactRouter.Route, { path: 'story', component: (0, _RequireAuth2.default)(_CreatePage2.default) }),
 	      '// Edit Story',
@@ -32849,7 +32855,7 @@
 	//
 
 	/*
-	 * Authorization
+	 * Views
 	 */
 	exports.default = Routes;
 
@@ -40288,7 +40294,7 @@
 	            { className: 'row' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'col-md-12' },
+	              { className: 'col-md-12 bottom-space' },
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'tabs-x tabs-below' },
@@ -40428,7 +40434,7 @@
 	 */
 	function getContent() {
 	  var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-	  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
+	  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
 	  var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'Approved';
 	  var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _types.FETCH_STORIES;
 
@@ -54989,7 +54995,7 @@
 	      this.props.updatePath(path);
 	      return _react2.default.createElement(
 	        'section',
-	        { className: 'section bg-white top-offset', id: 'create-page' },
+	        { className: 'section bg-white top-offset bottom-space', id: 'create-page' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container' },
@@ -55517,7 +55523,7 @@
 	      this.props.updatePath(path);
 	      return _react2.default.createElement(
 	        'section',
-	        { className: 'section bg-white top-offset', id: 'edit-page' },
+	        { className: 'section bg-white top-offset bottom-space', id: 'edit-page' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container' },
@@ -55796,6 +55802,8 @@
 	      // get my submitted stories
 	      //this.props.getMyStories()
 	    }
+	    /***/
+
 	    /*
 	     * Render
 	     */
@@ -55803,6 +55811,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -55821,7 +55830,9 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    current: state.content.current
+	    current: state.content.current,
+	    page: state.content.page,
+	    count: state.content.count
 	  };
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(HomePage);
@@ -55845,7 +55856,7 @@
 	var Hero = function Hero() {
 	    return _react2.default.createElement(
 	        "div",
-	        null,
+	        { className: "hero-top" },
 	        _react2.default.createElement(
 	            "section",
 	            { className: "container" },
@@ -55880,7 +55891,7 @@
 	                        ),
 	                        _react2.default.createElement(
 	                            "a",
-	                            { type: "button", className: "btn btn-default cs-btn-green-outline", href: "https://www.freecodecamp.com/", target: "_blank" },
+	                            { type: "button", className: "btn btn-default cs-btn-green-outline", href: "https://tropicalchancer.github.io/projectus/", target: "_blank" },
 	                            "Join Us"
 	                        )
 	                    )
@@ -55907,7 +55918,7 @@
 	                        { className: "col-md-12 no-padding-picture" },
 	                        _react2.default.createElement(
 	                            "div",
-	                            { id: "myCarousel", className: "carousel", "data-ride": "carousel", "data-interval": "100000" },
+	                            { id: "myCarousel", className: "carousel", "data-ride": "carousel", "data-interval": "2000" },
 	                            _react2.default.createElement(
 	                                "div",
 	                                { className: "carousel-inner", role: "listbox" },
@@ -56025,27 +56036,20 @@
 
 	var _moment2 = _interopRequireDefault(_moment);
 
+	var _reactRouter = __webpack_require__(378);
+
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var StoryContent = function StoryContent(_ref) {
-	  var current = _ref.current;
 	  var page = _ref.page;
+	  var updatePath = _ref.updatePath;
+	  var current = _ref.current;
 	  var count = _ref.count;
 	  var getContent = _ref.getContent;
 
-	  var dis = true;
-	  var nextDis = false;
-	  if (page > 1) dis = false;
-	  if (page === Math.ceil(count / 20)) nextDis = true;
 
-	  // get me the next/previous page
-	  var fetchStories = function fetchStories(page) {
-	    return function () {
-	      undefined.props.getContent(page);
-	    };
-	  };
 	  // masonry options
 	  var masonryOptions = {
 	    transitionDuration: 0
@@ -56053,47 +56057,64 @@
 	  // bricks
 	  var childElements = current.map(function (element, index) {
 	    var time = (0, _moment2.default)(element.created_at, "YYYY-MM-DD").format('LL');
-
+	    var body = element.body.length >= 400 ? element.body.slice(0, 400) + '...' : element.body;
 	    return _react2.default.createElement(
 	      'div',
 	      { key: index, className: 'col-md-6 grid-item' },
 	      _react2.default.createElement(
-	        'div',
-	        { className: 'thumbnail' },
-	        _react2.default.createElement('img', { src: element.image, alt: 'Campfire Story' }),
+	        _reactRouter.Link,
+	        { to: '/full/' + element._id, onClick: function onClick() {
+	            updatePath(element._id);
+	          } },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'caption' },
+	          { className: 'thumbnail' },
+	          _react2.default.createElement('img', { src: element.image, alt: 'Campfire Story' }),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'card-title' },
+	            { className: 'caption' },
 	            _react2.default.createElement(
-	              'h2',
-	              null,
-	              element.title
+	              'div',
+	              { className: 'card-title' },
+	              _react2.default.createElement(
+	                'h2',
+	                null,
+	                element.title
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'card-info' },
+	                'Posted on ',
+	                time,
+	                ' by ',
+	                element.postedBy.firstName + " " + element.postedBy.lastName
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'p',
-	              { className: 'card-info' },
-	              'Posted on ',
-	              time,
-	              ' by ',
-	              element.postedBy.firstName + " " + element.postedBy.lastName
+	              { className: 'card-description' },
+	              body
 	            )
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'card-description' },
-	            element.body
 	          )
 	        )
 	      )
 	    );
 	  });
 	  // controls
+	  var fetchStories = function fetchStories(page) {
+	    return function () {
+	      return getContent(page);
+	    };
+	  };
+	  var dis = true;
+	  var nextDis = false;
+	  if (page > 1) dis = false;
+	  if (page === Math.ceil(count / 20)) nextDis = true;
+
+	  // get me the next/previous page
 	  var controls = _react2.default.createElement(
 	    'div',
-	    { className: 'row home-controls' },
+	    { className: ' home-controls' },
 	    _react2.default.createElement(
 	      'button',
 	      { disabled: dis,
@@ -56116,6 +56137,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'row grid' },
+	        controls,
 	        _react2.default.createElement(
 	          _reactMasonryComponent2.default,
 	          {
@@ -56124,6 +56146,11 @@
 	            , updateOnEachImageLoad: false // default false and works only if disableImagesLoaded is false
 	          },
 	          childElements
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'bottom-buttons' },
+	          controls
 	        )
 	      )
 	    )
@@ -61745,7 +61772,7 @@
 	          { className: 'container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'row grid-1' },
+	            { className: 'row grid-1 bottom-space' },
 	            childElemenets
 	          )
 	        )
@@ -62249,33 +62276,170 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(604);
+	var _reactRedux = __webpack_require__(1);
 
-	var _Nav2 = _interopRequireDefault(_Nav);
+	var _storyActions = __webpack_require__(466);
 
-	var _Footer = __webpack_require__(607);
+	var actions = _interopRequireWildcard(_storyActions);
 
-	var _Footer2 = _interopRequireDefault(_Footer);
+	var _moment = __webpack_require__(467);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(608);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Container = function Container(_ref) {
-	  var children = _ref.children;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_Nav2.default, null),
-	    children
-	  );
-	};
-	exports.default = Container;
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	$(document).ready(function () {
+	  var $url = window.location.href;
+
+	  var $fb = $('#share-fb');
+	  var $tw = $('#share-tw');
+
+	  $fb.attr('href', 'http://www.facebook.com/sharer.php?u=' + $url);
+	  $tw.attr('href', 'http://twitter.com/share?url=' + $url + '&amp;text=This is an awesome story!!!&amp;hashtags=campfirestories');
+	});
+
+	var FullStoryPage = function (_Component) {
+	  _inherits(FullStoryPage, _Component);
+
+	  function FullStoryPage() {
+	    _classCallCheck(this, FullStoryPage);
+
+	    return _possibleConstructorReturn(this, (FullStoryPage.__proto__ || Object.getPrototypeOf(FullStoryPage)).apply(this, arguments));
+	  }
+
+	  _createClass(FullStoryPage, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props$story = this.props.story;
+	      var image = _props$story.image;
+	      var title = _props$story.title;
+	      var body = _props$story.body;
+	      var created_at = _props$story.created_at;
+	      var _props$story$postedBy = _props$story.postedBy;
+	      var firstName = _props$story$postedBy.firstName;
+	      var lastName = _props$story$postedBy.lastName;
+
+	      var time = (0, _moment2.default)(created_at, "YYYY-MM-DD").format('LL');
+
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'full-story' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'section top-offset-small' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container-fluid' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-md-12 no-padding-picture' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'post-header' },
+	                  _react2.default.createElement(
+	                    'h1',
+	                    { className: 'post-title' },
+	                    firstName + ' ' + lastName
+	                  ),
+	                  _react2.default.createElement(
+	                    'p',
+	                    { className: 'post-date' },
+	                    'Published on ',
+	                    time
+	                  )
+	                ),
+	                _react2.default.createElement('img', { src: image, className: 'img-responsive post-image' })
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'section bg-white padding-top' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-md-8 col-md-offset-2' },
+	                _react2.default.createElement(
+	                  'p',
+	                  null,
+	                  body
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'section bg-white padding-bottom' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'container' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-md-12 social-buttons' },
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#', id: 'share-fb', target: '_blank' },
+	                  _react2.default.createElement('i', { className: 'fa fa-facebook' })
+	                ),
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#', id: 'share-tw', target: '_blank' },
+	                  _react2.default.createElement('i', { className: 'fa fa-twitter' })
+	                )
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return FullStoryPage;
+	}(_react.Component);
+
+	function matchStory(state) {
+	  var path = state.content.path;
+	  return state.content.current.filter(function (_ref) {
+	    var _id = _ref._id;
+
+	    return _id === path;
+	  })[0];
+	}
+
+	function mapStateToProps(state) {
+	  return {
+	    story: matchStory(state)
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, actions)(FullStoryPage);
 
 /***/ },
 /* 604 */
@@ -62291,11 +62455,50 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NavbarLinks = __webpack_require__(605);
+	var _Nav = __webpack_require__(605);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Footer = __webpack_require__(608);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	__webpack_require__(609);
+
+	var Container = function Container(_ref) {
+	  var children = _ref.children;
+
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Nav2.default, null),
+	    children,
+	    _react2.default.createElement(_Footer2.default, null)
+	  );
+	};
+	exports.default = Container;
+
+/***/ },
+/* 605 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _NavbarLinks = __webpack_require__(606);
 
 	var _NavbarLinks2 = _interopRequireDefault(_NavbarLinks);
 
-	var _NavbarHeader = __webpack_require__(606);
+	var _NavbarHeader = __webpack_require__(607);
 
 	var _NavbarHeader2 = _interopRequireDefault(_NavbarHeader);
 
@@ -62320,7 +62523,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 605 */
+/* 606 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62443,7 +62646,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(NavbarLinks);
 
 /***/ },
-/* 606 */
+/* 607 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62491,7 +62694,7 @@
 	exports.default = NavbarHeader;
 
 /***/ },
-/* 607 */
+/* 608 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -62522,15 +62725,15 @@
 	          _react2.default.createElement(
 	            "p",
 	            { className: "text-center" },
-	            "built with ",
+	            "Built with ",
 	            _react2.default.createElement("span", { className: "glyphicon glyphicon-heart" }),
 	            " by ",
 	            _react2.default.createElement(
 	              "a",
-	              { href: "https://www.freecodecamp.com/", target: "_blank" },
-	              "FCC"
+	              { href: "https://tropicalchancer.github.io/projectus/", target: "_blank" },
+	              "Chingu"
 	            ),
-	            " campers"
+	            " Cohorts"
 	          )
 	        )
 	      )
@@ -62541,16 +62744,16 @@
 	exports.default = Footer;
 
 /***/ },
-/* 608 */
+/* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(609);
+	var content = __webpack_require__(610);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(611)(content, {});
+	var update = __webpack_require__(612)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -62567,21 +62770,21 @@
 	}
 
 /***/ },
-/* 609 */
+/* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(610)();
+	exports = module.exports = __webpack_require__(611)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "/* Vars */\n/*declaring basic style*/\nbody {\n  font-family: 'Open Sans', sans-serif;\n  font-size: 16px; }\n\nh1,\nh2,\nh3,\nh4 {\n  font-family: \"Rubik\", sans-serif; }\n\nh1 {\n  font-size: 3.142em; }\n\nh2 {\n  font-size: 1.942em; }\n\n.h2 {\n  font-family: \"Rubik\", sans-serif;\n  padding-bottom: 30px;\n  margin-top: 0;\n  color: #4e5166; }\n\np {\n  line-height: 1.7;\n  padding-bottom: 40px; }\n\n/*end of declaring basic style*/\n/*helper classes*/\n.bg-white {\n  background: #fff; }\n\n.bg-blue {\n  background: #4E5166;\n  color: #fff; }\n\n.bg-pale-blue {\n  background: #EDEEF0; }\n\n.no-padding-picture {\n  padding: 0;\n  margin: 0; }\n\n.img-responsive {\n  width: 100%; }\n\n/*end of helper classes*/\n/*offset for fixed nav and hero section post etc*/\n.top-offset {\n  /*to fix fixed top style of navbar*/\n  margin-top: 140px; }\n\n.padding-top {\n  padding-top: 60px; }\n\n.padding-bottom {\n  padding-bottom: 60px; }\n\n/*end of offset for fixed nav and hero section*/\n/*navbar styles*/\n.navbar-fixed-top {\n  min-height: 80px;\n  border: 0;\n  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75);\n  -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75);\n  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75); }\n\n.navbar-nav > li > a, .navbar-fixed-top .navbar-header {\n  padding-top: 0px;\n  padding-bottom: 0px;\n  line-height: 80px; }\n\n.navbar-default .navbar-nav > li > a {\n  color: #4E5166;\n  -webkit-transition: all 0.3s ease-out;\n  -moz-transition: all 0.3s ease-out;\n  -ms-transition: all 0.3s ease-out;\n  -o-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out; }\n\n.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {\n  background-color: #4E5166;\n  color: #fff; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle {\n  margin-top: 13px;\n  border: 0; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle:hover,\n.navbar-fixed-top .navbar-header .navbar-toggle:focus {\n  background: none; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle .icon-bar {\n  height: 3px;\n  background: #4E5166; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle:hover .icon-bar,\n.navbar-fixed-top .navbar-header .navbar-toggle:focus .icon-bar {\n  background: #7BE5A0; }\n\n@media (max-width: 767px) {\n  .navbar-nav > li > a, .navbar-fixed-top .navbar-header {\n    line-height: 20px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n    margin-top: 0; }\n  .navbar-fixed-top .navbar-header .navbar-brand {\n    margin-top: -9px; } }\n\n/*end of navbar styles*/\n/*Making full page carousel*/\n.carousel {\n  height: 100vh;\n  z-index: -100;\n  position: relative; }\n\n.carousel-inner {\n  overflow: hidden; }\n\n.carousel-inner .item img {\n  height: 100vh;\n  width: 100%;\n  max-width: none; }\n\n/*end of full page carousel*/\n/*style for the hero content*/\n#hero-content {\n  display: table;\n  position: absolute;\n  z-index: 1;\n  height: inherit;\n  height: 100vh; }\n\n#hero-content-centered {\n  display: table-cell;\n  vertical-align: middle;\n  color: #fff; }\n\n.hero-headline {\n  font-family: 'Rubik', sans-serif;\n  font-size: 3.142em; }\n\n.hero-copy {\n  font-family: 'Open Sans', sans-serif;\n  padding-bottom: 10px; }\n\n#overlay {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  opacity: 0.8;\n  z-index: -99;\n  background: #4E5166; }\n\n#explore-stories {\n  font-size: 3.142em;\n  color: #fff;\n  position: absolute;\n  top: 90%;\n  left: 0;\n  z-index: 1;\n  -webkit-transition: transform 0.3s ease-out;\n  -webkit-transition: transform 0.3s ease-out;\n  transition: -webkit-transform 0.3s ease-out;\n  -webkit-transition: -webkit-transform 0.3s ease-out;\n  transition: transform 0.3s ease-out;\n  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out; }\n\n#explore-stories:hover {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px); }\n\n/*end of hero content styling*/\n/*button styles*/\n.cs-btn-blue {\n  border-radius: 0;\n  padding: 12px;\n  background: #4E5166;\n  color: #7BE5A0;\n  border: 2px solid #4E5166;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-blue:hover,\n.cs-btn-blue:focus {\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0; }\n\n.cs-btn-blue-outline {\n  border-radius: 0;\n  padding: 12px;\n  background: transparent;\n  color: #4E5166;\n  border: 2px solid #4E5166;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-blue-outline:hover,\n.cs-btn-blue-outline:focus {\n  background: #4E5166;\n  color: #7BE5A0;\n  border: 2px solid #4E5166; }\n\n.cs-btn-green {\n  border-radius: 0;\n  padding: 12px;\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-green:hover,\n.cs-btn-green:focus {\n  background: #4E5166;\n  color: #7BE5A0;\n  border: 2px solid #4E5166; }\n\n.cs-btn-green-outline {\n  border-radius: 0;\n  padding: 12px;\n  background: transparent;\n  color: #fff;\n  border: 2px solid #fff;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-green-outline:hover,\n.cs-btn-green-outline:focus {\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0; }\n\n.cs-btn-green-inverted {\n  border-radius: 0;\n  padding: 12px;\n  background: #fff;\n  color: #4E5166;\n  border: 2px solid #fff;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-green-inverted:hover,\n.cs-btn-green-inverted:focus {\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0; }\n\n/*end of button styles*/\n/*card styles*/\n.thumbnail {\n  padding: 0;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75); }\n\n.thumbnail > img {\n  width: 100%;\n  display: block; }\n\n.thumbnail .card-title {\n  border-bottom: solid 1px #eee; }\n\n.no-border-bottom .card-title {\n  border-bottom: 0 !important; }\n\n.thumbnail h2 {\n  color: #7BE5A0; }\n\n.thumbnail h2 {\n  margin: 0;\n  padding: 15px 15px; }\n\n.thumbnail h4 {\n  color: #7BE5A0; }\n\n.thumbnail h4 {\n  margin: 0;\n  padding: 15px 15px; }\n\n.card-description {\n  margin: 0;\n  padding: 15px 15px; }\n\n.caption .cs-btn-green {\n  margin: 15px 15px; }\n\n.thumbnail p {\n  padding-top: 15px; }\n\n.card-title .card-info {\n  font-size: 0.75em;\n  line-height: 1.35;\n  padding: 0px 15px 15px 15px; }\n\n.card-title .status {\n  font-size: 0.75em;\n  line-height: 1.35;\n  padding: 0px 15px 15px 15px; }\n\n.card-title .status .published {\n  color: #7be5a0 !important; }\n\n.grid-item,\n.grid-item-1 {\n  padding-bottom: 15px; }\n\n.card-buttons {\n  color: #7be5a0;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out; }\n\n.card-buttons:hover,\n.card-buttons:focus {\n  color: #4e5166; }\n\n.glyphicon-trash,\n.glyphicon-collapse-down {\n  padding-left: 12px; }\n\n.glyphicon-trash {\n  color: red; }\n\n.glyphicon-collapse-down {\n  color: orange; }\n\n/*end of card styles*/\n#login-page .panel {\n  border-radius: 0;\n  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);\n  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);\n  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2); }\n\n#login-page .panel-heading {\n  text-align: center;\n  padding-top: 18px;\n  font-size: 1.2em;\n  height: 61px;\n  margin-bottom: 30px; }\n\n#login-page #login-link, #login-page #register-link {\n  font-weight: bold;\n  text-transform: uppercase;\n  text-decoration: none; }\n\n#login-page #register-link,\n#login-page #login-link {\n  color: #4E5166; }\n\n#login-page .active {\n  color: #7BE5A0 !important;\n  margin-right: 15px; }\n\n#login-page form {\n  display: block; }\n\n#login-page .panel-login input[type=\"text\"], #login-page .panel-login input[type=\"email\"], #login-page .panel-login input[type=\"password\"] {\n  height: 40px;\n  font-size: 16px; }\n\n#login-page #login-submit, #login-page #register-submit {\n  background-color: #4E5166;\n  text-decoration: none;\n  color: #fff !important;\n  margin-top: 20px;\n  text-transform: uppercase;\n  font-weight: bold;\n  border: 0; }\n\n#login-page #login {\n  margin-top: 32px; }\n\n/*footer styles*/\n.footer {\n  position: absolute !important;\n  bottom: 0;\n  width: 100%;\n  height: 60px; }\n\n.footer p {\n  line-height: 60px;\n  padding: 0;\n  margin: 0; }\n\n.bg-blue a {\n  color: #fff;\n  text-decoration: underline;\n  -webkit-transition: color 0.3s ease-out;\n  transition: color 0.3s ease-out; }\n\n.bg-blue a:hover {\n  color: #7BE5A0; }\n\nhtml {\n  position: relative;\n  min-height: 100%; }\n\n/*end of footer styles*/\n/*form styles*/\n.control-label {\n  font-size: 100%;\n  padding-bottom: 15px;\n  color: #4e5166; }\n\n.form-control {\n  border-radius: 0;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  border-color: #b8bac2; }\n\n.form-control:focus {\n  box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75);\n  border-color: #fff; }\n\n.admin-btn {\n  margin-left: 18px; }\n\n.text-danger {\n  margin-left: 6px;\n  margin-top: 6px;\n  color: #ff1654; }\n\n#create-page .form-group,\n#edit-page .form-group {\n  padding-bottom: 15px; }\n\n/*end of form styles*/\n/*tab styles*/\n.tab-content {\n  padding-top: 30px; }\n\nh4 {\n  color: #4e5166;\n  padding: 15px 0;\n  margin-top: 0; }\n\n.tab-pane .row .col-md-4 {\n  padding-bottom: 15px; }\n\n.nav-tabs.nav-justified > li > a {\n  border: none;\n  border-bottom: 2px solid #b8bac2;\n  color: #4e5166;\n  -webkit-transition: color 0.3s ease-out;\n  transition: color 0.3s ease-out; }\n\n.nav-tabs.nav-justified > li > a:hover,\n.nav-tabs.nav-justified > li > a:focus {\n  border: none;\n  border-bottom: 2px solid #7be5a0;\n  color: #7be5a0;\n  background: transparent; }\n\n.nav-tabs.nav-justified > .active > a {\n  border: none;\n  border-bottom: 2px solid #7be5a0;\n  color: #7be5a0; }\n\n.nav-tabs.nav-justified > .active > a:focus,\n.nav-tabs.nav-justified > .active > a:hover {\n  border: none;\n  border-bottom: 2px solid #7be5a0;\n  color: #7be5a0;\n  cursor: pointer;\n  background: #fff; }\n\n.user-list {\n  box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75);\n  margin-bottom: 30px; }\n\n.user-list h4 {\n  color: #4e5166;\n  margin: 15px; }\n\n/*end of tab styles*/\n", ""]);
+	exports.push([module.id, "/* Vars */\n/*declaring basic style*/\nbody {\n  font-family: 'Open Sans', sans-serif;\n  font-size: 16px; }\n\nh1,\nh2,\nh3,\nh4 {\n  font-family: \"Rubik\", sans-serif; }\n\nh1 {\n  font-size: 3.142em; }\n\nh2 {\n  font-size: 1.942em; }\n\n.h2 {\n  font-family: \"Rubik\", sans-serif;\n  padding-bottom: 30px;\n  margin-top: 0;\n  color: #4e5166; }\n\np {\n  line-height: 1.7;\n  padding-bottom: 40px; }\n\n/*end of declaring basic style*/\n/*helper classes*/\n.bg-white {\n  background: #fff; }\n\n.bg-blue {\n  background: #4E5166;\n  color: #fff; }\n\n.bg-pale-blue {\n  background: #EDEEF0; }\n\n.no-padding-picture {\n  padding: 0;\n  margin: 0; }\n\n.img-responsive {\n  width: 100%; }\n\n/*end of helper classes*/\n/*offset for fixed nav and hero section post etc*/\n.top-offset {\n  /*to fix fixed top style of navbar*/\n  margin-top: 140px; }\n\n.padding-top {\n  padding-top: 60px; }\n\n.padding-bottom {\n  padding-bottom: 60px; }\n\n/*end of offset for fixed nav and hero section*/\n.bottom-space {\n  margin-bottom: 70px; }\n\n/*navbar styles*/\n.navbar-fixed-top {\n  min-height: 80px;\n  border: 0;\n  -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75);\n  -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75);\n  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75); }\n\n.navbar-nav > li > a, .navbar-fixed-top .navbar-header {\n  padding-top: 0px;\n  padding-bottom: 0px;\n  line-height: 80px; }\n\n.navbar-default .navbar-nav > li > a {\n  color: #4E5166;\n  -webkit-transition: all 0.3s ease-out;\n  -moz-transition: all 0.3s ease-out;\n  -ms-transition: all 0.3s ease-out;\n  -o-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out; }\n\n.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {\n  background-color: #4E5166;\n  color: #fff; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle {\n  margin-top: 13px;\n  border: 0; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle:hover,\n.navbar-fixed-top .navbar-header .navbar-toggle:focus {\n  background: none; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle .icon-bar {\n  height: 3px;\n  background: #4E5166; }\n\n.navbar-fixed-top .navbar-header .navbar-toggle:hover .icon-bar,\n.navbar-fixed-top .navbar-header .navbar-toggle:focus .icon-bar {\n  background: #7BE5A0; }\n\n@media (max-width: 767px) {\n  .navbar-nav > li > a, .navbar-fixed-top .navbar-header {\n    line-height: 20px;\n    padding-top: 10px;\n    padding-bottom: 10px;\n    margin-top: 0; }\n  .navbar-fixed-top .navbar-header .navbar-brand {\n    margin-top: -9px; } }\n\n/*end of navbar styles*/\n/*Making full page carousel*/\n.carousel {\n  height: 100vh;\n  z-index: -100;\n  position: relative; }\n\n.carousel-inner {\n  overflow: hidden; }\n\n.carousel-inner .item img {\n  height: 100vh;\n  width: 100%;\n  max-width: none; }\n\n/*end of full page carousel*/\n/*style for the hero content*/\n@media (max-width: 767px) {\n  .hero-top {\n    display: none; }\n  section .grid > div {\n    margin-top: 60px;\n    margin-bottom: 100px; } }\n\n#hero-content {\n  display: table;\n  position: absolute;\n  z-index: 1;\n  height: inherit;\n  height: 100vh; }\n\n#hero-content-centered {\n  display: table-cell;\n  vertical-align: middle;\n  color: #fff; }\n\n.hero-headline {\n  font-family: 'Rubik', sans-serif;\n  font-size: 3.142em; }\n\n.hero-copy {\n  font-family: 'Open Sans', sans-serif;\n  padding-bottom: 10px; }\n\n#overlay {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  opacity: 0.8;\n  z-index: -99;\n  background: #4E5166; }\n\n#explore-stories {\n  font-size: 3.142em;\n  color: #fff;\n  position: absolute;\n  top: 85%;\n  left: 0;\n  z-index: 1;\n  -webkit-transition: transform 0.3s ease-out;\n  -webkit-transition: transform 0.3s ease-out;\n  transition: -webkit-transform 0.3s ease-out;\n  -webkit-transition: -webkit-transform 0.3s ease-out;\n  transition: transform 0.3s ease-out;\n  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out; }\n\n#explore-stories:hover {\n  -webkit-transform: translateY(10px);\n  transform: translateY(10px); }\n\n/*end of hero content styling*/\n/*button styles*/\n.cs-btn-blue {\n  border-radius: 0;\n  padding: 12px;\n  background: #4E5166;\n  color: #7BE5A0;\n  border: 2px solid #4E5166;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-blue:hover,\n.cs-btn-blue:focus {\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0; }\n\n.cs-btn-blue-outline {\n  border-radius: 0;\n  padding: 12px;\n  background: transparent;\n  color: #4E5166;\n  border: 2px solid #4E5166;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-blue-outline:hover,\n.cs-btn-blue-outline:focus {\n  background: #4E5166;\n  color: #7BE5A0;\n  border: 2px solid #4E5166; }\n\n.cs-btn-green {\n  border-radius: 0;\n  padding: 12px;\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-green:hover,\n.cs-btn-green:focus {\n  background: #4E5166;\n  color: #7BE5A0;\n  border: 2px solid #4E5166; }\n\n.cs-btn-green-outline {\n  border-radius: 0;\n  padding: 12px;\n  background: transparent;\n  color: #fff;\n  border: 2px solid #fff;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-green-outline:hover,\n.cs-btn-green-outline:focus {\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0; }\n\n.cs-btn-green-inverted {\n  border-radius: 0;\n  padding: 12px;\n  background: #fff;\n  color: #4E5166;\n  border: 2px solid #fff;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  text-transform: uppercase; }\n\n.cs-btn-green-inverted:hover,\n.cs-btn-green-inverted:focus {\n  background: #7BE5A0;\n  color: #4E5166;\n  border: 2px solid #7BE5A0; }\n\n/*end of button styles*/\n.home-controls {\n  position: relative;\n  z-index: 999; }\n  .home-controls .left-control {\n    left: -100px; }\n  .home-controls .right-control {\n    right: -100px; }\n  .home-controls .btn {\n    position: absolute;\n    top: 30px;\n    padding: 0 8px;\n    padding-bottom: 12px;\n    margin: 0px 12px;\n    font-size: 48px; }\n\n.bottom-buttons {\n  width: 100%;\n  padding-bottom: 200px; }\n\n@media (max-width: 768px) {\n  .home-controls .left-control {\n    left: -10px; }\n  .home-controls .right-control {\n    right: -10px; } }\n\n@media (max-width: 767px) {\n  .bottom-buttons {\n    display: none; }\n  .home-controls .btn {\n    font-size: 24px;\n    padding-bottom: 6px;\n    top: -10px; } }\n\n/*card styles*/\n.grid-item a {\n  text-decoration: none; }\n\n.thumbnail {\n  padding: 0;\n  border-radius: 0;\n  border: 0;\n  box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75); }\n\n.thumbnail > img {\n  width: 100%;\n  display: block; }\n\n.thumbnail .card-title {\n  border-bottom: solid 1px #eee; }\n\n.no-border-bottom .card-title {\n  border-bottom: 0 !important; }\n\n.thumbnail h2 {\n  color: #7BE5A0; }\n\n.thumbnail h2 {\n  margin: 0;\n  padding: 15px 15px; }\n\n.thumbnail h4 {\n  color: #7BE5A0; }\n\n.thumbnail h4 {\n  margin: 0;\n  padding: 15px 15px; }\n\n.card-description {\n  margin: 0;\n  padding: 15px 15px; }\n\n.caption .cs-btn-green {\n  margin: 15px 15px; }\n\n.thumbnail p {\n  padding-top: 15px; }\n\n.card-title .card-info {\n  font-size: 0.75em;\n  line-height: 1.35;\n  padding: 0px 15px 15px 15px; }\n\n.card-title .status {\n  font-size: 0.75em;\n  line-height: 1.35;\n  padding: 0px 15px 15px 15px; }\n\n.card-title .status .published {\n  color: #7be5a0 !important; }\n\n.grid-item,\n.grid-item-1 {\n  padding-bottom: 15px; }\n\n.card-buttons {\n  color: #7be5a0;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out; }\n\n.card-buttons:hover,\n.card-buttons:focus {\n  color: #4e5166; }\n\n.glyphicon-trash,\n.glyphicon-collapse-down {\n  padding-left: 12px; }\n\n.glyphicon-trash {\n  color: red; }\n\n.glyphicon-collapse-down {\n  color: orange; }\n\n/*end of card styles*/\n#login-page .panel {\n  border-radius: 0;\n  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);\n  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2);\n  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.2); }\n\n#login-page .panel-heading {\n  text-align: center;\n  padding-top: 18px;\n  font-size: 1.2em;\n  height: 61px;\n  margin-bottom: 30px; }\n\n#login-page #login-link, #login-page #register-link {\n  font-weight: bold;\n  text-transform: uppercase;\n  text-decoration: none; }\n\n#login-page #register-link,\n#login-page #login-link {\n  color: #4E5166; }\n\n#login-page .active {\n  color: #7BE5A0 !important;\n  margin-right: 15px; }\n\n#login-page form {\n  display: block; }\n\n#login-page .panel-login input[type=\"text\"], #login-page .panel-login input[type=\"email\"], #login-page .panel-login input[type=\"password\"] {\n  height: 40px;\n  font-size: 16px; }\n\n#login-page #login-submit, #login-page #register-submit {\n  background-color: #4E5166;\n  text-decoration: none;\n  color: #fff !important;\n  margin-top: 20px;\n  text-transform: uppercase;\n  font-weight: bold;\n  border: 0; }\n\n#login-page #login {\n  margin-top: 32px; }\n\n/*footer styles*/\nfooter {\n  position: fixed;\n  z-index: 9999;\n  bottom: 0;\n  width: 100%;\n  height: 60px; }\n\nfooter p {\n  line-height: 60px;\n  padding: 0;\n  margin: 0; }\n\n.bg-blue a {\n  color: #fff;\n  text-decoration: underline;\n  -webkit-transition: color 0.3s ease-out;\n  transition: color 0.3s ease-out; }\n\n.bg-blue a:hover {\n  color: #7BE5A0; }\n\n@media (max-width: 768px) {\n  footer p {\n    font-size: 12px; } }\n\n/*end of footer styles*/\n/*form styles*/\n.control-label {\n  font-size: 100%;\n  padding-bottom: 15px;\n  color: #4e5166; }\n\n.form-control {\n  border-radius: 0;\n  -webkit-transition: all 0.3s ease-out;\n  transition: all 0.3s ease-out;\n  border-color: #b8bac2; }\n\n.form-control:focus {\n  box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75);\n  border-color: #fff; }\n\n.admin-btn {\n  margin-left: 18px; }\n\n.text-danger {\n  margin-left: 6px;\n  margin-top: 6px;\n  color: #ff1654; }\n\n#create-page .form-group,\n#edit-page .form-group {\n  padding-bottom: 15px; }\n\n/*end of form styles*/\n/*tab styles*/\n.tab-content {\n  padding-top: 30px; }\n\nh4 {\n  color: #4e5166;\n  padding: 15px 0;\n  margin-top: 0; }\n\n.tab-pane .row .col-md-4 {\n  padding-bottom: 15px; }\n\n.nav-tabs.nav-justified > li > a {\n  border: none;\n  border-bottom: 2px solid #b8bac2;\n  color: #4e5166;\n  -webkit-transition: color 0.3s ease-out;\n  transition: color 0.3s ease-out; }\n\n.nav-tabs.nav-justified > li > a:hover,\n.nav-tabs.nav-justified > li > a:focus {\n  border: none;\n  border-bottom: 2px solid #7be5a0;\n  color: #7be5a0;\n  background: transparent; }\n\n.nav-tabs.nav-justified > .active > a {\n  border: none;\n  border-bottom: 2px solid #7be5a0;\n  color: #7be5a0; }\n\n.nav-tabs.nav-justified > .active > a:focus,\n.nav-tabs.nav-justified > .active > a:hover {\n  border: none;\n  border-bottom: 2px solid #7be5a0;\n  color: #7be5a0;\n  cursor: pointer;\n  background: #fff; }\n\n.user-list {\n  box-shadow: 0px 0px 30px -5px rgba(184, 186, 194, 0.75);\n  margin-bottom: 30px; }\n\n.user-list h4 {\n  color: #4e5166;\n  margin: 15px; }\n\n/*end of tab styles*/\n#full-story {\n  /*Making wrap and video bg*/\n  /*end of wrap and video bg*/\n  /*style for the hero content*/\n  /*end of hero content styling*/\n  /*button styles*/\n  /*end of button styles*/\n  /*post styles*/\n  /*end of post styles*/\n  /*offset for fixed nav and hero section post etc*/\n  /*end of offset for fixed nav and hero section*/ }\n  #full-story .fullscreen-bg {\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    overflow: hidden;\n    z-index: -100; }\n  #full-story .fullscreen-bg__video {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%; }\n  @media (min-aspect-ratio: 16 / 9) {\n    #full-story .fullscreen-bg__video {\n      height: 300%;\n      top: -100%; } }\n  @media (max-aspect-ratio: 16 / 9) {\n    #full-story .fullscreen-bg__video {\n      width: 300%;\n      left: -100%; } }\n  @media (max-width: 767px) {\n    #full-story .fullscreen-bg {\n      background: url(\"http://touchcielo.com/alive/vid/vid.jpg\") center center/cover no-repeat; }\n    #full-story .fullscreen-bg__video {\n      display: none; } }\n  #full-story #hero-content {\n    position: absolute;\n    top: 50%;\n    transform: translateY(-50%);\n    color: #fff; }\n  #full-story .hero-headline {\n    font-family: 'Rubik', sans-serif;\n    font-size: 3.142em; }\n  #full-story .hero-copy {\n    font-family: 'Open Sans', sans-serif;\n    padding-bottom: 10px; }\n  #full-story #overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    opacity: 0.8;\n    z-index: -99;\n    background: #4E5166; }\n  #full-story #explore-stories {\n    font-size: 3.142em;\n    color: #fff;\n    position: absolute;\n    left: 0;\n    right: 0;\n    text-align: center;\n    top: 90%;\n    -webkit-transition: transform 0.3s ease-out;\n    -moz-transition: transform 0.3s ease-out;\n    -ms-transition: transform 0.3s ease-out;\n    -o-transition: transform 0.3s ease-out;\n    transition: transform 0.3s ease-out; }\n  #full-story #explore-stories:hover {\n    -webkit-transform: translateY(10px);\n    -moz-transform: translateY(10px);\n    -ms-transform: translateY(10px);\n    -o-transform: translateY(10px);\n    transform: translateY(10px); }\n  #full-story .cs-btn-blue {\n    border-radius: 0;\n    padding: 12px;\n    margin-bottom: 12px;\n    background: #4E5166;\n    color: #7BE5A0;\n    border: 2px solid #4E5166;\n    -webkit-transition: all 0.3s ease-out;\n    -moz-transition: all 0.3s ease-out;\n    -ms-transition: all 0.3s ease-out;\n    -o-transition: all 0.3s ease-out;\n    transition: all 0.3s ease-out;\n    text-transform: uppercase; }\n  #full-story .cs-btn-blue:hover {\n    background: #7BE5A0;\n    color: #4E5166;\n    border: 2px solid #7BE5A0; }\n  #full-story .cs-btn-blue-outline {\n    border-radius: 0;\n    padding: 12px;\n    margin-bottom: 12px;\n    background: transparent;\n    color: #fff;\n    border: 2px solid #fff;\n    -webkit-transition: all 0.3s ease-out;\n    -moz-transition: all 0.3s ease-out;\n    -ms-transition: all 0.3s ease-out;\n    -o-transition: all 0.3s ease-out;\n    transition: all 0.3s ease-out;\n    text-transform: uppercase; }\n  #full-story .cs-btn-blue-outline:hover {\n    background: #4E5166;\n    color: #7BE5A0;\n    border: 2px solid #4E5166; }\n  #full-story .cs-btn-green {\n    border-radius: 0;\n    padding: 12px;\n    margin-bottom: 12px;\n    background: #7BE5A0;\n    color: #4E5166;\n    border: 2px solid #7BE5A0;\n    -webkit-transition: all 0.3s ease-out;\n    -moz-transition: all 0.3s ease-out;\n    -ms-transition: all 0.3s ease-out;\n    -o-transition: all 0.3s ease-out;\n    transition: all 0.3s ease-out;\n    text-transform: uppercase; }\n  #full-story .cs-btn-green:hover {\n    background: #4E5166;\n    color: #7BE5A0;\n    border: 2px solid #4E5166; }\n  #full-story .cs-btn-green-outline {\n    border-radius: 0;\n    padding: 12px;\n    margin-bottom: 12px;\n    background: transparent;\n    color: #fff;\n    border: 2px solid #fff;\n    -webkit-transition: all 0.3s ease-out;\n    -moz-transition: all 0.3s ease-out;\n    -ms-transition: all 0.3s ease-out;\n    -o-transition: all 0.3s ease-out;\n    transition: all 0.3s ease-out;\n    text-transform: uppercase; }\n  #full-story .cs-btn-green-outline:hover {\n    background: #7BE5A0;\n    color: #4E5166;\n    border: 2px solid #7BE5A0; }\n  #full-story .cs-btn-green-inverted {\n    border-radius: 0;\n    padding: 12px;\n    margin-bottom: 12px;\n    background: #fff;\n    color: #4E5166;\n    border: 2px solid #fff;\n    -webkit-transition: all 0.3s ease-out;\n    -moz-transition: all 0.3s ease-out;\n    -ms-transition: all 0.3s ease-out;\n    -o-transition: all 0.3s ease-out;\n    transition: all 0.3s ease-out;\n    text-transform: uppercase; }\n  #full-story .cs-btn-green-inverted:hover {\n    background: #7BE5A0;\n    color: #4E5166;\n    border: 2px solid #7BE5A0; }\n  #full-story .social-buttons {\n    margin: 0 auto;\n    margin-bottom: 70px;\n    text-align: center; }\n  #full-story .social-buttons .fa {\n    color: #7BE5A0;\n    font-size: 1.942em;\n    padding: 0 30px;\n    -webkit-transition: color 0.3s ease-out;\n    -moz-transition: color 0.3s ease-out;\n    -ms-transition: color 0.3s ease-out;\n    -o-transition: color 0.3s ease-out;\n    transition: color 0.3s ease-out; }\n  #full-story .social-buttons .fa:hover {\n    color: #4E5166; }\n  #full-story .post-header {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%, -50%);\n    -moz-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    -o-transform: translate(-50%, -50%);\n    transform: translate(-50%, -50%); }\n  #full-story .post-title {\n    color: #fff;\n    font-size: 4em;\n    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.75);\n    line-height: 1;\n    text-align: center; }\n  #full-story .post-date {\n    color: #fff;\n    font-size: 1em;\n    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.75);\n    text-align: center; }\n  #full-story .top-offset-large {\n    margin-top: 100vh;\n    height: 300px;\n    /*remove line in final*/ }\n  #full-story .top-offset-small {\n    /*to fix fixed top style of navbar*/\n    margin-top: 80px; }\n  #full-story .padding-top {\n    padding-top: 60px; }\n  #full-story .padding-bottom {\n    padding-bottom: 60px; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 610 */
+/* 611 */
 /***/ function(module, exports) {
 
 	/*
@@ -62637,7 +62840,7 @@
 
 
 /***/ },
-/* 611 */
+/* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

@@ -54,7 +54,6 @@ class SignupForm extends React.Component {
 
           <div className="form-group">
             <Field
-              type="email"
               name="email"
               component={renderField}
               label="Email"

@@ -26,16 +26,18 @@ if (process.env.NODE_ENV !== 'test'){
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(favicon(path.join(__dirname, '../client/public', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, '../client/public')));
+
 /*
  * Route app
  */
 router(app);
-
-app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'))
-})
+if (process.env.NODE_ENV == 'prod'){
+  app.use(favicon(path.join(__dirname, '../client/public', 'favicon.ico')));
+  app.use(express.static(path.join(__dirname, '../client/public')));
+  app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'))
+  })  
+}
 
 /*
  * Error handling

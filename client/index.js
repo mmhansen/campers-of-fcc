@@ -29,7 +29,7 @@ if (token) {
  */
 import React from 'react';
 import  { render } from 'react-dom';
-import Routes from './routes';
+import Routes from './routes.jsx';
 
 render(
   <Provider store={store}>
