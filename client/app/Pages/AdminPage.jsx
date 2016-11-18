@@ -5,6 +5,7 @@ import * as storyActions from '../actions/story-actions'
 import { FETCH_PENDING_STORIES } from '../actions/types'
 import { Link } from 'react-router'
 import moment from 'moment'
+import cookie from 'react-cookie'
  /*
   * Component
   */
@@ -26,7 +27,9 @@ class HomePage extends Component {
     // Change the child element format based on if it loads Stories or Users
     let childElements;
     if (view === 'users') {
-      childElements = users.map((user,i) => {
+      const currentUser = cookie.load('user')
+      childElements = users.filter(user => (user._id !== currentUser._id))
+      childElements = childElements.map((user,i) => {
       let adminButtonText = (user.role === 'Admin') ? 'Demote to user' : 'Promote to admin';
 
         return (
