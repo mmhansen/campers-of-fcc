@@ -10,7 +10,8 @@ let initialState = {
   error: null,
   path: null,
   body: '',
-  view: 'stories'
+  view: 'stories',
+  currentStory: null
 }
 // view is either users or stories
 
@@ -81,6 +82,11 @@ export default function stories_reducer(state = initialState, action) {
       return {
         ...state,
         adminStories: action.payload
+      }
+    case actions.FETCH_STORY:
+      return {
+        ...state,
+        currentStory: action.payload
       }
     default:
       return state;

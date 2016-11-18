@@ -3,22 +3,20 @@ import { connect } from 'react-redux'
 import * as actions from '../actions/story-actions'
 import moment from 'moment';
 
-$(document).ready(function(){
-  var $url = window.location.href;
-
-  var $fb = $('#share-fb');
-  var $tw = $('#share-tw');
-
-  $fb.attr('href','http://www.facebook.com/sharer.php?u=' + $url);
-  $tw.attr('href', 'http://twitter.com/share?url=' + $url + '&amp;text=This is an awesome story!!!&amp;hashtags=campfirestories');
-});
 
 class FullStoryPage extends Component {
+  componentDidMount () {
+    let id = this.props.location.pathname.slice(6)
+    this.props.getStory(id)
+  }
+
   render () {
-
-    let { image, title, body, created_at, postedBy: { firstName, lastName } } = this.props.story
+    if (!this.props.currentStory) {
+      return <div>loading :)...</div>
+    }
+    let { image, title, body, created_at, postedBy: { firstName, lastName } } = this.props.currentStory
     let time = moment(created_at, "YYYY-MM-DD").format('LL');
-
+    const url= `${window.location.host}${this.props.location.pathname}`
     return (
       <div id="full-story">
         <div className="section top-offset-small">
@@ -51,9 +49,11 @@ class FullStoryPage extends Component {
               <div className="col-md-12 social-buttons">
 
 
-                  <a href="#" id="share-fb" target="_blank"><i className="fa fa-facebook"></i></a>
+                  <a href={`http://www.facebook.com/share.php?u=${url}`} id="share-fb" target="_blank">
+                    <i className="fa fa-facebook"></i></a>
 
-                  <a href="#" id="share-tw" target="_blank"><i className="fa fa-twitter"></i></a>
+                  <a href={`http://twitter.com/share?text=This is an awesome story!!!`}
+                    id="share-tw" target="_blank"><i className="fa fa-twitter"></i></a>
 
                 </div>
               </div>
@@ -64,18 +64,9 @@ class FullStoryPage extends Component {
   }
 }
 
-function matchStory(state){
-  const path = state.content.path
-  return state.content.current.filter(({ _id }) => {
-    return _id === path
-  })[0]
-
-}
-
-
 function mapStateToProps(state) {
   return {
-    story: matchStory(state),
+    currentStory: state.content.currentStory
   }
 }
 

@@ -15324,7 +15324,8 @@
 	  error: null,
 	  path: null,
 	  body: '',
-	  view: 'stories'
+	  view: 'stories',
+	  currentStory: null
 	};
 	// view is either users or stories
 
@@ -15386,6 +15387,10 @@
 	    case actions.FETCH_PENDING_STORIES:
 	      return _extends({}, state, {
 	        adminStories: action.payload
+	      });
+	    case actions.FETCH_STORY:
+	      return _extends({}, state, {
+	        currentStory: action.payload
 	      });
 	    default:
 	      return state;
@@ -33116,11 +33121,11 @@
 
 	var _FullStoryPage2 = _interopRequireDefault(_FullStoryPage);
 
-	var _AboutUs = __webpack_require__(643);
+	var _AboutUs = __webpack_require__(633);
 
 	var _AboutUs2 = _interopRequireDefault(_AboutUs);
 
-	var _Container = __webpack_require__(633);
+	var _Container = __webpack_require__(634);
 
 	var _Container2 = _interopRequireDefault(_Container);
 
@@ -64779,16 +64784,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	$(document).ready(function () {
-	  var $url = window.location.href;
-
-	  var $fb = $('#share-fb');
-	  var $tw = $('#share-tw');
-
-	  $fb.attr('href', 'http://www.facebook.com/sharer.php?u=' + $url);
-	  $tw.attr('href', 'http://twitter.com/share?url=' + $url + '&amp;text=This is an awesome story!!!&amp;hashtags=campfirestories');
-	});
-
 	var FullStoryPage = function (_Component) {
 	  _inherits(FullStoryPage, _Component);
 
@@ -64799,19 +64794,32 @@
 	  }
 
 	  _createClass(FullStoryPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var id = this.props.location.pathname.slice(6);
+	      this.props.getStory(id);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props$story = this.props.story,
-	          image = _props$story.image,
-	          title = _props$story.title,
-	          body = _props$story.body,
-	          created_at = _props$story.created_at,
-	          _props$story$postedBy = _props$story.postedBy,
-	          firstName = _props$story$postedBy.firstName,
-	          lastName = _props$story$postedBy.lastName;
+	      if (!this.props.currentStory) {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'loading :)...'
+	        );
+	      }
+	      var _props$currentStory = this.props.currentStory,
+	          image = _props$currentStory.image,
+	          title = _props$currentStory.title,
+	          body = _props$currentStory.body,
+	          created_at = _props$currentStory.created_at,
+	          _props$currentStory$p = _props$currentStory.postedBy,
+	          firstName = _props$currentStory$p.firstName,
+	          lastName = _props$currentStory$p.lastName;
 
 	      var time = (0, _moment2.default)(created_at, "YYYY-MM-DD").format('LL');
-
+	      var url = '' + window.location.host + this.props.location.pathname;
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'full-story' },
@@ -64882,12 +64890,13 @@
 	                { className: 'col-md-12 social-buttons' },
 	                _react2.default.createElement(
 	                  'a',
-	                  { href: '#', id: 'share-fb', target: '_blank' },
+	                  { href: 'http://www.facebook.com/share.php?u=' + url, id: 'share-fb', target: '_blank' },
 	                  _react2.default.createElement('i', { className: 'fa fa-facebook' })
 	                ),
 	                _react2.default.createElement(
 	                  'a',
-	                  { href: '#', id: 'share-tw', target: '_blank' },
+	                  { href: 'http://twitter.com/share?text=This is an awesome story!!!',
+	                    id: 'share-tw', target: '_blank' },
 	                  _react2.default.createElement('i', { className: 'fa fa-twitter' })
 	                )
 	              )
@@ -64901,18 +64910,9 @@
 	  return FullStoryPage;
 	}(_react.Component);
 
-	function matchStory(state) {
-	  var path = state.content.path;
-	  return state.content.current.filter(function (_ref) {
-	    var _id = _ref._id;
-
-	    return _id === path;
-	  })[0];
-	}
-
 	function mapStateToProps(state) {
 	  return {
-	    story: matchStory(state)
+	    currentStory: state.content.currentStory
 	  };
 	}
 
@@ -64922,7 +64922,7 @@
 /* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -64932,30 +64932,48 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Nav = __webpack_require__(634);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
-	var _Footer = __webpack_require__(637);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(638);
-
-	var Container = function Container(_ref) {
-	  var children = _ref.children;
-
+	exports.default = function () {
 	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_Nav2.default, null),
-	    children,
-	    _react2.default.createElement(_Footer2.default, null)
+	    "div",
+	    { className: "container-fluid top-offset about-me" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "row" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "col-sm-4 col-sm-offset-4" },
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "About Campfire-Stories"
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Right now, we\u2019re at a time in human history where a large number of people are turning on their computers and learning how to code. Most of us on Free Code Camp are learning to code on the side, or in some way or another are in the middle of a career change. And this is happening all over the world. Campfire-Stories is a place that highlights this journey. It\u2019s a place for coders to read and share stories."
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "About the Team"
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Powered by the heart of Free Code Camp, the Chingu Cohorts is a place for coders with shared goals to come together to help each other level-up, chat, and build things. In October and November, dozens of then-strangers came together to build this project. The goal was to solidify our skills, build something of value for the FCC community, and improve portfolios. We formed various teams to set this project up. We had a design team, front-end team, back-end team, as well as a content-generation team. Some members are writing medium articles about the experience, and they will be linked here when finished. :slightly_smiling_face: If you\u2019re interested in learning more about Chingu or have any questions, please feel free to ",
+	          _react2.default.createElement(
+	            "a",
+	            { href: "mailto:chinguftw@gmail.com" },
+	            "email us"
+	          ),
+	          "."
+	        )
+	      )
+	    )
 	  );
 	};
-	exports.default = Container;
 
 /***/ },
 /* 634 */
@@ -64971,11 +64989,50 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NavbarLinks = __webpack_require__(635);
+	var _Nav = __webpack_require__(635);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Footer = __webpack_require__(638);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	__webpack_require__(639);
+
+	var Container = function Container(_ref) {
+	  var children = _ref.children;
+
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Nav2.default, null),
+	    children,
+	    _react2.default.createElement(_Footer2.default, null)
+	  );
+	};
+	exports.default = Container;
+
+/***/ },
+/* 635 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(4);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _NavbarLinks = __webpack_require__(636);
 
 	var _NavbarLinks2 = _interopRequireDefault(_NavbarLinks);
 
-	var _NavbarHeader = __webpack_require__(636);
+	var _NavbarHeader = __webpack_require__(637);
 
 	var _NavbarHeader2 = _interopRequireDefault(_NavbarHeader);
 
@@ -65000,7 +65057,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 635 */
+/* 636 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65133,7 +65190,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(NavbarLinks);
 
 /***/ },
-/* 636 */
+/* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65181,7 +65238,7 @@
 	exports.default = NavbarHeader;
 
 /***/ },
-/* 637 */
+/* 638 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -65231,16 +65288,16 @@
 	exports.default = Footer;
 
 /***/ },
-/* 638 */
+/* 639 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(639);
+	var content = __webpack_require__(640);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(641)(content, {});
+	var update = __webpack_require__(642)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -65257,10 +65314,10 @@
 	}
 
 /***/ },
-/* 639 */
+/* 640 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(640)();
+	exports = module.exports = __webpack_require__(641)();
 	// imports
 
 
@@ -65271,7 +65328,7 @@
 
 
 /***/ },
-/* 640 */
+/* 641 */
 /***/ function(module, exports) {
 
 	/*
@@ -65327,7 +65384,7 @@
 
 
 /***/ },
-/* 641 */
+/* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -65577,64 +65634,6 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
-
-/***/ },
-/* 642 */,
-/* 643 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(4);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "container-fluid top-offset about-me" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "row" },
-	      _react2.default.createElement(
-	        "div",
-	        { className: "col-sm-4 col-sm-offset-4" },
-	        _react2.default.createElement(
-	          "h2",
-	          null,
-	          "About Campfire-Stories"
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Right now, we\u2019re at a time in human history where a large number of people are turning on their computers and learning how to code. Most of us on Free Code Camp are learning to code on the side, or in some way or another are in the middle of a career change. And this is happening all over the world. Campfire-Stories is a place that highlights this journey. It\u2019s a place for coders to read and share stories."
-	        ),
-	        _react2.default.createElement(
-	          "h2",
-	          null,
-	          "About the Team"
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Powered by the heart of Free Code Camp, the Chingu Cohorts is a place for coders with shared goals to come together to help each other level-up, chat, and build things. In October and November, dozens of then-strangers came together to build this project. The goal was to solidify our skills, build something of value for the FCC community, and improve portfolios. We formed various teams to set this project up. We had a design team, front-end team, back-end team, as well as a content-generation team. Some members are writing medium articles about the experience, and they will be linked here when finished. :slightly_smiling_face: If you\u2019re interested in learning more about Chingu or have any questions, please feel free to ",
-	          _react2.default.createElement(
-	            "a",
-	            { href: "mailto:chinguftw@gmail.com" },
-	            "email us"
-	          ),
-	          "."
-	        )
-	      )
-	    )
-	  );
-	};
 
 /***/ }
 /******/ ]);
