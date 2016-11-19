@@ -1,3 +1,6 @@
+const webpack = require('webpack');
+const env = process.env.NODE_ENV;
+
 module.exports = {
   devtools: 'source-map',
   entry: './client/app/app.jsx',
@@ -28,4 +31,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      __DEVTOOLS__: JSON.stringify(env)
+    })
+  ]
 };
