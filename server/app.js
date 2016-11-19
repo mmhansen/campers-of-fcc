@@ -14,7 +14,11 @@ import config from 'config'
 import router from './routes'
 const app = express() // start server
 app.listen(process.env.PORT || config.port) // server listen on 3000 by default
-mongoose.connect(config.mongodb) // connect to db
+
+const env = process.env.NODE_ENV;
+const mongodb = env === "prod" ?  `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${config.db}`: config.mongodb;
+
+mongoose.connect(mongodb) // connect to db
 
 // get a little feedback
 console.log(`${config.name} config running on port ${config.port}`)
