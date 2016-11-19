@@ -50,10 +50,6 @@ class FullStoryPage extends Component {
             <div className="row">
               <div className="col-md-12 social-buttons">
 
-
-                  <a href={`http://www.facebook.com/share.php?u=${url}`} id="share-fb" target="_blank">
-                    <i className="fa fa-facebook"></i></a>
-
                   <a href={`http://twitter.com/share?text=This is an awesome story!!!`}
                     id="share-tw" target="_blank"><i className="fa fa-twitter"></i></a>
 

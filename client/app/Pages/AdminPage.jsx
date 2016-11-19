@@ -10,9 +10,9 @@ import cookie from 'react-cookie'
   * Component
   */
 class HomePage extends Component {
-  componentWillMount(){
+  componentDidMount(){
     // get pending stories
-    this.props.getContent(1, 10, 'Pending', FETCH_PENDING_STORIES)
+    this.props.getContent(1, 5, 'Pending', FETCH_PENDING_STORIES)
     // get user
     this.props.getUsers()
   }
@@ -20,6 +20,11 @@ class HomePage extends Component {
    * Render
    */
   render (){
+    if (!stories) {
+      return (
+        <div>loading...</div>
+      )
+    }
     // content
     let { stories, users, view } = this.props
     // actions

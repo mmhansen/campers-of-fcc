@@ -8,8 +8,8 @@ import { AUTH_USER, SET_USER } from './actions/types'
 import rootReducer from './reducers'
 import cookie from 'react-cookie'
 
-const devtools = __DEVTOOLS__ === "dev"? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(): {}
-// const devtools = true? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(): {}
+//const devtools = __DEVTOOLS__ === "dev"? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(): {}
+const devtools = true? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(): {}
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer, devtools);
