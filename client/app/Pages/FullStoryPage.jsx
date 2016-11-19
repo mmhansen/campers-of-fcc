@@ -27,7 +27,9 @@ class FullStoryPage extends Component {
                   <h1 className="post-title">{`${firstName} ${lastName}`}</h1>
                   <p className="post-date">Published on {time}</p>
                 </div>
-                <img src={image} className="img-responsive post-image" />
+                <div className="post-image">
+                  <img src={image} className="img-responsive" />
+                </div>
               </div>
             </div>
           </div>

@@ -227,6 +227,12 @@
   -o-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
 }
+
+.post-image {
+  height: 600px;
+  overflow: hidden;
+}
+
 .post-title{
   color: #fff;
   font-size: 4em;
