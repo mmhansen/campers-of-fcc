@@ -41,6 +41,7 @@ export function getContent (req, res, next){
     .limit(limit)
     .populate('postedBy')
     .exec((err, storyArr) => {
+      //console.log(storyArr)
     if (err) { return next(err); }
     res.status(200).json({
       content: storyArr

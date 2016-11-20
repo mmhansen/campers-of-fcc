@@ -44,6 +44,17 @@
     }
   }
 }
+
+@media (max-width: 1280px) {
+  .home-controls {
+    .left-control{
+      left: -10px;
+    }
+    .right-control{
+      right: -10px;
+    }
+  }
+}
 // .bottom {
 //   position: relative;
 //   bottom: -100em;

@@ -48,6 +48,7 @@ export function getContent (page=1, limit=10, status='Approved', type=FETCH_STOR
   return dispatch => {
     return axios.get(`/api/content/?page=${page}&limit=${limit}&status=${status}`)
       .then( res => {
+
         dispatch({
           type,
           page: page,
