@@ -19,27 +19,22 @@ class FullStoryPage extends Component {
     const url= `${window.location.host}${this.props.location.pathname}`
     return (
       <div id="full-story">
-        <div className="section top-offset-small">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-12 no-padding-picture">
-                <div className="post-header">
-                  <h1 className="post-title">{`${firstName} ${lastName}`}</h1>
-                  <p className="post-date">Published on {time}</p>
-                </div>
-                <div className="post-image">
-                  <img src={image} className="img-responsive" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="section bg-white padding-top">
           <div className="container">
             <div className="row">
               <div className="col-md-8 col-md-offset-2">
-                <p>{body}</p>
+
+                <div className="no-padding-picture full-head">
+                  <div className="post-header">
+                    <h1 className="post-title">{`${firstName} ${lastName}`}</h1>
+                    <p className="post-date">Published on {time}</p>
+                  </div>
+                  <div className="post-image">
+                    <img src={image} className="img-responsive" />
+                  </div>
+                </div>
+
+                <p className="post-text">{body}</p>
               </div>
             </div>
           </div>

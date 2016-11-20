@@ -227,12 +227,16 @@
   -o-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
 }
-
+.full-head {
+  position: relative;
+}
 .post-image {
-  height: 600px;
+  //height: 600px;
   overflow: hidden;
 }
-
+.post-text {
+  margin-top: 18px;
+}
 .post-title{
   color: #fff;
   font-size: 4em;

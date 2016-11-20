@@ -3,7 +3,7 @@ import React from 'react'
 export default () => (
   <div className="container-fluid top-offset about-me">
     <div className="row">
-      <div className="col-sm-4 col-sm-offset-4">
+      <div className="col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
         <h2>About Campfire-Stories</h2>
         <p>
         Right now, we’re at a time in human history where a large number of people are turning on their computers and learning how to code. Most of us on Free Code Camp are learning to code on the side, or in some way or another are in the middle of a career change. And this is happening all over the world.

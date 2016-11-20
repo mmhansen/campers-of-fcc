@@ -15,12 +15,14 @@ class HomePage extends Component {
     this.props.getContent(1, 5, 'Pending', FETCH_PENDING_STORIES)
     // get user
     this.props.getUsers()
+    // show correct view
+    this.props.switchView('users')
   }
   /*
    * Render
    */
   render (){
-    if (!stories) {
+    if (!this.props.stories) {
       return (
         <div>loading...</div>
       )
@@ -50,7 +52,7 @@ class HomePage extends Component {
           </div>
         )
       })
-    } else {
+    } else if (view === 'stories'){
       childElements = stories.map((story, i) => {
         let time = moment(story.created_at, "YYYY-MM-DD").format('LL');
         return (
@@ -110,17 +112,6 @@ class HomePage extends Component {
     )
   }
 }
-
-
-// <div className="tab-pane fade in active" id="stories">
-//     <div className="row">
-//
-//     </div>
-// </div>
-
-/*
- * Redux
- */
 
 const mapStateToProps = (state) => {
   return {
