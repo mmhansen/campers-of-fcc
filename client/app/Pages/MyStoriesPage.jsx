@@ -48,6 +48,11 @@ class MyStoryPage extends Component {
       )
     } else {
        childElemenets = submitted.map((x,i) => {
+         let editButton = (
+           <Link to={`/edit/${x._id}`} className="pull-right card-buttons">
+             <span className="glyphicon glyphicon-edit"></span>
+           </Link>
+         )
         return (
             <div key={i} className="col-md-4 grid-item-1">
                 <div className="thumbnail">
@@ -55,9 +60,7 @@ class MyStoryPage extends Component {
                     <div className="caption no-border-bottom">
                         <div className="card-title">
                             <h4>{x.title}
-                              <Link to={`/edit/${x._id}`} className="pull-right card-buttons">
-                                <span className="glyphicon glyphicon-edit"></span>
-                              </Link>
+                                { (x.status === 'Approved') ? null : editButton }
                             </h4>
                             <p className="status">
                                 Status: <span className={classnames("",{ "published" : (x.status === 'Approved')} )} > { x.status } </span>

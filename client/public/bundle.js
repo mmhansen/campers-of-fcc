@@ -64209,6 +64209,11 @@
 	        ));
 	      } else {
 	        childElemenets = submitted.map(function (x, i) {
+	          var editButton = _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/edit/' + x._id, className: 'pull-right card-buttons' },
+	            _react2.default.createElement('span', { className: 'glyphicon glyphicon-edit' })
+	          );
 	          return _react2.default.createElement(
 	            'div',
 	            { key: i, className: 'col-md-4 grid-item-1' },
@@ -64226,11 +64231,7 @@
 	                    'h4',
 	                    null,
 	                    x.title,
-	                    _react2.default.createElement(
-	                      _reactRouter.Link,
-	                      { to: '/edit/' + x._id, className: 'pull-right card-buttons' },
-	                      _react2.default.createElement('span', { className: 'glyphicon glyphicon-edit' })
-	                    )
+	                    x.status === 'Approved' ? null : editButton
 	                  ),
 	                  _react2.default.createElement(
 	                    'p',
