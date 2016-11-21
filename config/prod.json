@@ -1,6 +1,0 @@
-{
-  "name": "production",
-  "mongodb": "mongodb://admin:123@ds021326.mlab.com:21326/project",
-  "secret": "1Z$8eA9%k5FLt82wMI*1aBN!",
-  "port": 3000
-}

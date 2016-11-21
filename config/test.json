@@ -1,6 +1,0 @@
-{
-  "name" : "test",
-  "mongodb": "mongodb://localhost/camper_fcc_test",
-  "secret": "1Z$8eA9%k5FLt82wMI*1aBN!",
-  "port": 3000
-}

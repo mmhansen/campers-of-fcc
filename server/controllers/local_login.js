@@ -7,7 +7,7 @@ import makeJwt from '../libs/make_jwt'
 import UserModel from '../models/UserModel'
 // helper function
 const userResponse = (user) => ({
-  token: makeJwt(_user.id),
+  token: makeJwt(user._id),
   user
 })
 
@@ -36,11 +36,11 @@ export default function(app) {
     function (req, res, next) {
       let { email, password, firstName, lastName } = req.body
       // see if user with email already exists
-      User.findOne({email}, (err, existingUser) => {
+      UserModel.findOne({email}, (err, existingUser) => {
         if (err) { return next(err); }
         if (existingUser) { return res.conflict() }
         // make new user
-        let newUser = new User({ email, password, firstName, lastName })
+        let newUser = new UserModel({ email, password, firstName, lastName })
         // save new user
         newUser.save((err, user) => {
           if (err) { return next(err); }
