@@ -10,7 +10,7 @@ import LocalStrategy from 'passport-local'
  * Local imports
  */
 import User from '../models/UserModel'
-import config from 'config'
+import config from '../libs/config'
 
 /*
  * Local Strategy (For validating login)
@@ -43,7 +43,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 // JWT options
 const opts = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: config.secret
+  secretOrKey: config().secret
 }
 // payload is decoded token, use it to check if it is a valid token
 const jwtLogin = new Strategy(opts, (payload, done) => {
@@ -56,16 +56,6 @@ const jwtLogin = new Strategy(opts, (payload, done) => {
 })
 
 
-/*
- * Helper function (For admin authentication through token ID)
- */
-export function authAdmin (req, res, next)  {
-  User.findById(req.user._id, (err, user) => {
-      if (err) { return next(err); }
-      if (user.role !== "Admin") { return res.status(403).json({ res: 'Forbidden' }); }
-      next();
-  })
-}
 
 /*
  * Add Strategies as middleware
