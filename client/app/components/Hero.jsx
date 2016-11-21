@@ -28,27 +28,8 @@ const Hero = () => {
                     <div id="myCarousel" className="carousel" data-ride="carousel" data-interval="2000">
 
                         <div className="carousel-inner" role="listbox">
+
                             <div className="item active">
-                                <img src="/img/people-slide/1.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/2.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/3.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/4.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/5.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
                                 <img src="/img/people-slide/6.jpg" alt="Campfire Stories People"/>
                             </div>
 
@@ -86,6 +67,26 @@ const Hero = () => {
 
                             <div className="item">
                                 <img src="/img/people-slide/15.jpg" alt="Campfire Stories People"/>
+                            </div>
+
+                            <div className="item">
+                                <img src="/img/people-slide/1.jpg" alt="Campfire Stories People"/>
+                            </div>
+
+                            <div className="item">
+                                <img src="/img/people-slide/2.jpg" alt="Campfire Stories People"/>
+                            </div>
+
+                            <div className="item">
+                                <img src="/img/people-slide/3.jpg" alt="Campfire Stories People"/>
+                            </div>
+
+                            <div className="item">
+                                <img src="/img/people-slide/4.jpg" alt="Campfire Stories People"/>
+                            </div>
+
+                            <div className="item">
+                                <img src="/img/people-slide/5.jpg" alt="Campfire Stories People"/>
                             </div>
                         </div>
 

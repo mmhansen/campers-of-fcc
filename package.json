@@ -7,9 +7,11 @@
     "test": "export NODE_ENV=test && mocha --compilers js:babel-core/register --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "dev": "export NODE_ENV=dev && run-p build server",
-    "start": "export NODE_ENV=prod && run-p build server",
+    "dev:prod": "export NODE_ENV=prod && run-p build server",
     "build": "webpack -w",
-    "server": "nodemon --watch server --exec babel-node -- ./server/app.js"
+    "server": "nodemon --watch server --exec babel-node -- ./server/app.js",
+    "start": "export NODE_ENV=prod && DB_USERNAME='admin' && babel-node ./server/app.js"
+
   },
   "keywords": [],
   "author": "",
