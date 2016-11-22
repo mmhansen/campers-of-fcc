@@ -18,11 +18,11 @@ export default function(app) {
   // connect authentication sub router to api router
   apiRoutes.use('/auth/', localLogin())
   // route graphQL on api router
-  // apiRoutes.use('/graphql', graphqlHTTP({
-  //   schema: schema,
-  //   graphiql: true,
-  //   pretty: true
-  // }));
+  apiRoutes.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+    pretty: true
+  }));
   /**
    * connect api router to main router
    */

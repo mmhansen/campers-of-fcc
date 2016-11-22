@@ -1,9 +1,17 @@
-## Campers of FCC  
+# Campers of FCC   
 
-**[Installation and Usage](https://github.com/mmhansen/campers-of-fcc/wiki)**  
+## Install   
+```  
+npm i  
+```  
+## Developing Front End?  
+```
+npm run dev:client  
+```
+go to localhost:8080  
 
-**Contributors**  
-mmhansen  
-codejunky  
-dmatt  
-l'emi  
+## Developing Back End?  
+```
+npm run dev:server  
+```
+go to localhost:3000/api/graphql  

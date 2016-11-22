@@ -5,10 +5,6 @@ import mongoose, { Schema } from 'mongoose';
  */
 
 const StorySchema = new Schema({
-  title: {
-    type: String,
-    required: true
-  },
   body: {
     type: String,
     required: true
@@ -17,7 +13,7 @@ const StorySchema = new Schema({
     type: String,
     required: true
   },
-  postedBy: {
+  posted_by: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
