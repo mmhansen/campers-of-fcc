@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Carousel from './BitsAndBobs/Carousel';
 
 const Hero = () => {
   return (
@@ -20,81 +21,9 @@ const Hero = () => {
         </div>
         <div id="overlay"></div>
     </section>
-
-    <section className="section">
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-12 no-padding-picture">
-                    <div id="myCarousel" className="carousel" data-ride="carousel" data-interval="2000">
-
-                        <div className="carousel-inner" role="listbox">
-
-                            <div className="item active">
-                                <img src="/img/people-slide/6.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/7.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/8.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/9.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/10.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/11.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/12.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/13.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/14.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/15.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/1.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/2.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/3.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/4.jpg" alt="Campfire Stories People"/>
-                            </div>
-
-                            <div className="item">
-                                <img src="/img/people-slide/5.jpg" alt="Campfire Stories People"/>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
+    <Carousel />
+    
     </div>
   )
 }
