@@ -11,7 +11,8 @@ import mongoose from "mongoose"
  * Local imports, connect db, and start server
  */
 import config from 'config'
-import router from './routes'
+import { auth, admin, content } from './routes'
+
 const app = express() // start server
 app.listen(process.env.PORT || config.port) // server listen on 3000 by default
 
@@ -33,9 +34,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, '../client/public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, '../client/public')));
 /*
- * Route app
+ * Routes 
  */
-router(app);
+auth(app);
+admin(app);
+content(app);
 
 app.get('*', function (request, response){
   response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'))
