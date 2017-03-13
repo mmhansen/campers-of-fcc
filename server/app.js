@@ -7,6 +7,7 @@ import favicon from "serve-favicon"
 import logger from "morgan"
 import bodyParser from "body-parser"
 import mongoose from "mongoose"
+import compression from 'compression';
 /*
  * Local imports, connect db, and start server
  */
@@ -29,19 +30,30 @@ console.log(`${config.name} config running on port ${config.port}`)
 if (process.env.NODE_ENV !== 'test'){
   app.use(logger('dev'));
 }
+
+app.use(compression({ filter: (req, res) => {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res)
+} }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, '../client/public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, '../client/public')));
 /*
- * Routes 
+ * Routes
  */
 auth(app);
 admin(app);
 content(app);
 
 app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'))
+  response.sendFile(path.resolve(__dirname, '../client/public/assets', 'index.html'))
 })
 
 /*

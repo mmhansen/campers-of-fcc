@@ -1,1 +1,1 @@
-web: export NODE_ENV=prod && webpack -p && babel-node ./server/app.js
+web: cross-env NODE_ENV=prod && npm run build:prod && babel-node ./server/app.js
