@@ -2,5 +2,5 @@ node_modules
 .DS_Store
 yarn.lock
 line-count.txt
-client/public/bundle.js
+client/public/assets
 npm.debug.log

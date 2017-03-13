@@ -8,9 +8,9 @@ module.exports = {
   context: process.cwd(),
   entry: './client/app/app.jsx',
   output: {
-    path: path.join(process.cwd(), 'client', 'public'),
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[chunkhash].js'
+    path: path.join(process.cwd(), 'client', 'public', 'assets'),
+    filename: '[name].js',
+    publicPath: '/assets'
   },
   resolve: {
     alias: {
@@ -29,8 +29,18 @@ module.exports = {
         exclude: /(node_modules|bower_components)/
       },
       {
-        test: /(\.css|\.scss)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /(\.css|\.scss)$/
+      },
+      {
+        loader:'file-loader?limit=1024&name=/images/[name][hash].[ext]',
+        test: /\.(jpg|jpeg|gif|png)$/,
+        exclude: /node_modules/
+      },
+      {
+        loader: 'file-loader?limit=1024&name=/fonts/[name][hash].[ext]',
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/
       }
     ]
   },

@@ -10,9 +10,9 @@ const Hero = () => {
             <div className="row" id="hero-content-centered">
                 <div className="col-md-12 col-xs-11">
                     <h1 className="hero-headline">Welcome to the Campfire Stories</h1>
-                    <p className="hero-copy">Place where Free Code Campers share their stories while on a quest of learning to code</p>
+                    <p className="hero-copy">Place where people from all over the world share their stories while on a quest of learning to code</p>
                     <a type="button" className="btn btn-default cs-btn-green-inverted" href="#explore-stories">Explore</a><span style={{"padding":"12px"}}>or</span>
-                    <a type="button" className="btn btn-default cs-btn-green-outline" href="https://www.freecodecamp.com/about" target="_blank">Join Us</a>
+                    <a type="button" className="btn btn-default cs-btn-green-outline" href="https://tropicalchancer.github.io/projectus/" target="_blank">Join Us</a>
                 </div>
             </div>
             <a href="#explore-stories">
@@ -21,9 +21,9 @@ const Hero = () => {
         </div>
         <div id="overlay"></div>
     </section>
-    
+
     <Carousel />
-    
+
     </div>
   )
 }

@@ -45,7 +45,7 @@ module.exports = {
           ]
         },
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/
+        exclude: /node_modules/
       },
       {
         test: /\.(css|scss)$/,
@@ -54,6 +54,16 @@ module.exports = {
           use: [ 'css-loader', 'sass-loader' ]
         })
       },
+      {
+        loader:'file-loader?limit=1024&name=/images/[name][hash].[ext]',
+        test: /\.(jpg|jpeg|gif|png)$/,
+        exclude: /node_modules/
+      },
+      {
+        loader: 'file-loader?limit=1024&name=/fonts/[name][hash].[ext]',
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/
+      }
     ]
   },
   plugins: [
