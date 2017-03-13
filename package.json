@@ -11,7 +11,7 @@
     "build:prod": "cross-env NODE_ENV=prod webpack --colors --config ./webpack/webpack.config.prod.js",
     "build": "webpack -w --config ./webpack/webpack.config.js",
     "server": "nodemon --watch server --exec babel-node -- ./server/app.js",
-    "start": "cross-env NODE_ENV=prod && DB_USERNAME='admin' && babel-node ./server/app.js"
+    "start": "cross-env NODE_ENV=prod DB_USERNAME='admin' && babel-node ./server/app.js"
   },
   "keywords": [],
   "author": "",
@@ -19,11 +19,15 @@
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.3.2",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "clean-webpack-plugin": "^0.1.15",
     "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "faker": "^3.1.0",
     "html-webpack-plugin": "^2.28.0",
     "mocha": "^3.1.2",
