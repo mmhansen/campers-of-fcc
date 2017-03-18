@@ -4,14 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "export NODE_ENV=test && mocha --compilers js:babel-core/register --recursive ./test",
+    "test": "cross-env NODE_ENV=test && mocha --compilers js:babel-core/register --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "dev": "export NODE_ENV=dev && run-p build server",
-    "dev:prod": "export NODE_ENV=prod && run-p build server",
-    "build": "webpack -w",
+    "dev": "cross-env NODE_ENV=dev run-p server",
+    "dev:prod": "cross-env NODE_ENV=prod run-p server",
+    "build:prod": "cross-env NODE_ENV=prod webpack --colors --config ./webpack/webpack.config.prod.js",
     "server": "nodemon --watch server --exec babel-node -- ./server/app.js",
-    "start": "export NODE_ENV=prod && DB_USERNAME='admin' && babel-node ./server/app.js"
-
+    "start": "cross-env NODE_ENV=prod DB_USERNAME='admin' babel-node ./server/app.js"
   },
   "keywords": [],
   "author": "",
@@ -19,18 +18,27 @@
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.3.2",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "clean-webpack-plugin": "^0.1.15",
     "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "faker": "^3.1.0",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
     "mocha": "^3.1.2",
     "node-sass": "^3.10.1",
     "nodemon": "^1.11.0",
     "npm-run-all": "^3.1.0",
     "sass-loader": "^4.0.2",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.8",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.1"
   },
   "dependencies": {
     "axios": "^0.12.0",
@@ -39,8 +47,11 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
+    "compression": "^1.6.2",
     "config": "^1.21.0",
+    "cross-env": "^3.2.3",
     "debug": "~2.2.0",
+    "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "jwt-simple": "^0.5.0",
     "lodash": "^4.16.4",
@@ -53,6 +64,7 @@
     "react": "^15.3.2",
     "react-cookie": "^0.4.8",
     "react-dom": "^15.3.2",
+    "react-hot-loader": "^3.0.0-beta.6",
     "react-masonry-component": "^4.2.2",
     "react-medium-editor": "^1.8.1",
     "react-redux": "^4.4.5",
@@ -62,6 +74,6 @@
     "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
     "validator": "^6.0.0",
-    "webpack": "^1.13.2"
+    "webpack": "^2.2.1"
   }
 }

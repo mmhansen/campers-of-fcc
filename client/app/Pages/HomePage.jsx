@@ -5,13 +5,9 @@ import Hero from '../components/Hero.jsx'
 import Masonry from '../components/Masonry.jsx'
 import * as actions from '../actions/story-actions'
 
- /*
-  * Component
-  */
+ /** Component */
 class HomePage extends Component {
-/*
- * Get Stuff when this page loads
- */
+/** Get Stuff when this page loads */
   componentWillMount(){
     // get the stories to display
     this.props.getContent()
@@ -20,24 +16,25 @@ class HomePage extends Component {
     // get my submitted stories
     //this.props.getMyStories()
   }
-  /***/
+/***/
 
-  /*
-   * Render
-   */
+  /** Render */
   render () {
 
     return (
-      <div>
+      <div className="clearfix">
+        <div>
           <Hero />
+        </div>
+        <div>
           <Masonry current={this.props.current}/>
+        </div>
       </div>
     )
   }
 }
-/*
- * Redux
- */
+
+/** Redux */
 const mapStateToProps = (state) => {
   return {
     current: state.content.current,
