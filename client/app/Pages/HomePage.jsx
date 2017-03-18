@@ -29,8 +29,12 @@ class HomePage extends Component {
 
     return (
       <div>
+        <div>
           <Hero />
+        </div>
+        <div>
           <Masonry current={this.props.current}/>
+        </div>
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Masonry from 'react-masonry-component'
 import * as actions from '../actions/story-actions'
-import moment from 'moment'
+import moment from 'moment' 
 import { Link } from 'react-router'
 
 const StoryContent = ({ page, updatePath, current, count, getContent }) => {
@@ -15,23 +15,23 @@ const StoryContent = ({ page, updatePath, current, count, getContent }) => {
   let childElements = current.map(function(element, index){
     let time = moment(element.created_at, "YYYY-MM-DD").format('LL');
     let body = (element.body.length >= 400) ? element.body.slice(0,400) + '...' : element.body;
-     return (
-       <div key={index} className="col-md-6 grid-item">
-         <Link to={`/full/${element._id}`} onClick={()=>{updatePath(element._id)}}>
-           <div className="thumbnail">
-               <img src={element.image} alt="Campfire Story" />
-               <div className="caption">
-                   <div className="card-title">
-                       <h2>{element.title}</h2>
-                       <p className="card-info">
-                          Posted on {time} by {element.postedBy.firstName +" "+ element.postedBy.lastName}
-                       </p>
-                   </div>
-                   <p className="card-description">{body}</p>
-               </div>
-           </div>
-         </Link>
-       </div>
+    return (
+      <div key={index} className="col-md-6 grid-item clearfix">
+        <Link to={`/full/${element._id}`} onClick={()=>{updatePath(element._id)}}>
+          <div className="thumbnail">
+            <img src={element.image} alt="Campfire Story" />
+              <div className="caption">
+                <div className="card-title">
+                  <h2>{element.title}</h2>
+                  <p className="card-info">
+                  Posted on {time} by {element.postedBy.firstName +" "+ element.postedBy.lastName}
+                  </p>
+                </div>
+              <p className="card-description">{body}</p>
+            </div>
+          </div>
+        </Link>
+      </div>
      )
   })
   // controls
@@ -54,9 +54,9 @@ const StoryContent = ({ page, updatePath, current, count, getContent }) => {
     </div>
   )
   return (
-    <section className="section bg-white padding-top" id="cs-stories">
+    <section className="section bg-white padding-top clearfix" id="cs-stories">
         <section className="container">
-            <div className="row grid">
+            <div className="row grid ">
               { controls }
               <Masonry
                 options={masonryOptions} // default {}
