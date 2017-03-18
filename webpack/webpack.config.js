@@ -2,15 +2,20 @@ const webpack = require('webpack');
 const env = process.env.NODE_ENV;
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PORT = Number(process.env.PORT) || 3000;
+const localhost = 'http://localhost:';
+const hmrScript = `webpack-hot-middleware/client?path=${localhost}${PORT}/__webpack_hmr`;
 
 module.exports = {
   devtool: 'source-map',
   context: process.cwd(),
-  entry: './client/app/app.jsx',
+  entry: {
+    app: ['./client/app/app.jsx', hmrScript]
+  },
   output: {
     path: path.join(process.cwd(), 'client', 'public', 'assets'),
     filename: '[name].js',
-    publicPath: '/assets'
+    publicPath: '/'
   },
   resolve: {
     alias: {
@@ -33,7 +38,7 @@ module.exports = {
         test: /(\.css|\.scss)$/
       },
       {
-        loader:'file-loader?limit=1024&name=/images/[name][hash].[ext]',
+        loader:`file-loader?limit=1024&name=${localhost}${PORT}/images/[name][hash].[ext]`,
         test: /\.(jpg|jpeg|gif|png)$/,
         exclude: /node_modules/
       },
@@ -45,8 +50,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),    
     new webpack.DefinePlugin({
-      __DEVTOOLS__: JSON.stringify(env)
+      __DEVTOOLS__: JSON.stringify(env),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     new HtmlWebpackPlugin({
       template: path.join('.', 'client', 'app', 'index.html')

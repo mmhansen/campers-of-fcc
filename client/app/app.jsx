@@ -1,6 +1,4 @@
-/*
- * Redux
- */
+/** Redux */
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
@@ -27,16 +25,33 @@ if (token) {
   })
 }
 
-/*
- * render to DOM
- */
+/** render to DOM */
+import 'react-hot-loader/patch';
+import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import  { render } from 'react-dom';
 import Routes from './routes';
 
-render(
-  <Provider store={store}>
-    <Routes />
-  </Provider>,
-  document.getElementById("app")
-)
+const renderRoutes = Routes => {
+  render(
+    <Provider store={store}>
+      <Routes key={Math.random()}/>
+    </Provider>,
+    document.getElementById("app")
+  )
+}
+
+if (process.env.NODE_ENV === 'dev') {
+  if (module.hot) {
+    module.hot.accept('./routes', () => {
+      const nextRoutes = require('./routes').default;
+      renderRoutes(nextRoutes);
+    });
+    module.hot.accept('./reducers', () => {
+      const nextReducer = require('./reducers').default;
+      store.replaceReducer(nextReducer);
+    });
+  }
+}
+
+renderRoutes(Routes)

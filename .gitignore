@@ -4,3 +4,4 @@ yarn.lock
 line-count.txt
 client/public/assets
 npm.debug.log
+.env

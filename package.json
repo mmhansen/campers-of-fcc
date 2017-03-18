@@ -6,12 +6,11 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test && mocha --compilers js:babel-core/register --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "dev": "cross-env NODE_ENV=dev && run-p build server",
-    "dev:prod": "cross-env NODE_ENV=prod && run-p build server",
+    "dev": "cross-env NODE_ENV=dev run-p server",
+    "dev:prod": "cross-env NODE_ENV=prod run-p server",
     "build:prod": "cross-env NODE_ENV=prod webpack --colors --config ./webpack/webpack.config.prod.js",
-    "build": "webpack -w --config ./webpack/webpack.config.js",
     "server": "nodemon --watch server --exec babel-node -- ./server/app.js",
-    "start": "cross-env NODE_ENV=prod DB_USERNAME='admin' && babel-node ./server/app.js"
+    "start": "cross-env NODE_ENV=prod DB_USERNAME='admin' babel-node ./server/app.js"
   },
   "keywords": [],
   "author": "",
@@ -37,7 +36,9 @@
     "npm-run-all": "^3.1.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.8"
+    "url-loader": "^0.5.8",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.1"
   },
   "dependencies": {
     "axios": "^0.12.0",
@@ -50,6 +51,7 @@
     "config": "^1.21.0",
     "cross-env": "^3.2.3",
     "debug": "~2.2.0",
+    "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "jwt-simple": "^0.5.0",
     "lodash": "^4.16.4",
@@ -62,6 +64,7 @@
     "react": "^15.3.2",
     "react-cookie": "^0.4.8",
     "react-dom": "^15.3.2",
+    "react-hot-loader": "^3.0.0-beta.6",
     "react-masonry-component": "^4.2.2",
     "react-medium-editor": "^1.8.1",
     "react-redux": "^4.4.5",
