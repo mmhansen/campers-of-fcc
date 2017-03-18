@@ -16,7 +16,7 @@ const StoryContent = ({ page, updatePath, current, count, getContent }) => {
     let time = moment(element.created_at, "YYYY-MM-DD").format('LL');
     let body = (element.body.length >= 400) ? element.body.slice(0,400) + '...' : element.body;
     return (
-      <div key={index} className="col-md-6 grid-item clearfix">
+      <div key={index} className="col-md-6 grid-item">
         <Link to={`/full/${element._id}`} onClick={()=>{updatePath(element._id)}}>
           <div className="thumbnail">
             <img src={element.image} alt="Campfire Story" />
@@ -54,7 +54,7 @@ const StoryContent = ({ page, updatePath, current, count, getContent }) => {
     </div>
   )
   return (
-    <section className="section bg-white padding-top clearfix" id="cs-stories">
+    <section className="section bg-white padding-top" id="cs-stories">
         <section className="container">
             <div className="row grid ">
               { controls }

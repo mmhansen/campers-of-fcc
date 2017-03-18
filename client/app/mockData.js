@@ -21,7 +21,7 @@ export default [
 		_id:"583261eb69dc973461510fd6",
 		title: "On Coding with Cats",
 		body: "The truth is: my cat actually does most of the work… I just provide the fingers and opposable thumbs.",
-		image: "https://c8.staticflickr.com/6/5485/30836110391_0c7c191f49.jpg",
+		image: "https://c1.staticflickr.com/6/5822/22745757168_bf873eb960_b.jpg",
 		postedBy: {
 			_id:"582fb281e82ad65f8aad94a6",
 			email:"mcallisterchance@gmail.com",
@@ -57,7 +57,7 @@ export default [
 		_id:"583261eb69dc973461510fd6",
 		title: "On Coding with Cats",
 		body: "The truth is: my cat actually does most of the work… I just provide the fingers and opposable thumbs.",
-		image: "https://c8.staticflickr.com/6/5485/30836110391_0c7c191f49.jpg",
+		image: "https://c1.staticflickr.com/6/5822/22745757168_bf873eb960_b.jpg",
 		postedBy: {
 			_id:"582fb281e82ad65f8aad94a6",
 			email:"mcallisterchance@gmail.com",
@@ -93,7 +93,7 @@ export default [
 		_id:"583261eb69dc973461510fd6",
 		title: "On Coding with Cats",
 		body: "The truth is: my cat actually does most of the work… I just provide the fingers and opposable thumbs.",
-		image: "https://c8.staticflickr.com/6/5485/30836110391_0c7c191f49.jpg",
+		image: "https://c1.staticflickr.com/6/5822/22745757168_bf873eb960_b.jpg",
 		postedBy: {
 			_id:"582fb281e82ad65f8aad94a6",
 			email:"mcallisterchance@gmail.com",

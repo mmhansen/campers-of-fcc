@@ -67,14 +67,12 @@ if (process.env.NODE_ENV === 'dev') {
   /** Load everything from memory */
   app.get('*', (req, res) => {
     let memoryFs = compiler.outputFileSystem;
-    console.log(memoryFs)
     let index = path.join(webpackConfig.output.path, 'index.html')
     let html = memoryFs.readFileSync(index)
-    res.end(html)
+    res.send(html)
   })
 } else {
   /** Production */
-  console.log("Inside Production")
   app.get('*', (req, res) => {    
     res.sendFile(path.resolve(__dirname, '../client/public/assets', 'index.html'))
   })

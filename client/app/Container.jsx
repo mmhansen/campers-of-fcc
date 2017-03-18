@@ -11,10 +11,7 @@ const Container = ({ children }) => {
       {/* Content */}
       { children }
       {/* Footer */}
-      <div>
-
       <Footer /> 
-      </div>
     </div>
   )
 }
