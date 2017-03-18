@@ -19,7 +19,3 @@ dist
 
 # Assets
 assets
-
-# Test cache
-C:UsersUsernodejsnpm-cache
-public

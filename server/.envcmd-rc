@@ -1,0 +1,17 @@
+{
+  "development": {
+    "mongodb": "mongodb://localhost/camper_fcc",
+    "secret": "1Z$8eA9%k5FLt82wMI*1aBN!",
+    "port": 3000
+  },
+  "production": {
+    "db": "ds021326.mlab.com:21326/project",
+    "secret": "1Z$8eA9%k5FLt82wMI*1aBN!",
+    "port": 3000
+  },
+  "test": {
+    "mongodb": "mongodb://localhost/camper_fcc_test",
+    "secret": "1Z$8eA9%k5FLt82wMI*1aBN!",
+    "port": 3000
+  }
+}
