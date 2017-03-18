@@ -1,7 +1,25 @@
+# Node files
 node_modules
-.DS_Store
+
+# Debug logs
+*.log*
+
+# Mac trash
+DS_STORE
+
+# Yarn versioning
 yarn.lock
-line-count.txt
-client/public/assets
-npm.debug.log
-.env
+
+# Istanbul reports
+coverage
+.nyc_output
+
+# Production build
+dist
+
+# Assets
+assets
+
+# Test cache
+C:UsersUsernodejsnpm-cache
+public
