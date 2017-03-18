@@ -1,0 +1,42 @@
+language: node_js
+node_js:
+- node
+services: mongodb
+cache:
+  directories:
+    - node_modules
+install:
+- npm install
+branches:
+  only:
+  - master
+  - development
+script:
+  - sleep 5
+  - npm test
+after_success:
+  - echo "Building dist."
+  - npm run build
+  - echo "Ready to deploy."
+before_deploy:
+  - echo "Bunlding build files."
+  - mkdir public
+  - zip -r build.zip dist package.json .env-cmdrc .ebextensions public
+deploy:
+  - provider: elasticbeanstalk
+    skip_cleanup: true
+    zip_file: build.zip
+    access_key_id:
+    secret_access_key:
+    region: us-east-1
+    app: campfire-stories
+    env: projects
+    bucket_name: elasticbeanstalk-us-east-1-768491813393
+    on:
+      branch: master
+notifications:
+  email:
+    recipients:
+    - hansen.mmb@gmail.com
+    on_success: always
+    on_failure: always

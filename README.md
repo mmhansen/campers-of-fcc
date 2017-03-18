@@ -1,7 +1,8 @@
-# Campers of FCC  
+# Campfire Stories   
+# Temporarily broken as I update the development/deployment process.  
 
-This project uses create react app.
-The server and client are run separately.
+This project uses create react app.  
+The server and client are run separately.  
 
 ```
 # terminal 1
